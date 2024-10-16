@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Savage-Shop.sln"
+    "dotnet.defaultSolution": "Savage-Shop.sln",
+    "FSharp.suggestGitignore": false
 }
