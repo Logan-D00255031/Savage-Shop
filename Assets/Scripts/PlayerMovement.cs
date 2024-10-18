@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Required]
     public CharacterController controller;
 
     public float speed = 10f;
 
+    [ReadOnly]
     [SerializeField]
     private float x;
+    [ReadOnly]
     [SerializeField] 
     private float z;
 

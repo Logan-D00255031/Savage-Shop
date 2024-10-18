@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class MousePan : MonoBehaviour
 {
+    [Required]
     public Transform player;
 
     [Range(0.0f, 1.0f)]
@@ -13,12 +15,15 @@ public class MousePan : MonoBehaviour
     [Range(15f, 180f)]
     private float maxRotation = 90f;
 
+    [ReadOnly]
     [SerializeField]
     private float mouseX;
 
+    [ReadOnly]
     [SerializeField]
     private float mouseY;
 
+    [ReadOnly]
     [SerializeField]
     float verticalRotation = 0f;
 
