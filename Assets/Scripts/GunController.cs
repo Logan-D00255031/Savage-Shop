@@ -27,7 +27,11 @@ public class GunController : MonoBehaviour
             {
                 Debug.Log("Hit " + target.transform.name);
 
-
+                Target targetComponent = target.transform.GetComponent<Target>();
+                if(targetComponent != null)
+                {
+                    targetComponent.Damaged(damage);
+                }
             }
         }
     }
