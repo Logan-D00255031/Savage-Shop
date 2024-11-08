@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -46,6 +47,29 @@ public class PlacementSystem : MonoBehaviour
         {
             InitializeObject(prefabs[1]);
         }
+
+        if(!desiredObject)
+        {
+            return;
+        }
+
+        if(Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            if(CanBePlaced(desiredObject))
+            {
+                desiredObject.Place();
+                Vector3Int start = gridLayout.WorldToCell(desiredObject.GetStartPosition());
+                ClaimArea(start, desiredObject.Size);
+            }
+            else
+            {
+                Destroy(desiredObject.gameObject);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Destroy(desiredObject.gameObject);
+        }
     }
 
     public static Vector3 GetMouseInWorld() // Gets the positon in the scene that the mouse is over
@@ -74,7 +98,36 @@ public class PlacementSystem : MonoBehaviour
 
        GameObject gameObject = Instantiate(prefab, position, Quaternion.identity);
        desiredObject = gameObject.GetComponent<PlaceableObject>();
-        gameObject.AddComponent<ObjectDrag>();
+       gameObject.AddComponent<ObjectDrag>();
+    }
+
+    private bool CanBePlaced(PlaceableObject placeableObject)
+    {
+        BoundsInt area = new BoundsInt();
+        area.position = gridLayout.WorldToCell(desiredObject.GetStartPosition());
+        area.size = desiredObject.Size;
+        Debug.Log(area.position);
+
+        TileBase[] tilebase = tilemap.GetTilesBlock(area);
+
+        foreach(TileBase t in tilebase)
+        {
+            if(t == blueTile)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void ClaimArea(Vector3Int start,  Vector3Int size)
+    {
+        tilemap.BoxFill(start, blueTile, size.x, size.y, start.x + size.x, start.y + size.y);
+    }
+
+    public GridLayout GetGridLayout()
+    {
+        return gridLayout;
     }
 
     #endregion

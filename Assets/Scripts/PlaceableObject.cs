@@ -1,18 +1,37 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlaceableObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GridLayout gridLayout;
+    public bool Placed {  get; private set; }
+    public Vector3Int Size { get; private set; }
+
+    public Vector3 GetStartPosition()
     {
-        
+        BoxCollider boxCollider = gameObject.GetComponent<BoxCollider>();
+        Vector3 startPosition = boxCollider.center + new Vector3(-boxCollider.size.x, -boxCollider.size.y, -boxCollider.size.z) * 0.5f;
+        Debug.Log(startPosition);
+        return startPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        BoxCollider boxCollider = gameObject.GetComponent<BoxCollider>();
+        gridLayout = PlacementSystem.instance.GetGridLayout();
+        Size = gridLayout.WorldToCell(boxCollider.size);
     }
+
+    public void Place()
+    {
+        ObjectDrag objectDrag = gameObject.GetComponent<ObjectDrag>();
+        Destroy(objectDrag);
+
+        Placed = true;
+    }
+
+
+
 }
