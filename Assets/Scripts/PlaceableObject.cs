@@ -12,8 +12,8 @@ public class PlaceableObject : MonoBehaviour
     public Vector3 GetStartPosition()
     {
         BoxCollider boxCollider = gameObject.GetComponent<BoxCollider>();
-        Vector3 startPosition = boxCollider.center + new Vector3(-boxCollider.size.x, -boxCollider.size.y, -boxCollider.size.z) * 0.5f;
-        Debug.Log(startPosition);
+        Vector3 startPosition = gameObject.transform.position + new Vector3(-boxCollider.size.x, 0, -boxCollider.size.z) * 0.5f;
+        Debug.Log($"Position: {startPosition}");
         return startPosition;
     }
 

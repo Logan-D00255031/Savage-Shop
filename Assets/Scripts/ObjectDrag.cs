@@ -10,12 +10,12 @@ public class ObjectDrag : MonoBehaviour
 
     private void OnMouseDown()
     {
-        offset = transform.position - PlacementSystem.GetMouseInWorld(); // Gets mouse offset from object's centre
+        offset = transform.position - PlacementSystem.instance.GetMouseInWorld(); // Gets mouse offset from object's centre
     }
 
     private void OnMouseDrag()
     {
-        Vector3 position = PlacementSystem.GetMouseInWorld() + offset;
+        Vector3 position = PlacementSystem.instance.GetMouseInWorld() + offset;
         transform.position = PlacementSystem.instance.SnapToGrid(position);
     }
 }

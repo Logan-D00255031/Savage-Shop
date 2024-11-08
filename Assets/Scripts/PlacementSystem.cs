@@ -12,6 +12,10 @@ public class PlacementSystem : MonoBehaviour
     public static PlacementSystem instance;
 
     [Required]
+    public Camera placementCamera;
+    [Required]
+    public LayerMask placementlayerMask;
+    [Required]
     public GridLayout gridLayout;
     private Grid grid;
 
@@ -24,9 +28,12 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private TileBase redTile;
 
+    public GameObject cellIndicator;
     public List<GameObject> prefabs;
     [ReadOnly]
     private PlaceableObject desiredObject;
+    [ReadOnly]
+    private Vector3 lastPosition = Vector3.zero;
 
     #region Methods
 
@@ -39,6 +46,10 @@ public class PlacementSystem : MonoBehaviour
 
     private void Update()
     {
+        GetMouseInWorld();
+        Vector3Int gridPos = gridLayout.WorldToCell(lastPosition);
+        cellIndicator.transform.position = gridLayout.CellToWorld(gridPos);
+
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             InitializeObject(prefabs[0]);
@@ -60,6 +71,7 @@ public class PlacementSystem : MonoBehaviour
                 desiredObject.Place();
                 Vector3Int start = gridLayout.WorldToCell(desiredObject.GetStartPosition());
                 ClaimArea(start, desiredObject.Size);
+                Debug.Log($"Size: {desiredObject.Size}, Start: {start}");
             }
             else
             {
@@ -72,23 +84,20 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    public static Vector3 GetMouseInWorld() // Gets the positon in the scene that the mouse is over
+    public Vector3 GetMouseInWorld() // Gets the positon in the scene that the mouse is over
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);    // Create ray from MainCamera mouse position
-        if(Physics.Raycast(ray, out RaycastHit raycastHit)) // If the raycast hit something
+        Ray ray = placementCamera.ScreenPointToRay(Input.mousePosition);    // Create ray from MainCamera mouse position
+        if(Physics.Raycast(ray, out RaycastHit raycastHit, 100, placementlayerMask)) // If the raycast hit something
         {
-            return raycastHit.point;    // Return hit position in scene
+            lastPosition = raycastHit.point;    // Update last position to hit position in scene
         }
-        else
-        {
-            return Vector3.zero;
-        }
+        return lastPosition;    
     }
 
     public Vector3 SnapToGrid(Vector3 position)
     {
         Vector3Int cellPos = gridLayout.WorldToCell(position); // Convert Vector position to Cell position
-        position = grid.GetCellCenterWorld(cellPos);    // Get centre position of cell at Cell position
+        position = grid.CellToWorld(cellPos);    // Get position of cell at Cell position
         return position;
     }
 
@@ -106,12 +115,13 @@ public class PlacementSystem : MonoBehaviour
         BoundsInt area = new BoundsInt();
         area.position = gridLayout.WorldToCell(desiredObject.GetStartPosition());
         area.size = desiredObject.Size;
-        Debug.Log(area.position);
+        //Debug.Log(area.position);
 
         TileBase[] tilebase = tilemap.GetTilesBlock(area);
 
         foreach(TileBase t in tilebase)
         {
+            Debug.Log("Loop");
             if(t == blueTile)
             {
                 return false;
@@ -122,7 +132,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void ClaimArea(Vector3Int start,  Vector3Int size)
     {
-        tilemap.BoxFill(start, blueTile, size.x, size.y, start.x + size.x, start.y + size.y);
+        tilemap.BoxFill(start, blueTile, start.x, start.y, start.x + size.x, start.y + size.y);
     }
 
     public GridLayout GetGridLayout()
