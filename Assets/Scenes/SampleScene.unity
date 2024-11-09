@@ -770,9 +770,8 @@ MonoBehaviour:
   whiteTile: {fileID: 11400000, guid: d2a53cc0548c26c4994bac62f21f878c, type: 2}
   redTile: {fileID: 11400000, guid: d91fd01820f573541882ed34343415a1, type: 2}
   cellIndicator: {fileID: 61392433}
-  prefabs:
-  - {fileID: 4184128714173119126, guid: d5afa76b365a5354095987a77dfadde5, type: 3}
-  - {fileID: 6886715020549738650, guid: 210e8e10341176a4d95d0b80ad850267, type: 3}
+  gridView: {fileID: 1002708400}
+  prefabDatabase: {fileID: 11400000, guid: 9bf1c835d8263c840a73df4f64c7db11, type: 2}
 --- !u!156049354 &282482598
 Grid:
   m_ObjectHideFlags: 0
@@ -900,7 +899,7 @@ GameObject:
   - component: {fileID: 656821730}
   - component: {fileID: 656821729}
   - component: {fileID: 656821728}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: PolyShape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1454,8 +1453,8 @@ GameObject:
   - component: {fileID: 1002708403}
   - component: {fileID: 1002708402}
   - component: {fileID: 1002708401}
-  m_Layer: 0
-  m_Name: Plane
+  m_Layer: 3
+  m_Name: GridView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

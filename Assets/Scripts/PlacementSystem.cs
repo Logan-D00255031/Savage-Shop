@@ -1,8 +1,10 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 // Learned from Tutorial: https://youtu.be/rKp9fWvmIww?si=6ueW9PHdiFnlvi5h
@@ -29,13 +31,50 @@ public class PlacementSystem : MonoBehaviour
     private TileBase redTile;
 
     public GameObject cellIndicator;
-    public List<GameObject> prefabs;
+    //public List<GameObject> prefabs;
     [ReadOnly]
     private PlaceableObject desiredObject;
     [ReadOnly]
     private Vector3 lastPosition = Vector3.zero;
 
+    [SerializeField]
+    private GameObject gridView;
+    [SerializeField]
+    private PrefabDatabaseSO prefabDatabase;
+    private int selectedObjectIndex = -1;
+
+    public event Action OnClick, OnExit;
+
     #region Methods
+
+    private void Start()
+    {
+        EndPlacement();
+    }
+
+    public void StartPlacement(int ID)
+    {
+        EndPlacement();
+        selectedObjectIndex = prefabDatabase.objectsData.FindIndex(data => data.ID == ID);
+        if (selectedObjectIndex < 0)
+        {
+            Debug.LogError($"ID not found {ID}");
+            return;
+        }
+        gridView.SetActive(true);
+        cellIndicator.SetActive(true);
+        OnClick += InitializeObject;
+        OnExit += EndPlacement;
+    }
+
+    private void EndPlacement()
+    {
+        selectedObjectIndex = -1;
+        gridView.SetActive(false);
+        cellIndicator.SetActive(false);
+        OnClick -= InitializeObject;
+        OnExit -= EndPlacement;
+    }
 
     private void Awake()
     {
@@ -46,24 +85,33 @@ public class PlacementSystem : MonoBehaviour
 
     private void Update()
     {
-        GetMouseInWorld();
-        Vector3Int gridPos = gridLayout.WorldToCell(lastPosition);
+        if (Input.GetMouseButtonDown(0))
+        {
+            OnClick?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnExit?.Invoke();
+        }
+
+        Vector3Int gridPos = gridLayout.WorldToCell(GetMouseInWorld());
         cellIndicator.transform.position = gridLayout.CellToWorld(gridPos);
 
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            InitializeObject(prefabs[0]);
+            StartPlacement(1);
         }
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            InitializeObject(prefabs[1]);
+            StartPlacement(2);
         }
 
+        /*
         if(!desiredObject)
         {
             return;
         }
-
+        
         if(Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             if(CanBePlaced(desiredObject))
@@ -82,7 +130,10 @@ public class PlacementSystem : MonoBehaviour
         {
             Destroy(desiredObject.gameObject);
         }
+        */
     }
+
+    public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
 
     public Vector3 GetMouseInWorld() // Gets the positon in the scene that the mouse is over
     {
@@ -101,13 +152,13 @@ public class PlacementSystem : MonoBehaviour
         return position;
     }
 
-    public void InitializeObject(GameObject prefab)
+    public void InitializeObject()
     {
-       Vector3 position = SnapToGrid(Vector3.zero);
+       Vector3 position = SnapToGrid(GetMouseInWorld());
 
-       GameObject gameObject = Instantiate(prefab, position, Quaternion.identity);
-       desiredObject = gameObject.GetComponent<PlaceableObject>();
-       gameObject.AddComponent<ObjectDrag>();
+       GameObject newObject = Instantiate(prefabDatabase.objectsData[selectedObjectIndex].Prefab, position, Quaternion.identity);
+       desiredObject = newObject.GetComponent<PlaceableObject>();
+       newObject.AddComponent<ObjectDrag>();
     }
 
     private bool CanBePlaced(PlaceableObject placeableObject)
