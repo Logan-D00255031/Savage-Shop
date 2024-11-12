@@ -43,6 +43,12 @@ public class PlacementSystem : MonoBehaviour
     private PrefabDatabaseSO prefabDatabase;
     private int selectedObjectIndex = -1;
 
+    private GridData groundData;
+
+    private List<GameObject> placedGroundObjects;
+
+    private Renderer previewRenderer;
+
     public event Action OnClick, OnExit;
 
     #region Methods
@@ -50,6 +56,9 @@ public class PlacementSystem : MonoBehaviour
     private void Start()
     {
         EndPlacement();
+        groundData = new GridData();
+        placedGroundObjects = new List<GameObject>();
+        previewRenderer = cellIndicator.GetComponentInChildren<Renderer>();
     }
 
     public void StartPlacement(int ID)
@@ -131,6 +140,13 @@ public class PlacementSystem : MonoBehaviour
             Destroy(desiredObject.gameObject);
         }
         */
+        if(selectedObjectIndex < 0)
+        {
+            return;
+        }
+        bool validPlacement = CheckValidPlacement(gridPos, selectedObjectIndex);
+        previewRenderer.material.color = validPlacement ? Color.white : Color.red;
+
     }
 
     public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
@@ -154,13 +170,27 @@ public class PlacementSystem : MonoBehaviour
 
     public void InitializeObject()
     {
-       Vector3 position = SnapToGrid(GetMouseInWorld());
+        Vector3 position = SnapToGrid(GetMouseInWorld());
+        Vector3Int gridPosition = gridLayout.WorldToCell(position);
 
-       GameObject newObject = Instantiate(prefabDatabase.objectsData[selectedObjectIndex].Prefab, position, Quaternion.identity);
-       desiredObject = newObject.GetComponent<PlaceableObject>();
-       newObject.AddComponent<ObjectDrag>();
+        if (!CheckValidPlacement(gridPosition, selectedObjectIndex)) 
+        { 
+            return; 
+        }
+
+        GameObject newObject = Instantiate(prefabDatabase.objectsData[selectedObjectIndex].Prefab, position, Quaternion.identity);
+        Debug.Log(newObject.name);
+        Debug.Log(newObject.transform.position);
+        placedGroundObjects.Add(newObject);
+
+        desiredObject = newObject.GetComponent<PlaceableObject>();
+        newObject.AddComponent<ObjectDrag>();
+
+        groundData.AddObjectAt(gridPosition, 
+            prefabDatabase.objectsData[selectedObjectIndex].Size,
+            prefabDatabase.objectsData[selectedObjectIndex].ID,
+            placedGroundObjects.Count - 1);
     }
-
     private bool CanBePlaced(PlaceableObject placeableObject)
     {
         BoundsInt area = new BoundsInt();
@@ -189,6 +219,12 @@ public class PlacementSystem : MonoBehaviour
     public GridLayout GetGridLayout()
     {
         return gridLayout;
+    }
+
+    private bool CheckValidPlacement(Vector3Int gridPosition, int selectedObjectIndex)
+    {
+        Vector2Int objectSize = prefabDatabase.objectsData[selectedObjectIndex].Size;
+        return groundData.ObjectCanBePlacedAt(gridPosition, objectSize);
     }
 
     #endregion
