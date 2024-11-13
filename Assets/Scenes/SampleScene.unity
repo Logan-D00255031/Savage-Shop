@@ -769,9 +769,9 @@ MonoBehaviour:
   blueTile: {fileID: 11400000, guid: 61d06722176bef44faf2be533afdf7b0, type: 2}
   whiteTile: {fileID: 11400000, guid: d2a53cc0548c26c4994bac62f21f878c, type: 2}
   redTile: {fileID: 11400000, guid: d91fd01820f573541882ed34343415a1, type: 2}
-  cellIndicator: {fileID: 61392433}
   gridView: {fileID: 1002708400}
   prefabDatabase: {fileID: 11400000, guid: 9bf1c835d8263c840a73df4f64c7db11, type: 2}
+  previewSystem: {fileID: 670277062}
 --- !u!156049354 &282482598
 Grid:
   m_ObjectHideFlags: 0
@@ -1250,6 +1250,53 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10, y: 0, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &670277061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 670277063}
+  - component: {fileID: 670277062}
+  m_Layer: 0
+  m_Name: PreviewSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &670277062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670277061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26087677aceed7548b603580d4ba45e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yOffset: 0.05
+  cellIndicator: {fileID: 61392433}
+  prefabPreviewMaterial: {fileID: 2100000, guid: 62a846ee7d40b56409e175950b6ed55d, type: 2}
+--- !u!4 &670277063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670277061}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.04625623, y: -1.1470816, z: -1.6777495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7584,3 +7631,4 @@ SceneRoots:
   - {fileID: 1675687131}
   - {fileID: 1773313980}
   - {fileID: 282482599}
+  - {fileID: 670277063}

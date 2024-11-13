@@ -30,8 +30,6 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private TileBase redTile;
 
-    public GameObject cellIndicator;
-    //public List<GameObject> prefabs;
     [ReadOnly]
     private PlaceableObject desiredObject;
     [ReadOnly]
@@ -47,7 +45,10 @@ public class PlacementSystem : MonoBehaviour
 
     private List<GameObject> placedGroundObjects;
 
-    private Renderer previewRenderer;
+    [SerializeField]
+    private PreviewSystem previewSystem;
+
+    private Vector3Int lastGridPosition = Vector3Int.zero;
 
     public event Action OnClick, OnExit;
 
@@ -56,9 +57,9 @@ public class PlacementSystem : MonoBehaviour
     private void Start()
     {
         EndPlacement();
+        // Instantiate Variables
         groundData = new GridData();
         placedGroundObjects = new List<GameObject>();
-        previewRenderer = cellIndicator.GetComponentInChildren<Renderer>();
     }
 
     public void StartPlacement(int ID)
@@ -71,7 +72,9 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
         gridView.SetActive(true);
-        cellIndicator.SetActive(true);
+        previewSystem.BeginPreview(
+            prefabDatabase.objectsData[selectedObjectIndex].Prefab,
+            prefabDatabase.objectsData[selectedObjectIndex].Size);
         OnClick += InitializeObject;
         OnExit += EndPlacement;
     }
@@ -80,9 +83,10 @@ public class PlacementSystem : MonoBehaviour
     {
         selectedObjectIndex = -1;
         gridView.SetActive(false);
-        cellIndicator.SetActive(false);
+        previewSystem.EndPreview();
         OnClick -= InitializeObject;
         OnExit -= EndPlacement;
+        lastGridPosition = Vector3Int.zero;
     }
 
     private void Awake()
@@ -103,9 +107,6 @@ public class PlacementSystem : MonoBehaviour
             OnExit?.Invoke();
         }
 
-        Vector3Int gridPos = gridLayout.WorldToCell(GetMouseInWorld());
-        cellIndicator.transform.position = gridLayout.CellToWorld(gridPos);
-
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             StartPlacement(1);
@@ -115,37 +116,17 @@ public class PlacementSystem : MonoBehaviour
             StartPlacement(2);
         }
 
-        /*
-        if(!desiredObject)
+        if(selectedObjectIndex < 0) // If no prefab selected
         {
             return;
         }
-        
-        if(Input.GetKeyDown(KeyCode.KeypadEnter))
+        Vector3Int gridPosition = grid.WorldToCell(GetMouseInWorld());
+        if (lastGridPosition != gridPosition)   // If grid position has changed
         {
-            if(CanBePlaced(desiredObject))
-            {
-                desiredObject.Place();
-                Vector3Int start = gridLayout.WorldToCell(desiredObject.GetStartPosition());
-                ClaimArea(start, desiredObject.Size);
-                Debug.Log($"Size: {desiredObject.Size}, Start: {start}");
-            }
-            else
-            {
-                Destroy(desiredObject.gameObject);
-            }
+            bool validPlacement = CheckValidPlacement(gridPosition, selectedObjectIndex);
+            previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), validPlacement);
+            lastGridPosition = gridPosition;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Destroy(desiredObject.gameObject);
-        }
-        */
-        if(selectedObjectIndex < 0)
-        {
-            return;
-        }
-        bool validPlacement = CheckValidPlacement(gridPos, selectedObjectIndex);
-        previewRenderer.material.color = validPlacement ? Color.white : Color.red;
 
     }
 
@@ -163,7 +144,7 @@ public class PlacementSystem : MonoBehaviour
 
     public Vector3 SnapToGrid(Vector3 position)
     {
-        Vector3Int cellPos = gridLayout.WorldToCell(position); // Convert Vector position to Cell position
+        Vector3Int cellPos = grid.WorldToCell(position); // Convert Vector position to Cell position
         position = grid.CellToWorld(cellPos);    // Get position of cell at Cell position
         return position;
     }
@@ -171,30 +152,33 @@ public class PlacementSystem : MonoBehaviour
     public void InitializeObject()
     {
         Vector3 position = SnapToGrid(GetMouseInWorld());
-        Vector3Int gridPosition = gridLayout.WorldToCell(position);
+        Vector3Int gridPosition = grid.WorldToCell(position);
 
-        if (!CheckValidPlacement(gridPosition, selectedObjectIndex)) 
+        if (!CheckValidPlacement(gridPosition, selectedObjectIndex))    // If the position to place is not valid
         { 
             return; 
         }
 
         GameObject newObject = Instantiate(prefabDatabase.objectsData[selectedObjectIndex].Prefab, position, Quaternion.identity);
-        Debug.Log(newObject.name);
-        Debug.Log(newObject.transform.position);
-        placedGroundObjects.Add(newObject);
+        Debug.Log($"New {newObject.name} placed at {newObject.transform.position}");
+        placedGroundObjects.Add(newObject); // Add to List of placed objects
 
-        desiredObject = newObject.GetComponent<PlaceableObject>();
-        newObject.AddComponent<ObjectDrag>();
+        //desiredObject = newObject.GetComponent<PlaceableObject>();
+        //newObject.AddComponent<ObjectDrag>();
 
+        // Add the placed object's data to the grid data
         groundData.AddObjectAt(gridPosition, 
             prefabDatabase.objectsData[selectedObjectIndex].Size,
             prefabDatabase.objectsData[selectedObjectIndex].ID,
             placedGroundObjects.Count - 1);
+        previewSystem.UpdatePosition(position, false);  // Update placed position to be invalid
     }
+
+    // DEPRECATED METHOD
     private bool CanBePlaced(PlaceableObject placeableObject)
     {
         BoundsInt area = new BoundsInt();
-        area.position = gridLayout.WorldToCell(desiredObject.GetStartPosition());
+        area.position = grid.WorldToCell(desiredObject.GetStartPosition());
         area.size = desiredObject.Size;
         //Debug.Log(area.position);
 
@@ -211,6 +195,7 @@ public class PlacementSystem : MonoBehaviour
         return true;
     }
 
+    // DEPRECATED METHOD
     public void ClaimArea(Vector3Int start,  Vector3Int size)
     {
         tilemap.BoxFill(start, blueTile, start.x, start.y, start.x + size.x, start.y + size.y);
