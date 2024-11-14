@@ -21,33 +21,34 @@ public class PlacementSystem : MonoBehaviour
     public GridLayout gridLayout;
     private Grid grid;
 
-    [SerializeField]
+    [SerializeField, BoxGroup("Tilemap Properties")]
     private Tilemap tilemap;
-    [SerializeField]
+    [SerializeField, BoxGroup("Tilemap Properties")]
     private TileBase blueTile;
-    [SerializeField]
+    [SerializeField, BoxGroup("Tilemap Properties")]
     private TileBase whiteTile;
-    [SerializeField]
+    [SerializeField, BoxGroup("Tilemap Properties")]
     private TileBase redTile;
 
     [ReadOnly]
-    private PlaceableObject desiredObject;
-    [ReadOnly]
-    private Vector3 lastPosition = Vector3.zero;
+    private Vector3 lastMousePosition = Vector3.zero;
 
     [SerializeField]
     private GameObject gridView;
     [SerializeField]
     private PrefabDatabaseSO prefabDatabase;
-    private int selectedObjectIndex = -1;
 
     private GridData groundData;
 
-    private List<GameObject> placedGroundObjects;
+    [SerializeField]
+    private ObjectPlacer objectPlacer;
+
+    IBuildState buildState;
 
     [SerializeField]
     private PreviewSystem previewSystem;
 
+    [ReadOnly]
     private Vector3Int lastGridPosition = Vector3Int.zero;
 
     public event Action OnClick, OnExit;
@@ -57,41 +58,46 @@ public class PlacementSystem : MonoBehaviour
     private void Start()
     {
         EndPlacement();
-        // Instantiate Variables
+        // Initialize GridData Variables
         groundData = new GridData();
-        placedGroundObjects = new List<GameObject>();
     }
 
     public void StartPlacement(int ID)
     {
         EndPlacement();
-        selectedObjectIndex = prefabDatabase.objectsData.FindIndex(data => data.ID == ID);
-        if (selectedObjectIndex < 0)
-        {
-            Debug.LogError($"ID not found {ID}");
-            return;
-        }
         gridView.SetActive(true);
-        previewSystem.BeginPreview(
-            prefabDatabase.objectsData[selectedObjectIndex].Prefab,
-            prefabDatabase.objectsData[selectedObjectIndex].Size);
-        OnClick += InitializeObject;
+        // Initialize PlacementState
+        buildState = new PlacementState(ID,
+                                        grid,
+                                        previewSystem,
+                                        prefabDatabase,
+                                        groundData,
+                                        objectPlacer);
+
+        OnClick += PlaceObject;
         OnExit += EndPlacement;
     }
 
     private void EndPlacement()
     {
-        selectedObjectIndex = -1;
+        if (buildState == null) // If no Build State is active
+        {
+            return;
+        }
         gridView.SetActive(false);
-        previewSystem.EndPreview();
-        OnClick -= InitializeObject;
+
+        buildState.EndState();
+
+        OnClick -= PlaceObject;
         OnExit -= EndPlacement;
+
         lastGridPosition = Vector3Int.zero;
     }
 
     private void Awake()
     {
-        // Instantiate Variables
+        gridView.SetActive(false);
+        // Initialize Variables
         instance = this;
         grid = gridLayout.gameObject.GetComponent<Grid>();
     }
@@ -116,15 +122,14 @@ public class PlacementSystem : MonoBehaviour
             StartPlacement(2);
         }
 
-        if(selectedObjectIndex < 0) // If no prefab selected
+        if(buildState == null) // If not currently in a Build State
         {
             return;
         }
         Vector3Int gridPosition = grid.WorldToCell(GetMouseInWorld());
         if (lastGridPosition != gridPosition)   // If grid position has changed
         {
-            bool validPlacement = CheckValidPlacement(gridPosition, selectedObjectIndex);
-            previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), validPlacement);
+            buildState.UpdateState(gridPosition);   // Update the Build State position
             lastGridPosition = gridPosition;
         }
 
@@ -137,9 +142,9 @@ public class PlacementSystem : MonoBehaviour
         Ray ray = placementCamera.ScreenPointToRay(Input.mousePosition);    // Create ray from MainCamera mouse position
         if(Physics.Raycast(ray, out RaycastHit raycastHit, 100, placementlayerMask)) // If the raycast hit something
         {
-            lastPosition = raycastHit.point;    // Update last position to hit position in scene
+            lastMousePosition = raycastHit.point;    // Update last position to hit position in scene
         }
-        return lastPosition;    
+        return lastMousePosition;    
     }
 
     public Vector3 SnapToGrid(Vector3 position)
@@ -149,68 +154,56 @@ public class PlacementSystem : MonoBehaviour
         return position;
     }
 
-    public void InitializeObject()
+    public void PlaceObject()
     {
-        Vector3 position = SnapToGrid(GetMouseInWorld());
-        Vector3Int gridPosition = grid.WorldToCell(position);
+        //if (IsPointerOverUI())  // If Event is Active
+        //{
+        //    return;
+        //}
+        Vector3 worldPosition = SnapToGrid(GetMouseInWorld());
+        Vector3Int gridPosition = grid.WorldToCell(worldPosition);
 
-        if (!CheckValidPlacement(gridPosition, selectedObjectIndex))    // If the position to place is not valid
-        { 
-            return; 
-        }
-
-        GameObject newObject = Instantiate(prefabDatabase.objectsData[selectedObjectIndex].Prefab, position, Quaternion.identity);
-        Debug.Log($"New {newObject.name} placed at {newObject.transform.position}");
-        placedGroundObjects.Add(newObject); // Add to List of placed objects
-
-        //desiredObject = newObject.GetComponent<PlaceableObject>();
-        //newObject.AddComponent<ObjectDrag>();
-
-        // Add the placed object's data to the grid data
-        groundData.AddObjectAt(gridPosition, 
-            prefabDatabase.objectsData[selectedObjectIndex].Size,
-            prefabDatabase.objectsData[selectedObjectIndex].ID,
-            placedGroundObjects.Count - 1);
-        previewSystem.UpdatePosition(position, false);  // Update placed position to be invalid
+        buildState.OnAction(gridPosition);  // Begin Placement Action
+        
     }
 
     // DEPRECATED METHOD
-    private bool CanBePlaced(PlaceableObject placeableObject)
-    {
-        BoundsInt area = new BoundsInt();
-        area.position = grid.WorldToCell(desiredObject.GetStartPosition());
-        area.size = desiredObject.Size;
-        //Debug.Log(area.position);
+    //private bool CanBePlaced(PlaceableObject placeableObject)
+    //{
+    //    BoundsInt area = new BoundsInt();
+    //    area.position = grid.WorldToCell(desiredObject.GetStartPosition());
+    //    area.size = desiredObject.Size;
+    //    //Debug.Log(area.position);
 
-        TileBase[] tilebase = tilemap.GetTilesBlock(area);
+    //    TileBase[] tilebase = tilemap.GetTilesBlock(area);
 
-        foreach(TileBase t in tilebase)
-        {
-            Debug.Log("Loop");
-            if(t == blueTile)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+    //    foreach(TileBase t in tilebase)
+    //    {
+    //        Debug.Log("Loop");
+    //        if(t == blueTile)
+    //        {
+    //            return false;
+    //        }
+    //    }
+    //    return true;
+    //}
 
     // DEPRECATED METHOD
-    public void ClaimArea(Vector3Int start,  Vector3Int size)
-    {
-        tilemap.BoxFill(start, blueTile, start.x, start.y, start.x + size.x, start.y + size.y);
-    }
+    //public void ClaimArea(Vector3Int start,  Vector3Int size)
+    //{
+    //    tilemap.BoxFill(start, blueTile, start.x, start.y, start.x + size.x, start.y + size.y);
+    //}
 
     public GridLayout GetGridLayout()
     {
         return gridLayout;
     }
 
-    private bool CheckValidPlacement(Vector3Int gridPosition, int selectedObjectIndex)
-    {
-        Vector2Int objectSize = prefabDatabase.objectsData[selectedObjectIndex].Size;
-        return groundData.ObjectCanBePlacedAt(gridPosition, objectSize);
-    }
+    //private bool CheckValidPlacement(Vector3Int gridPosition, int selectedObjectIndex)
+    //{
+    //    Vector2Int objectSize = prefabDatabase.objectsData[selectedObjectIndex].Size;
+    //    return groundData.ObjectCanBePlacedAt(gridPosition, objectSize);
+    //}
 
     #endregion
 
