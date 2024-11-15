@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+
+// Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
 
 public class PreviewSystem : MonoBehaviour
 {
@@ -8,12 +11,15 @@ public class PreviewSystem : MonoBehaviour
     [SerializeField]
     private GameObject cellIndicator;
     private GameObject previewObject;
+    private GameObject removePreviewObject;
 
     [SerializeField]
     private Material prefabPreviewMaterial;
     private Material previewMaterialInstance;
 
     private Renderer cellIndicatorRenderer;
+
+    private Dictionary<Renderer, Material[]> originalMaterials = new();
 
     private void Start()
     {
@@ -44,6 +50,11 @@ public class PreviewSystem : MonoBehaviour
         Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();   // Get all prefab Renderers
         foreach (Renderer renderer in renderers)
         {
+            if(!originalMaterials.ContainsKey(renderer))    // If renderer is not already stored in dictionary
+            {
+                originalMaterials.Add(renderer, renderer.materials);    // Add renderer and its materials to dictionary
+            }
+
             Material[] materials = renderer.materials;  // Get all renderer materials
             for (int i = 0; i < materials.Length; i++)  // For every material in array
             {
@@ -53,12 +64,36 @@ public class PreviewSystem : MonoBehaviour
         }
     }
 
+    private void RestorePreviewObjectMaterials(GameObject previewObject)
+    {
+        Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();   // Get all prefab Renderers
+        foreach (Renderer renderer in renderers)
+        {
+            if (originalMaterials.ContainsKey(renderer))    // If renderer is stored in dictionary
+            {
+                renderer.materials = originalMaterials[renderer];   // Restore materials from dictionary
+                originalMaterials.Remove(renderer); // Remove renderer from dictionary
+            }
+        }
+    }
+
     public void EndPreview()
     {
+        EndRemovalPreview();
         cellIndicator.SetActive(false); // Hide Indicator
         if (previewObject != null)  // If there is an active preview object
         {
             Destroy(previewObject); // Remove Prefab preview from scene
+            previewObject = null;
+        }
+    }
+
+    public void EndRemovalPreview()
+    {
+        if (removePreviewObject != null)  // If there is an active preview object
+        {
+            RestorePreviewObjectMaterials(removePreviewObject);   // Restores the original materials the object had before being replaced
+            removePreviewObject = null;
         }
     }
 
@@ -97,10 +132,17 @@ public class PreviewSystem : MonoBehaviour
         previewObject.transform.position = position + new Vector3(0, yOffset, 0);   // Update prefab preview position with y offset
     }
 
-    internal void BeginRemovalPreview()
+    public void BeginRemovalPreview()
     {
         cellIndicator.SetActive(true);
         PrepareIndicator(Vector2Int.one);
         ApplyIndicatorFeedbackColour(false);
+    }
+
+    public void BeginRemovalPreview(GameObject previewObject)
+    {
+        removePreviewObject = previewObject;
+        PreparePreview(removePreviewObject);
+        ApplyPreviewFeedbackColour(false);
     }
 }

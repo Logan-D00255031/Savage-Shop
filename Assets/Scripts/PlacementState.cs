@@ -4,6 +4,8 @@ using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
+
 public class PlacementState : IBuildState
 {
     private int selectedObjectIndex = -1;

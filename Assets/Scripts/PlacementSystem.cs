@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 // Learned from Tutorial: https://youtu.be/rKp9fWvmIww?si=6ueW9PHdiFnlvi5h
+// Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
 
 public class PlacementSystem : MonoBehaviour
 {    
@@ -82,6 +83,7 @@ public class PlacementSystem : MonoBehaviour
     {
         EndPlacement();
         gridView.SetActive(true);
+        // Initialize RemovalState
         buildState = new RemovalState(grid,
                                       previewSystem,
                                       groundData,

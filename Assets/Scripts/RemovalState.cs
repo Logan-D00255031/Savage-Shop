@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
+
 public class RemovalState : IBuildState
 {
     private int gameObjectIndex = -1;
@@ -62,7 +64,17 @@ public class RemovalState : IBuildState
 
     public void UpdateState(Vector3Int gridPosition)
     {
+        previewSystem.EndRemovalPreview();
         bool valid = CheckIfSelectionIsValid(gridPosition);
+        if (valid)
+        {
+            int selectedObjectIndex = gridData.GetRepresentationIndex(gridPosition);
+            if (selectedObjectIndex > -1)
+            {
+                GameObject selectedObject = objectPlacer.GetObjectAtIndex(selectedObjectIndex);
+                previewSystem.BeginRemovalPreview(selectedObject);
+            }
+        }
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), valid);
     }
 }

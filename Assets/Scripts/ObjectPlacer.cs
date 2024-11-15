@@ -6,6 +6,8 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
+
 public class ObjectPlacer : MonoBehaviour
 {
     [SerializeField]
@@ -21,7 +23,7 @@ public class ObjectPlacer : MonoBehaviour
         return placedGameObjects.Count - 1; // Return new placed object's index in List
     }
 
-    internal void RemoveObjectAt(int gameObjectIndex)   // Removes desired GameObject stored in list from scene
+    public void RemoveObjectAt(int gameObjectIndex)   // Removes desired GameObject stored in list from scene
     {
         if (placedGameObjects.Count <= gameObjectIndex || placedGameObjects[gameObjectIndex] == null) // If index is out of bounds or null
         {
@@ -29,5 +31,10 @@ public class ObjectPlacer : MonoBehaviour
         }
         Destroy(placedGameObjects[gameObjectIndex]);    // Remove game object from scene
         placedGameObjects[gameObjectIndex] = null;  // Remove game object from list
+    }
+
+    public GameObject GetObjectAtIndex(int gameObjectIndex) 
+    {
+        return placedGameObjects[gameObjectIndex];
     }
 }
