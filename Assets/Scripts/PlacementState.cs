@@ -31,7 +31,7 @@ public class PlacementState : IBuildState
         selectedObjectIndex = prefabDatabase.objectsData.FindIndex(data => data.ID == ID);
         if (selectedObjectIndex > -1)
         {
-            previewSystem.BeginPreview(
+            previewSystem.BeginPlacementPreview(
                 prefabDatabase.objectsData[selectedObjectIndex].Prefab,
                 prefabDatabase.objectsData[selectedObjectIndex].Size);
         }

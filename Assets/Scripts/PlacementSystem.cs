@@ -78,6 +78,19 @@ public class PlacementSystem : MonoBehaviour
         OnExit += EndPlacement;
     }
 
+    public void StartRemoval()
+    {
+        EndPlacement();
+        gridView.SetActive(true);
+        buildState = new RemovalState(grid,
+                                      previewSystem,
+                                      groundData,
+                                      objectPlacer);
+
+        OnClick += PlaceObject;
+        OnExit += EndPlacement;
+    }
+
     private void EndPlacement()
     {
         if (buildState == null) // If no Build State is active
@@ -121,8 +134,12 @@ public class PlacementSystem : MonoBehaviour
         {
             StartPlacement(2);
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            StartRemoval();
+        }
 
-        if(buildState == null) // If not currently in a Build State
+        if (buildState == null) // If not currently in a Build State
         {
             return;
         }

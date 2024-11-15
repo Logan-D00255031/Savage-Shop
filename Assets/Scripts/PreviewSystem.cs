@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PreviewSystem : MonoBehaviour
@@ -25,7 +22,7 @@ public class PreviewSystem : MonoBehaviour
         cellIndicatorRenderer = cellIndicator.GetComponentInChildren<Renderer>();   // Instantiate Indicator Renderer
     }
 
-    public void BeginPreview(GameObject prefab, Vector2Int size)
+    public void BeginPlacementPreview(GameObject prefab, Vector2Int size)
     {
         previewObject = Instantiate(prefab);
         PreparePreview(previewObject);
@@ -59,22 +56,35 @@ public class PreviewSystem : MonoBehaviour
     public void EndPreview()
     {
         cellIndicator.SetActive(false); // Hide Indicator
-        Destroy(previewObject); // Remove Prefab preview from scene
+        if (previewObject != null)  // If there is an active preview object
+        {
+            Destroy(previewObject); // Remove Prefab preview from scene
+        }
     }
 
     public void UpdatePosition(Vector3 position, bool valid)
     {
-        MovePreview(position);
+        if (previewObject != null)  // If there is an active preview object
+        {
+            MovePreview(position);
+            ApplyPreviewFeedbackColour(valid);
+        }
+
         MoveCursor(position);
-        ApplyFeedbackColour(valid);
+        ApplyIndicatorFeedbackColour(valid);
     }
 
-    private void ApplyFeedbackColour(bool valid)
+    private void ApplyPreviewFeedbackColour(bool valid)
     {
         Color color = valid ? Color.white : Color.red;  // Set color based on valid bool
-        cellIndicatorRenderer.material.color = color;   // Set indicator color
         color.a = 0.5f; // Set color opacity
         previewMaterialInstance.color = color;  // Set Preview Material color
+    }
+    private void ApplyIndicatorFeedbackColour(bool valid)
+    {
+        Color color = valid ? Color.white : Color.red;  // Set color based on valid bool
+        color.a = 0.5f; // Set color opacity
+        cellIndicatorRenderer.material.color = color;   // Set indicator color
     }
 
     private void MoveCursor(Vector3 position)
@@ -85,5 +95,12 @@ public class PreviewSystem : MonoBehaviour
     private void MovePreview(Vector3 position)
     {
         previewObject.transform.position = position + new Vector3(0, yOffset, 0);   // Update prefab preview position with y offset
+    }
+
+    internal void BeginRemovalPreview()
+    {
+        cellIndicator.SetActive(true);
+        PrepareIndicator(Vector2Int.one);
+        ApplyIndicatorFeedbackColour(false);
     }
 }

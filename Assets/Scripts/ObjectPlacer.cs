@@ -20,4 +20,14 @@ public class ObjectPlacer : MonoBehaviour
 
         return placedGameObjects.Count - 1; // Return new placed object's index in List
     }
+
+    internal void RemoveObjectAt(int gameObjectIndex)   // Removes desired GameObject stored in list from scene
+    {
+        if (placedGameObjects.Count <= gameObjectIndex || placedGameObjects[gameObjectIndex] == null) // If index is out of bounds or null
+        {
+            return;
+        }
+        Destroy(placedGameObjects[gameObjectIndex]);    // Remove game object from scene
+        placedGameObjects[gameObjectIndex] = null;  // Remove game object from list
+    }
 }
