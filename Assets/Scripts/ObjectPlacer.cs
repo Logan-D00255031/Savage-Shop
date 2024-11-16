@@ -14,9 +14,9 @@ public class ObjectPlacer : MonoBehaviour
     [Sirenix.OdinInspector.ReadOnly]
     private List<GameObject> placedGameObjects = new();
 
-    public int PlaceObject(GameObject prefab, Vector3 position) // Places Object Prefab at desired position
+    public int PlaceObject(GameObject prefab, Vector3 position, float rotation) // Places Object Prefab at desired position and rotation
     {
-        GameObject newObject = Instantiate(prefab, position, Quaternion.identity);
+        GameObject newObject = Instantiate(prefab, position, Quaternion.Euler(0, rotation, 0));
         Debug.Log($"New {newObject.name} placed at {newObject.transform.position}");
         placedGameObjects.Add(newObject); // Add to List of placed objects
 

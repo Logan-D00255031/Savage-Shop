@@ -146,7 +146,7 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
         Vector3Int gridPosition = grid.WorldToCell(GetMouseInWorld());
-        if (lastGridPosition != gridPosition)   // If grid position has changed
+        if ((lastGridPosition != gridPosition) || (Input.GetAxis("Mouse ScrollWheel") != 0f))   // If grid position has changed or scroll wheel has moved
         {
             buildState.UpdateState(gridPosition);   // Update the Build State position
             lastGridPosition = gridPosition;

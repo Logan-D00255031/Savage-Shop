@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.UIElements;
 
 // Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
 
@@ -109,6 +112,18 @@ public class PreviewSystem : MonoBehaviour
         ApplyIndicatorFeedbackColour(valid);
     }
 
+    public void UpdatePosition(Vector3 position, bool valid, float objectRotation)
+    {
+        if (previewObject != null)  // If there is an active preview object
+        {
+            MovePreview(position, objectRotation);
+            ApplyPreviewFeedbackColour(valid);
+        }
+
+        MoveCursor(position, objectRotation);
+        ApplyIndicatorFeedbackColour(valid);
+    }
+
     private void ApplyPreviewFeedbackColour(bool valid)
     {
         Color color = valid ? Color.white : Color.red;  // Set color based on valid bool
@@ -127,9 +142,21 @@ public class PreviewSystem : MonoBehaviour
         cellIndicator.transform.position = position;    // Update indicator position
     }
 
+    private void MoveCursor(Vector3 position, float objectRotation)
+    {
+        cellIndicator.transform.position = position;    // Update indicator position
+        cellIndicator.transform.rotation = Quaternion.Euler(0, objectRotation, 0);  // Update indicator rotation with given objectRotation
+    }
+
     private void MovePreview(Vector3 position)
     {
         previewObject.transform.position = position + new Vector3(0, yOffset, 0);   // Update prefab preview position with y offset
+    }
+
+    private void MovePreview(Vector3 position, float objectRotation)
+    {
+        previewObject.transform.position = position + new Vector3(0, yOffset, 0);   // Update prefab preview position with y offset
+        previewObject.transform.rotation = Quaternion.Euler(0, objectRotation, 0);  // Update prefab preview rotation with given objectRotation
     }
 
     public void BeginRemovalPreview()
@@ -145,4 +172,5 @@ public class PreviewSystem : MonoBehaviour
         PreparePreview(removePreviewObject);
         ApplyPreviewFeedbackColour(false);
     }
+
 }
