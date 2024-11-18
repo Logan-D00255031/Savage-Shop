@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 // Learned from Tutorial: https://youtu.be/rKp9fWvmIww?si=6ueW9PHdiFnlvi5h
-// Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
 
 public class PlacementSystem : MonoBehaviour
 {    
@@ -79,20 +78,6 @@ public class PlacementSystem : MonoBehaviour
         OnExit += EndPlacement;
     }
 
-    public void StartRemoval()
-    {
-        EndPlacement();
-        gridView.SetActive(true);
-        // Initialize RemovalState
-        buildState = new RemovalState(grid,
-                                      previewSystem,
-                                      groundData,
-                                      objectPlacer);
-
-        OnClick += PlaceObject;
-        OnExit += EndPlacement;
-    }
-
     private void EndPlacement()
     {
         if (buildState == null) // If no Build State is active
@@ -136,17 +121,13 @@ public class PlacementSystem : MonoBehaviour
         {
             StartPlacement(2);
         }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            StartRemoval();
-        }
 
-        if (buildState == null) // If not currently in a Build State
+        if(buildState == null) // If not currently in a Build State
         {
             return;
         }
         Vector3Int gridPosition = grid.WorldToCell(GetMouseInWorld());
-        if ((lastGridPosition != gridPosition) || (Input.GetAxis("Mouse ScrollWheel") != 0f))   // If grid position has changed or scroll wheel has moved
+        if (lastGridPosition != gridPosition)   // If grid position has changed
         {
             buildState.UpdateState(gridPosition);   // Update the Build State position
             lastGridPosition = gridPosition;
