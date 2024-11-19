@@ -116,7 +116,7 @@ public class PlacementState : IBuildState
     {
         Vector2Int mouseGridOffset = (gridData.CalculateRotatedSize(objectSize, objectRotation) / 2); // Get mouse position offset from half of the rotated size
         objectGridPosition = mouseGridPosition - new Vector3Int(mouseGridOffset.x, mouseGridOffset.y, 0);    // Apply offset to get new object grid position
-        Debug.Log($"Offset: {mouseGridOffset} , Object Pos: {objectGridPosition}");
+        //Debug.Log($"Offset: {mouseGridOffset} , Object Pos: {objectGridPosition}");
     }
 
     private void RotateClockwise()

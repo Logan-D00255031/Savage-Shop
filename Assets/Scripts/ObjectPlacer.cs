@@ -30,7 +30,7 @@ public class ObjectPlacer : MonoBehaviour
             return;
         }
         Destroy(placedGameObjects[gameObjectIndex]);    // Remove game object from scene
-        placedGameObjects[gameObjectIndex] = null;  // Remove game object from list
+        placedGameObjects[gameObjectIndex] = null;  // Set game object from list to null
     }
 
     public GameObject GetObjectAtIndex(int gameObjectIndex) 

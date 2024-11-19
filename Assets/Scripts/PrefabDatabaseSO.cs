@@ -23,4 +23,17 @@ public class PrefabData
     public Vector2Int Size { get; private set; } = Vector2Int.one;
     [field: SerializeField]
     public GameObject Prefab { get; private set; }
+    [field: SerializeField]
+    public ItemData ItemData { get; private set; }
+}
+
+[Serializable]
+public class ItemData
+{
+    [field: SerializeField]
+    public string Name { get; private set; }
+    [field: SerializeField]
+    public string Description { get; private set; }
+    [field: SerializeField]
+    public float BuyPrice { get; private set; }
 }
