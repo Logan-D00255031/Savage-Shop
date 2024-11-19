@@ -124,7 +124,7 @@ public class GridData
         return values;
     }
 
-    private Vector2Int CalculateRotatedSize(Vector2Int objectSize, float objectRotation)
+    public Vector2Int CalculateRotatedSize(Vector2Int objectSize, float objectRotation)
     {
         if (objectRotation == 90f)
         {

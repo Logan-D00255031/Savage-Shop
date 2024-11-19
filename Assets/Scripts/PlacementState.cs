@@ -16,6 +16,8 @@ public class PlacementState : IBuildState
     GridData gridData;
     ObjectPlacer objectPlacer;
     private float objectRotation = 0f;
+    private Vector2Int objectSize;
+    private Vector3Int objectGridPosition = Vector3Int.zero;
 
     public PlacementState(int iD,
                           Grid grid,
@@ -34,6 +36,7 @@ public class PlacementState : IBuildState
         selectedObjectIndex = prefabDatabase.objectsData.FindIndex(data => data.ID == ID);
         if (selectedObjectIndex > -1)
         {
+            this.objectSize = prefabDatabase.objectsData[selectedObjectIndex].Size;
             previewSystem.BeginPlacementPreview(
                 prefabDatabase.objectsData[selectedObjectIndex].Prefab,
                 prefabDatabase.objectsData[selectedObjectIndex].Size);
@@ -51,11 +54,13 @@ public class PlacementState : IBuildState
         previewSystem.EndPreview();
     }
 
-    public void OnAction(Vector3Int gridPosition)
+    public void OnAction(Vector3Int mouseGridPosition)
     {
-        Vector3 worldPosition = grid.CellToWorld(gridPosition);
+        CalculateObjectGridPosition(mouseGridPosition); // Get new Object grid position
 
-        if (!CheckValidPlacement(gridPosition, selectedObjectIndex, objectRotation))    // If the position to place is not valid
+        Vector3 worldPosition = grid.CellToWorld(objectGridPosition);
+
+        if (!CheckValidPlacement(objectGridPosition, selectedObjectIndex, objectRotation))    // If the position to place is not valid
         {
             // Invalid sound can be added here
             return;
@@ -66,7 +71,7 @@ public class PlacementState : IBuildState
         int index = objectPlacer.PlaceObject(prefabDatabase.objectsData[selectedObjectIndex].Prefab, worldPosition, objectRotation);
 
         // Add the placed object's data to the grid data
-        gridData.AddObjectAt(gridPosition,
+        gridData.AddObjectAt(objectGridPosition,
             prefabDatabase.objectsData[selectedObjectIndex].Size,
             prefabDatabase.objectsData[selectedObjectIndex].ID,
             index, objectRotation);
@@ -85,7 +90,7 @@ public class PlacementState : IBuildState
         return gridData.ObjectCanBePlacedAt(gridPosition, objectSize, objectRotation);
     }
 
-    public void UpdateState(Vector3Int gridPosition)
+    public void UpdateState(Vector3Int mouseGridPosition)
     {
         float mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
 
@@ -101,8 +106,17 @@ public class PlacementState : IBuildState
             RotateCounterClockwise();
         }
 
-        bool validPlacement = CheckValidPlacement(gridPosition, selectedObjectIndex, objectRotation);
-        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), validPlacement, objectRotation);
+        CalculateObjectGridPosition(mouseGridPosition); // Get new Object grid position
+
+        bool validPlacement = CheckValidPlacement(objectGridPosition, selectedObjectIndex, objectRotation);
+        previewSystem.UpdatePosition(grid.CellToWorld(objectGridPosition), validPlacement, objectRotation);
+    }
+
+    private void CalculateObjectGridPosition(Vector3Int mouseGridPosition)
+    {
+        Vector2Int mouseGridOffset = (gridData.CalculateRotatedSize(objectSize, objectRotation) / 2); // Get mouse position offset from half of the rotated size
+        objectGridPosition = mouseGridPosition - new Vector3Int(mouseGridOffset.x, mouseGridOffset.y, 0);    // Apply offset to get new object grid position
+        Debug.Log($"Offset: {mouseGridOffset} , Object Pos: {objectGridPosition}");
     }
 
     private void RotateClockwise()
