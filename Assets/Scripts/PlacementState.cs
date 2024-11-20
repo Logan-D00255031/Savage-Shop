@@ -4,6 +4,8 @@ using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
+
 public class PlacementState : IBuildState
 {
     private int selectedObjectIndex = -1;
@@ -13,12 +15,9 @@ public class PlacementState : IBuildState
     PrefabDatabaseSO prefabDatabase;
     GridData gridData;
     ObjectPlacer objectPlacer;
-<<<<<<< HEAD
-=======
     private float objectRotation = 0f;
     private Vector2Int objectSize;
     private Vector3Int objectGridPosition = Vector3Int.zero;
->>>>>>> 22029faa9cdd267d6597953fe70efb830d936e82
 
     public PlacementState(int iD,
                           Grid grid,
@@ -37,12 +36,8 @@ public class PlacementState : IBuildState
         selectedObjectIndex = prefabDatabase.objectsData.FindIndex(data => data.ID == ID);
         if (selectedObjectIndex > -1)
         {
-<<<<<<< HEAD
-            previewSystem.BeginPreview(
-=======
             this.objectSize = prefabDatabase.objectsData[selectedObjectIndex].Size;
             previewSystem.BeginPlacementPreview(
->>>>>>> 22029faa9cdd267d6597953fe70efb830d936e82
                 prefabDatabase.objectsData[selectedObjectIndex].Prefab,
                 prefabDatabase.objectsData[selectedObjectIndex].Size);
         }
@@ -55,6 +50,7 @@ public class PlacementState : IBuildState
 
     public void EndState()
     {
+        previewSystem.UpdatePosition(Vector3.zero, false, 0f);  // Reset preview rotation
         previewSystem.EndPreview();
     }
 
@@ -62,13 +58,9 @@ public class PlacementState : IBuildState
     {
         CalculateObjectGridPosition(mouseGridPosition); // Get new Object grid position
 
-<<<<<<< HEAD
-        if (!CheckValidPlacement(gridPosition, selectedObjectIndex))    // If the position to place is not valid
-=======
         Vector3 worldPosition = grid.CellToWorld(objectGridPosition);
 
         if (!CheckValidPlacement(objectGridPosition, selectedObjectIndex, objectRotation))    // If the position to place is not valid
->>>>>>> 22029faa9cdd267d6597953fe70efb830d936e82
         {
             // Invalid sound can be added here
             return;
@@ -76,28 +68,30 @@ public class PlacementState : IBuildState
 
         // Valid sound can be added here
 
-        int index = objectPlacer.PlaceObject(prefabDatabase.objectsData[selectedObjectIndex].Prefab, worldPosition);
+        int index = objectPlacer.PlaceObject(prefabDatabase.objectsData[selectedObjectIndex].Prefab, worldPosition, objectRotation);
 
         // Add the placed object's data to the grid data
         gridData.AddObjectAt(objectGridPosition,
             prefabDatabase.objectsData[selectedObjectIndex].Size,
             prefabDatabase.objectsData[selectedObjectIndex].ID,
-            index);
+            index, objectRotation);
         previewSystem.UpdatePosition(worldPosition, false);  // Update placed position to be invalid
     }
 
-    private bool CheckValidPlacement(Vector3Int gridPosition, int selectedObjectIndex)
+    //private bool CheckValidPlacement(Vector3Int gridPosition, int selectedObjectIndex)
+    //{
+    //    Vector2Int objectSize = prefabDatabase.objectsData[selectedObjectIndex].Size;
+    //    return gridData.ObjectCanBePlacedAt(gridPosition, objectSize);
+    //}
+
+    private bool CheckValidPlacement(Vector3Int gridPosition, int selectedObjectIndex, float objectRotation)
     {
         Vector2Int objectSize = prefabDatabase.objectsData[selectedObjectIndex].Size;
-        return gridData.ObjectCanBePlacedAt(gridPosition, objectSize);
+        return gridData.ObjectCanBePlacedAt(gridPosition, objectSize, objectRotation);
     }
 
     public void UpdateState(Vector3Int mouseGridPosition)
     {
-<<<<<<< HEAD
-        bool validPlacement = CheckValidPlacement(gridPosition, selectedObjectIndex);
-        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), validPlacement);
-=======
         float mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
 
         // Check if the wheel is scrolled up or down
@@ -145,6 +139,5 @@ public class PlacementState : IBuildState
             objectRotation += 360f;
         }
         Debug.Log($"New rotation: {objectRotation} degrees");
->>>>>>> 22029faa9cdd267d6597953fe70efb830d936e82
     }
 }

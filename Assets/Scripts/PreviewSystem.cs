@@ -1,7 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.UIElements;
+
+// Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
 
 public class PreviewSystem : MonoBehaviour
 {
@@ -11,12 +14,15 @@ public class PreviewSystem : MonoBehaviour
     [SerializeField]
     private GameObject cellIndicator;
     private GameObject previewObject;
+    private GameObject removePreviewObject;
 
     [SerializeField]
     private Material prefabPreviewMaterial;
     private Material previewMaterialInstance;
 
     private Renderer cellIndicatorRenderer;
+
+    private Dictionary<Renderer, Material[]> originalMaterials = new();
 
     private void Start()
     {
@@ -25,7 +31,7 @@ public class PreviewSystem : MonoBehaviour
         cellIndicatorRenderer = cellIndicator.GetComponentInChildren<Renderer>();   // Instantiate Indicator Renderer
     }
 
-    public void BeginPreview(GameObject prefab, Vector2Int size)
+    public void BeginPlacementPreview(GameObject prefab, Vector2Int size)
     {
         previewObject = Instantiate(prefab);
         PreparePreview(previewObject);
@@ -47,6 +53,11 @@ public class PreviewSystem : MonoBehaviour
         Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();   // Get all prefab Renderers
         foreach (Renderer renderer in renderers)
         {
+            if(!originalMaterials.ContainsKey(renderer))    // If renderer is not already stored in dictionary
+            {
+                originalMaterials.Add(renderer, renderer.materials);    // Add renderer and its materials to dictionary
+            }
+
             Material[] materials = renderer.materials;  // Get all renderer materials
             for (int i = 0; i < materials.Length; i++)  // For every material in array
             {
@@ -56,25 +67,74 @@ public class PreviewSystem : MonoBehaviour
         }
     }
 
+    private void RestorePreviewObjectMaterials(GameObject previewObject)
+    {
+        Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();   // Get all prefab Renderers
+        foreach (Renderer renderer in renderers)
+        {
+            if (originalMaterials.ContainsKey(renderer))    // If renderer is stored in dictionary
+            {
+                renderer.materials = originalMaterials[renderer];   // Restore materials from dictionary
+                originalMaterials.Remove(renderer); // Remove renderer from dictionary
+            }
+        }
+    }
+
     public void EndPreview()
     {
+        EndRemovalPreview();
         cellIndicator.SetActive(false); // Hide Indicator
-        Destroy(previewObject); // Remove Prefab preview from scene
+        if (previewObject != null)  // If there is an active preview object
+        {
+            Destroy(previewObject); // Remove Prefab preview from scene
+            previewObject = null;
+        }
+    }
+
+    public void EndRemovalPreview()
+    {
+        if (removePreviewObject != null)  // If there is an active preview object
+        {
+            RestorePreviewObjectMaterials(removePreviewObject);   // Restores the original materials the object had before being replaced
+            removePreviewObject = null;
+        }
     }
 
     public void UpdatePosition(Vector3 position, bool valid)
     {
-        MovePreview(position);
+        if (previewObject != null)  // If there is an active preview object
+        {
+            MovePreview(position);
+            ApplyPreviewFeedbackColour(valid);
+        }
+
         MoveCursor(position);
-        ApplyFeedbackColour(valid);
+        ApplyIndicatorFeedbackColour(valid);
     }
 
-    private void ApplyFeedbackColour(bool valid)
+    public void UpdatePosition(Vector3 position, bool valid, float objectRotation)
+    {
+        if (previewObject != null)  // If there is an active preview object
+        {
+            MovePreview(position, objectRotation);
+            ApplyPreviewFeedbackColour(valid);
+        }
+
+        MoveCursor(position, objectRotation);
+        ApplyIndicatorFeedbackColour(valid);
+    }
+
+    private void ApplyPreviewFeedbackColour(bool valid)
     {
         Color color = valid ? Color.white : Color.red;  // Set color based on valid bool
-        cellIndicatorRenderer.material.color = color;   // Set indicator color
         color.a = 0.5f; // Set color opacity
         previewMaterialInstance.color = color;  // Set Preview Material color
+    }
+    private void ApplyIndicatorFeedbackColour(bool valid)
+    {
+        Color color = valid ? Color.white : Color.red;  // Set color based on valid bool
+        color.a = 0.5f; // Set color opacity
+        cellIndicatorRenderer.material.color = color;   // Set indicator color
     }
 
     private void MoveCursor(Vector3 position)
@@ -82,8 +142,35 @@ public class PreviewSystem : MonoBehaviour
         cellIndicator.transform.position = position;    // Update indicator position
     }
 
+    private void MoveCursor(Vector3 position, float objectRotation)
+    {
+        cellIndicator.transform.position = position;    // Update indicator position
+        cellIndicator.transform.rotation = Quaternion.Euler(0, objectRotation, 0);  // Update indicator rotation with given objectRotation
+    }
+
     private void MovePreview(Vector3 position)
     {
         previewObject.transform.position = position + new Vector3(0, yOffset, 0);   // Update prefab preview position with y offset
     }
+
+    private void MovePreview(Vector3 position, float objectRotation)
+    {
+        previewObject.transform.position = position + new Vector3(0, yOffset, 0);   // Update prefab preview position with y offset
+        previewObject.transform.rotation = Quaternion.Euler(0, objectRotation, 0);  // Update prefab preview rotation with given objectRotation
+    }
+
+    public void BeginRemovalPreview()
+    {
+        cellIndicator.SetActive(true);
+        PrepareIndicator(Vector2Int.one);
+        ApplyIndicatorFeedbackColour(false);
+    }
+
+    public void BeginRemovalPreview(GameObject previewObject)
+    {
+        removePreviewObject = previewObject;
+        PreparePreview(removePreviewObject);
+        ApplyPreviewFeedbackColour(false);
+    }
+
 }

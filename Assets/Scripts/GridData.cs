@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
+
 public class GridData
 {
     Dictionary<Vector3Int, PlacementData> placedObjects = new();
@@ -11,6 +13,20 @@ public class GridData
     public void AddObjectAt(Vector3Int objectPosition, Vector2Int objectSize, int ID, int placedObjectIndex)
     {
         List<Vector3Int> desiredPositions = CalculatePositions(objectPosition, objectSize);
+        PlacementData data = new PlacementData(desiredPositions, ID, placedObjectIndex);
+        foreach (Vector3Int p in desiredPositions)
+        {
+            if (placedObjects.ContainsKey(p)) 
+            {
+                throw new Exception($"Dictionary already contains cell position {p}");
+            }
+            placedObjects.Add(p, data);
+        }
+    }
+
+    public void AddObjectAt(Vector3Int objectPosition, Vector2Int objectSize, int ID, int placedObjectIndex, float objectRotation)
+    {
+        List<Vector3Int> desiredPositions = CalculatePositions(objectPosition, objectSize, objectRotation);
         PlacementData data = new PlacementData(desiredPositions, ID, placedObjectIndex);
         foreach (Vector3Int p in desiredPositions)
         {
@@ -47,8 +63,6 @@ public class GridData
         }
         return true;
     }
-<<<<<<< HEAD
-=======
 
     public int GetRepresentationIndex(Vector3Int gridPosition)
     {
@@ -127,7 +141,6 @@ public class GridData
         // Return original if no Rotation
         return objectSize;
     }
->>>>>>> 22029faa9cdd267d6597953fe70efb830d936e82
 }
 
 public class PlacementData
