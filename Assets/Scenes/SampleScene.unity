@@ -1579,6 +1579,8 @@ MonoBehaviour:
   prefabDatabase: {fileID: 11400000, guid: 9bf1c835d8263c840a73df4f64c7db11, type: 2}
   objectPlacer: {fileID: 1916962989}
   previewSystem: {fileID: 670277062}
+  lastGridPosition: {x: 0, y: 0, z: 0}
+  prefabInventory: {fileID: 0}
 --- !u!156049354 &282482598
 Grid:
   m_ObjectHideFlags: 0
@@ -3036,9 +3038,9 @@ RectTransform:
   - {fileID: 597444804}
   m_Father: {fileID: 1862637657}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 397, y: -15}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -175, y: 0}
   m_SizeDelta: {x: 250, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713036090
