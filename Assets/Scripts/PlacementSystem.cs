@@ -49,6 +49,9 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private PreviewSystem previewSystem;
 
+    [SerializeField]
+    private PrefabInventorySO prefabInventory;
+
     [ReadOnly]
     private Vector3Int lastGridPosition = Vector3Int.zero;
 
@@ -87,7 +90,8 @@ public class PlacementSystem : MonoBehaviour
         buildState = new RemovalState(grid,
                                       previewSystem,
                                       groundData,
-                                      objectPlacer);
+                                      objectPlacer,
+                                      prefabInventory);
 
         OnClick += PlaceObject;
         OnExit += EndPlacement;

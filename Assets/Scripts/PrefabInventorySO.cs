@@ -9,34 +9,34 @@ public class PrefabInventorySO : ScriptableObject
 {
     public List<InventoryData> storedItemData = new();
 
-    public int AddItem(PrefabData data)
+    public int AddItem(int prefabIndex)
     {
         // If list empty
         if (storedItemData.Count == 0)
         {
-            // Add data to list
-            storedItemData.Add(new InventoryData(data));
+            // Add index to list
+            storedItemData.Add(new InventoryData(prefabIndex));
             return storedItemData.Count;
         }
         else
         {
-            // Loop through list to find matching prefab data
+            // Loop through list to find matching prefab index
             for (int i = 0; i < storedItemData.Count; i++)
             {
                 // If found, increment amount stored and end method
-                if (storedItemData[i].PrefabData == data)
+                if (storedItemData[i].PrefabDatabaseIndex == prefabIndex)
                 {
                     storedItemData[i].AddItem();
                     return i;
                 }
             }
             // Otherwise add new inventory data to list
-            storedItemData.Add(new InventoryData(data));
+            storedItemData.Add(new InventoryData(prefabIndex));
             return storedItemData.Count;
         }
     }
 
-    public int RemoveItem(PrefabData data)
+    public int RemoveItem(int prefabIndex)
     {
         // If list empty
         if (storedItemData.Count == 0)
@@ -45,11 +45,11 @@ public class PrefabInventorySO : ScriptableObject
         }
         else
         {
-            // Loop through list to find matching prefab data
+            // Loop through list to find matching prefab intex
             for (int i = 0; i < storedItemData.Count; i++)
             {
                 // If found, decrease amount stored
-                if (storedItemData[i].PrefabData == data)
+                if (storedItemData[i].PrefabDatabaseIndex == prefabIndex)
                 {
                     storedItemData[i].RemoveItem();
                     // if last of that item removed, remove from list
@@ -62,7 +62,7 @@ public class PrefabInventorySO : ScriptableObject
                 }
             }
             // Otherwise throw exception
-            throw new System.Exception("Prefab data not found in list");
+            throw new System.Exception("PrefabDatabase Index not found in list");
         }
     }
 
@@ -72,19 +72,19 @@ public class PrefabInventorySO : ScriptableObject
 public class InventoryData
 {
     [field: SerializeField]
-    public PrefabData PrefabData { get; private set; }
+    public int PrefabDatabaseIndex { get; private set; }
     [field: SerializeField]
     public int AmountStored { get; private set; }
 
-    public InventoryData(PrefabData prefabData, int amountStored)
+    public InventoryData(int PrefabDatabaseIndex, int amountStored)
     {
-        this.PrefabData = prefabData;
+        this.PrefabDatabaseIndex = PrefabDatabaseIndex;
         this.AmountStored = amountStored;
     }
 
-    public InventoryData(PrefabData prefabData)
+    public InventoryData(int PrefabDatabaseIndex)
     {
-        this.PrefabData = prefabData;
+        this.PrefabDatabaseIndex = PrefabDatabaseIndex;
         this.AmountStored = 1;
     }
 
