@@ -12,18 +12,22 @@ public class RemovalState : IBuildState
     PreviewSystem previewSystem;
     GridData gridData;
     ObjectPlacer objectPlacer;
+    PrefabInventorySO prefabInventory;
 
     public RemovalState(Grid grid,
                         PreviewSystem previewSystem,
                         GridData gridData,
-                        ObjectPlacer objectPlacer)
+                        ObjectPlacer objectPlacer,
+                        PrefabInventorySO prefabInventory)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
         this.gridData = gridData;
         this.objectPlacer = objectPlacer;
+        this.prefabInventory = prefabInventory;
 
         previewSystem.BeginRemovalPreview();
+
     }
 
     public void EndState()
@@ -50,6 +54,10 @@ public class RemovalState : IBuildState
             {
                 return;
             }
+            // Add Object prefab ID to inventory
+            int prefabDatabaseID = selectedData.GetRepresentationID(gridPosition);
+            prefabInventory.AddItem(prefabDatabaseID);
+
             selectedData.RemoveObjectAt(gridPosition);
             objectPlacer.RemoveObjectAt(gameObjectIndex);
         }
