@@ -12,13 +12,13 @@ public class RemovalState : IBuildState
     PreviewSystem previewSystem;
     GridData gridData;
     ObjectPlacer objectPlacer;
-    PrefabInventorySO prefabInventory;
+    PrefabInventoryManager prefabInventory;
 
     public RemovalState(Grid grid,
                         PreviewSystem previewSystem,
                         GridData gridData,
                         ObjectPlacer objectPlacer,
-                        PrefabInventorySO prefabInventory)
+                        PrefabInventoryManager prefabInventory)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
