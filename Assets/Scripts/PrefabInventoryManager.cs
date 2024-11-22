@@ -1,8 +1,7 @@
+using Sirenix.OdinInspector;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,18 +14,21 @@ public class PrefabInventoryManager : MonoBehaviour
     public Transform InventoryContainer;
     public GameObject InventoryItem;
 
+    [ReadOnly, SerializeField]
+    private InventoryItemController[] InventoryItems;
+
     private void Awake()
     {
         instance = this;
     }
 
-    public int AddItem(int prefabIndex)
+    public int AddItem(int prefabID)
     {
         // If list empty
         if (storedItemData.Count == 0)
         {
             // Add index to list
-            storedItemData.Add(new InventoryData(prefabIndex));
+            storedItemData.Add(new InventoryData(prefabID));
             return storedItemData.Count;
         }
         else
@@ -35,19 +37,19 @@ public class PrefabInventoryManager : MonoBehaviour
             for (int i = 0; i < storedItemData.Count; i++)
             {
                 // If found, increment amount stored and end method
-                if (storedItemData[i].PrefabDatabaseID == prefabIndex)
+                if (storedItemData[i].PrefabDatabaseID == prefabID)
                 {
                     storedItemData[i].AddItem();
                     return i;
                 }
             }
             // Otherwise add new inventory data to list
-            storedItemData.Add(new InventoryData(prefabIndex));
+            storedItemData.Add(new InventoryData(prefabID));
             return storedItemData.Count;
         }
     }
 
-    public int RemoveItem(int prefabIndex)
+    public int RemoveItem(int prefabID)
     {
         // If list empty
         if (storedItemData.Count == 0)
@@ -60,7 +62,7 @@ public class PrefabInventoryManager : MonoBehaviour
             for (int i = 0; i < storedItemData.Count; i++)
             {
                 // If found, decrease amount stored
-                if (storedItemData[i].PrefabDatabaseID == prefabIndex)
+                if (storedItemData[i].PrefabDatabaseID == prefabID)
                 {
                     storedItemData[i].RemoveItem();
                     // if last of that item removed, remove from list
@@ -79,23 +81,45 @@ public class PrefabInventoryManager : MonoBehaviour
 
     public void ListItems()
     {
-        // Remove the previous instantiated items from the inventory UI to prevent duplicates
-        foreach(Transform item in InventoryContainer)
-        {
-            Destroy(item.gameObject);
-        }
+        CleanInventory();
         // Instantiate items into the inventory UI
         foreach (InventoryData itemData in storedItemData)
         {
             GameObject obj = Instantiate(InventoryItem, InventoryContainer);
             var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
             Image itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+            var itemAmount = obj.transform.Find("ItemAmount").GetComponent<TMP_Text>();
 
             // Use the stored prefab ID to get the Index in the prefab database so we can get the item's information to display
             int prefabIndex = PrefabDatabase.objectsData.FindIndex(data => data.ID == itemData.PrefabDatabaseID);
             itemName.text = PrefabDatabase.objectsData[prefabIndex].ItemData.Name;
             itemIcon.sprite = PrefabDatabase.objectsData[prefabIndex].ItemData.Icon;
+            itemAmount.text = itemData.AmountStored.ToString();
         }
+
+        SetInventoryItems();
+    }
+
+    public void CleanInventory()
+    {
+        // Remove the previous instantiated items from the inventory UI to prevent duplicates
+        foreach (Transform item in InventoryContainer)
+        {
+            Destroy(item.gameObject);
+        }
+        //Debug.Log($"Items: {InventoryItems.Length}");
+    }
+
+    public void SetInventoryItems()
+    {
+        var newItems = InventoryContainer.GetComponentsInChildren<InventoryItemController>();
+
+        for (int i = 0; i < storedItemData.Count; i++)
+        {
+            newItems[i].SetItem(storedItemData[i]);
+        }
+        InventoryItems = newItems;
+        //Debug.Log($"Items: {InventoryItems.Length}");
     }
 
 }

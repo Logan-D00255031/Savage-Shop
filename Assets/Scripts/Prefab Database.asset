@@ -17,7 +17,17 @@ MonoBehaviour:
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 2, y: 2}
     <Prefab>k__BackingField: {fileID: 4184128714173119126, guid: d5afa76b365a5354095987a77dfadde5, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: Basic Cube
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: dfa7573a6acf9e143a09725f05116e1a, type: 3}
+      <BuyPrice>k__BackingField: 0
   - <Name>k__BackingField: Rectangle
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 2, y: 4}
     <Prefab>k__BackingField: {fileID: 6886715020549738650, guid: 210e8e10341176a4d95d0b80ad850267, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: Basic Rectangle
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: b4047ecfa9407874c88af0996fe5951a, type: 3}
+      <BuyPrice>k__BackingField: 0
