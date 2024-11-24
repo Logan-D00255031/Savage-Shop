@@ -81,7 +81,7 @@ public class PrefabInventoryManager : MonoBehaviour
 
     public void ListItems()
     {
-        CleanInventory();
+        //CleanInventory();
         // Instantiate items into the inventory UI
         foreach (InventoryData itemData in storedItemData)
         {

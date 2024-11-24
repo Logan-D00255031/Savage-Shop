@@ -1,9 +1,10 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryToggle : MonoBehaviour
+public class InventoryToggle : MonoBehaviour, IButtonToggle
 {
     public PrefabInventoryManager inventoryManager;
     public GameObject inventoryContainer;
