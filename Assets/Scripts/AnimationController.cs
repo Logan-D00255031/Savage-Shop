@@ -20,7 +20,7 @@ public class AnimationController : MonoBehaviour
     {
         bool forwardPressed = Input.GetKey("w");
         bool isWalking = animator.GetBool(isWalkingHash);
-        if(!isWalking && forwardPressed)
+        if (!isWalking && forwardPressed)
         {
             animator.SetBool(isWalkingHash, true);
         }
