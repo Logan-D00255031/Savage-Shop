@@ -132,11 +132,11 @@ public class PlacementSystem : MonoBehaviour
             OnExit?.Invoke();
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             StartPlacement(1);
         }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             StartPlacement(2);
         }
