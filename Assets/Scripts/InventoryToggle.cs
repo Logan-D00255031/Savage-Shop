@@ -12,8 +12,14 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
     [ReadOnly, SerializeField]
     private bool active = false;
 
-    private void Update()
+    public void Awake()
     {
+        active = inventoryContainer.activeSelf;
+    }
+
+    public void Update()
+    {
+        active = inventoryContainer.activeSelf;
         if (Input.GetKeyDown(KeyCode.I))
         {
             ToggleState();
@@ -22,27 +28,29 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
 
     public void ToggleState()
     {
-        if (!active)
+        if (!inventoryContainer.activeSelf)
         {
-            active = true;
             Activate();
         }
         else
         {
-            active = false;
             Deactivate();
         }
     }
 
     public void Activate()
     {
-        inventoryContainer.SetActive(active);
+        inventoryContainer.SetActive(true);
         inventoryManager.ListItems();
+        //active = true;
+        Debug.Log("Activated Inventory");
     }
 
     public void Deactivate()
     {
-        inventoryContainer.SetActive(active);
+        inventoryContainer.SetActive(false);
         inventoryManager.CleanInventory();
+        //active = false;
+        Debug.Log("Deactivated Inventory");
     }
 }

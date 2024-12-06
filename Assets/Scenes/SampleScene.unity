@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1839735485 &17558125
 Tilemap:
   m_ObjectHideFlags: 0
@@ -1841,7 +1841,6 @@ GameObject:
   - component: {fileID: 331266666}
   - component: {fileID: 331266665}
   - component: {fileID: 331266664}
-  - component: {fileID: 331266663}
   m_Layer: 5
   m_Name: Shop Button
   m_TagString: Untagged
@@ -1868,21 +1867,6 @@ RectTransform:
   m_AnchoredPosition: {x: -2.8000488, y: 0}
   m_SizeDelta: {x: 44.61, y: 44.61}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &331266663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331266661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdd321eeb1605943bd7d25815c175ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 331805914}
-  inventoryContainer: {fileID: 713036088}
-  active: 0
 --- !u!114 &331266664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1927,7 +1911,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 331266663}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryToggle, Assembly-CSharp
         m_MethodName: ToggleState
         m_Mode: 1
@@ -2407,7 +2391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &501840314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2548,21 +2532,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 713036088}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 331805914}
-        m_TargetAssemblyTypeName: PrefabInventoryManager, Assembly-CSharp
-        m_MethodName: CleanInventory
+      - m_Target: {fileID: 1545101531}
+        m_TargetAssemblyTypeName: InventoryToggle, Assembly-CSharp
+        m_MethodName: Deactivate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4002,7 +3974,6 @@ GameObject:
   - component: {fileID: 902679522}
   - component: {fileID: 902679521}
   - component: {fileID: 902679520}
-  - component: {fileID: 902679519}
   m_Layer: 5
   m_Name: Currency
   m_TagString: Untagged
@@ -4029,21 +4000,6 @@ RectTransform:
   m_AnchoredPosition: {x: -142.9, y: -0.6}
   m_SizeDelta: {x: 150.41, y: 40}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &902679519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902679517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdd321eeb1605943bd7d25815c175ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 331805914}
-  inventoryContainer: {fileID: 713036088}
-  active: 0
 --- !u!114 &902679520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4088,7 +4044,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 902679519}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryToggle, Assembly-CSharp
         m_MethodName: ToggleState
         m_Mode: 1
@@ -6824,7 +6780,6 @@ GameObject:
   - component: {fileID: 1703858710}
   - component: {fileID: 1703858709}
   - component: {fileID: 1703858708}
-  - component: {fileID: 1703858707}
   m_Layer: 5
   m_Name: Clock
   m_TagString: Untagged
@@ -6851,21 +6806,6 @@ RectTransform:
   m_AnchoredPosition: {x: -368, y: 0.3}
   m_SizeDelta: {x: 128.1, y: 40}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &1703858707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703858705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdd321eeb1605943bd7d25815c175ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 331805914}
-  inventoryContainer: {fileID: 713036088}
-  active: 0
 --- !u!114 &1703858708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6910,7 +6850,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1703858707}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryToggle, Assembly-CSharp
         m_MethodName: ToggleState
         m_Mode: 1
@@ -11907,7 +11847,6 @@ GameObject:
   - component: {fileID: 1806299830}
   - component: {fileID: 1806299829}
   - component: {fileID: 1806299828}
-  - component: {fileID: 1806299827}
   m_Layer: 5
   m_Name: Pause Buttons
   m_TagString: Untagged
@@ -11934,21 +11873,6 @@ RectTransform:
   m_AnchoredPosition: {x: -94.2, y: -0.1}
   m_SizeDelta: {x: 44.74, y: 44.74}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &1806299827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806299825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdd321eeb1605943bd7d25815c175ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 331805914}
-  inventoryContainer: {fileID: 713036088}
-  active: 0
 --- !u!114 &1806299828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11993,7 +11917,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1806299827}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryToggle, Assembly-CSharp
         m_MethodName: ToggleState
         m_Mode: 1

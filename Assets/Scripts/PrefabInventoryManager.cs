@@ -112,7 +112,7 @@ public class PrefabInventoryManager : MonoBehaviour
 
     public void SetInventoryItems()
     {
-        var newItems = InventoryContainer.GetComponentsInChildren<InventoryItemController>();
+        InventoryItemController[] newItems = InventoryContainer.GetComponentsInChildren<InventoryItemController>();
 
         for (int i = 0; i < storedItemData.Count; i++)
         {
