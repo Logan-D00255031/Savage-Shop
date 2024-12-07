@@ -12,4 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaaa8cf156666d44eaf6a362d17835cc, type: 3}
   m_Name: Item Prefab Database
   m_EditorClassIdentifier: 
-  objectsData: []
+  objectsData:
+  - <Name>k__BackingField: 
+    <ID>k__BackingField: 1
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 0}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: Flower 1
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: 54630d81cb166ff46bb2ef2dd87bb859, type: 3}
+      <BuyPrice>k__BackingField: 10
+  - <Name>k__BackingField: 
+    <ID>k__BackingField: 2
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 0}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: Flower 2
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: 54630d81cb166ff46bb2ef2dd87bb859, type: 3}
+      <BuyPrice>k__BackingField: 12

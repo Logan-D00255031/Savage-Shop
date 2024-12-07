@@ -9,18 +9,33 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
     public PrefabInventoryManager inventoryManager;
     public GameObject inventoryContainer;
 
+    public GameObject inventoryButtonsContainer;
+    private List<InventoryToggle> inventoryToggles = new();
+
+    public KeyCode keyBind;
+
     [ReadOnly, SerializeField]
     private bool active = false;
 
     public void Awake()
     {
         active = inventoryContainer.activeSelf;
+
+        // Grab all inventory toggles except this one to the list
+        InventoryToggle[] toggles = inventoryButtonsContainer.GetComponentsInChildren<InventoryToggle>();
+        foreach (InventoryToggle toggle in toggles)
+        {
+            if (toggle != this)
+            { 
+                inventoryToggles.Add(toggle); 
+            }
+        }
     }
 
     public void Update()
     {
         active = inventoryContainer.activeSelf;
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(keyBind))
         {
             ToggleState();
         }
@@ -31,6 +46,14 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
         if (!inventoryContainer.activeSelf)
         {
             Activate();
+            // Deactivate any other active inventories to prevent overlapping
+            foreach (InventoryToggle toggle in inventoryToggles)
+            {
+                if (toggle.inventoryContainer.activeSelf)
+                {
+                    toggle.Deactivate();
+                }
+            }
         }
         else
         {

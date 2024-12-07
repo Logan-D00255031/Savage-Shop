@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class InventoryItemController : MonoBehaviour
 {
+    public PrefabInventoryManager inventoryManager;
     InventoryData inventoryData;
 
     public void RemoveItem()
     {
-        PrefabInventoryManager.instance.RemoveItem(inventoryData.PrefabDatabaseID);
+        inventoryManager.RemoveItem(inventoryData.PrefabDatabaseID);
         //Debug.Log($"Amount: {inventoryData.AmountStored}");
         if (inventoryData.AmountStored <= 0)
         {

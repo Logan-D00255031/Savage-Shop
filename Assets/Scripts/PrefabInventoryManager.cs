@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PrefabInventoryManager : MonoBehaviour
 {
-    public static PrefabInventoryManager instance;
+    //public static PrefabInventoryManager instance;
     public PrefabDatabaseSO PrefabDatabase;
     public List<InventoryData> storedItemData = new();
 
@@ -17,10 +17,10 @@ public class PrefabInventoryManager : MonoBehaviour
     [ReadOnly, SerializeField]
     private InventoryItemController[] InventoryItems;
 
-    private void Awake()
-    {
-        instance = this;
-    }
+    //private void Awake()
+    //{
+    //    instance = this;
+    //}
 
     public int AddItem(int prefabID)
     {
@@ -117,6 +117,7 @@ public class PrefabInventoryManager : MonoBehaviour
         for (int i = 0; i < storedItemData.Count; i++)
         {
             newItems[i].SetItem(storedItemData[i]);
+            newItems[i].inventoryManager = this;
         }
         InventoryItems = newItems;
         //Debug.Log($"Items: {InventoryItems.Length}");
