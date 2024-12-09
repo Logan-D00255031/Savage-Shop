@@ -131,7 +131,6 @@ public class PlacementSystem : MonoBehaviour
         {
             OnExit?.Invoke();
         }
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             StartPlacement(1);
@@ -140,10 +139,31 @@ public class PlacementSystem : MonoBehaviour
         {
             StartPlacement(2);
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartPlacement(3);
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            StartPlacement(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            StartPlacement(5);
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            StartPlacement(6);
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            StartPlacement(7);
+        }
         if (Input.GetKeyDown(KeyCode.X))
         {
             StartRemoval();
         }
+
 
         if (buildState == null) // If not currently in a Build State
         {
