@@ -196,7 +196,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1526693937149508059}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryItemController, Assembly-CSharp
         m_MethodName: RemoveItem
         m_Mode: 1
@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 9124596786164623928}
   - component: {fileID: 8462846835379756254}
   - component: {fileID: 2714862159114460312}
-  - component: {fileID: 1526693937149508059}
+  - component: {fileID: 5443672259687982863}
   m_Layer: 5
   m_Name: Item Slot
   m_TagString: Untagged
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1526693937149508059
+--- !u!114 &5443672259687982863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -762,10 +762,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6472459740831644529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38d19b2f99db11c479b8ded09c40d244, type: 3}
+  m_Script: {fileID: 11500000, guid: 247e4bfa81e02cd4ebb6a090ba8ce51f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 0}
+  slotMenuManager: {fileID: 0}
 --- !u!1 &8510373296033637602
 GameObject:
   m_ObjectHideFlags: 0

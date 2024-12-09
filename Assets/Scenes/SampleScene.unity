@@ -6573,6 +6573,8 @@ MonoBehaviour:
   slotMenu: {fileID: 1813382127}
   slotMenuContainer: {fileID: 323500996}
   slotMenuItem: {fileID: 6472459740831644529, guid: 9c7e429936755a24da56621f211f3a48, type: 3}
+  itemInventoryToggle: {fileID: 64983363}
+  currentItemHolder: {fileID: 0}
 --- !u!4 &1296795919
 Transform:
   m_ObjectHideFlags: 0
@@ -13033,7 +13035,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -576, y: -306}
+  m_AnchoredPosition: {x: -575, y: -105}
   m_SizeDelta: {x: 250, y: 400}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1813382129

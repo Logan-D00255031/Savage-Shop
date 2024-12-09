@@ -1,7 +1,10 @@
+using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlotMenuManager : MonoBehaviour
 {
@@ -11,14 +14,24 @@ public class SlotMenuManager : MonoBehaviour
     public Transform slotMenuContainer;
     public GameObject slotMenuItem;
 
+    public InventoryToggle itemInventoryToggle;
+
+    [ReadOnly]
+    public ItemHolder currentItemHolder;
+
     private void Awake()
     {
         instance = this;
     }
 
-    public void ListItemSlots(List<Transform> anchorPoints)
+    public void ListItemSlots(ItemHolder itemHolder)
     {
+        currentItemHolder = itemHolder;
+
         CleanMenu();
+
+        List<Transform> anchorPoints = currentItemHolder.anchorPoints;
+        int count = 0;
         foreach (Transform itemSlot in anchorPoints)
         {
             GameObject obj = Instantiate(slotMenuItem, slotMenuContainer);
@@ -26,6 +39,12 @@ public class SlotMenuManager : MonoBehaviour
             //Image slotIcon = obj.transform.Find("SlotIcon").GetComponent<Image>();
 
             slotName.text = itemSlot.gameObject.name;
+
+            ItemSlotController slotController = obj.GetComponent<ItemSlotController>();
+            slotController.slotMenuManager = this;
+            slotController.SetSlotIndex(count);
+            slotController.GetComponent<Button>().onClick.AddListener(slotController.ChooseItemFromMenu);
+            count++;
         }
 
     }
@@ -38,7 +57,7 @@ public class SlotMenuManager : MonoBehaviour
         }
     }
 
-    public void ShowMenu(ItemHolder itemHolder)
+    public void ShowMenu()
     {
         Debug.Log("ShowMenu Called");
 
@@ -56,13 +75,18 @@ public class SlotMenuManager : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.GetComponent<RectTransform>(),
             mousePos,
-            canvas.worldCamera,  // Camera associated with the canvas
+            canvas.worldCamera,
             out Vector2 localPoint
         );
 
         slotMenu.transform.localPosition = localPoint;
 
         slotMenu.SetActive(true);
-        ListItemSlots(itemHolder.anchorPoints);
+        //ListItemSlots(itemHolder.anchorPoints);
+    }
+
+    public void PlaceItem(GameObject prefab, int slotIndex)
+    {
+        currentItemHolder.PlaceItemAt(prefab, currentItemHolder.anchorPoints[slotIndex]);
     }
 }

@@ -123,6 +123,27 @@ public class PrefabInventoryManager : MonoBehaviour
         //Debug.Log($"Items: {InventoryItems.Length}");
     }
 
+    public List<Button> GetInventoryItemButtons()
+    {
+        List<Button> buttons = new();
+        foreach (Transform item in InventoryContainer)
+        {
+            buttons.Add(item.GetComponent<Button>());
+        }
+
+        return buttons;
+    }
+    public List<InventoryItemController> GetInventoryItems()
+    {
+        List<InventoryItemController> items = new();
+        foreach (Transform item in InventoryContainer)
+        {
+            items.Add(item.GetComponent<InventoryItemController>());
+        }
+
+        return items;
+    }
+
 }
 
 [Serializable]

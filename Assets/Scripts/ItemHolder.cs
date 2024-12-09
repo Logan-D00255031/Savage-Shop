@@ -49,6 +49,7 @@ public class ItemHolder : MonoBehaviour
 
     public void OnMouseDown()
     {
-        SlotMenuManager.instance.ShowMenu(this);
+        SlotMenuManager.instance.ShowMenu();
+        SlotMenuManager.instance.ListItemSlots(this);
     }
 }

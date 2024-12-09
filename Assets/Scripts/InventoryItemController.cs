@@ -7,7 +7,10 @@ using UnityEngine.UI;
 public class InventoryItemController : MonoBehaviour
 {
     public PrefabInventoryManager inventoryManager;
-    InventoryData inventoryData;
+    public InventoryData inventoryData;
+
+    // Used when adding an item to a slot
+    public ItemSlotController itemSlot;
 
     public void RemoveItem()
     {
@@ -28,5 +31,14 @@ public class InventoryItemController : MonoBehaviour
     public void SetItem(InventoryData inventoryData)
     {
         this.inventoryData = inventoryData;
+    }
+
+    public void PlaceItem()
+    {
+        PrefabDatabaseSO prefabDatabase = inventoryManager.PrefabDatabase;
+        int prefabIndex = prefabDatabase.objectsData.FindIndex(data => data.ID == inventoryData.PrefabDatabaseID);
+        GameObject prefab = prefabDatabase.objectsData[prefabIndex].Prefab;
+
+        itemSlot.PlaceItem(prefab);
     }
 }

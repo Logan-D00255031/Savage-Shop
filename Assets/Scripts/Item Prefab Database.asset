@@ -16,7 +16,7 @@ MonoBehaviour:
   - <Name>k__BackingField: 
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 6246234098027634437, guid: 71d4d34806d21dc4d837f97f1466a324, type: 3}
     <ItemData>k__BackingField:
       <Name>k__BackingField: Flower 1
       <Description>k__BackingField: 
@@ -25,7 +25,7 @@ MonoBehaviour:
   - <Name>k__BackingField: 
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 0}
+    <Prefab>k__BackingField: {fileID: 7044918668142119768, guid: 4480718c4324acd4aaba1fb6d756ea1c, type: 3}
     <ItemData>k__BackingField:
       <Name>k__BackingField: Flower 2
       <Description>k__BackingField: 
