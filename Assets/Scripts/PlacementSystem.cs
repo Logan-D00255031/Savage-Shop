@@ -159,6 +159,14 @@ public class PlacementSystem : MonoBehaviour
         {
             StartPlacement(7);
         }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            StartPlacement(8);
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            StartPlacement(9);
+        }
         if (Input.GetKeyDown(KeyCode.X))
         {
             StartRemoval();

@@ -31,7 +31,7 @@ MonoBehaviour:
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: b4047ecfa9407874c88af0996fe5951a, type: 3}
       <BuyPrice>k__BackingField: 0
-  - <Name>k__BackingField: Pot
+  - <Name>k__BackingField: Pot3
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 2637920306212673076, guid: e8b40cbc62163c74f8f8a2188cd31874, type: 3}
@@ -40,3 +40,57 @@ MonoBehaviour:
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
       <BuyPrice>k__BackingField: 1
+  - <Name>k__BackingField: Pot1
+    <ID>k__BackingField: 4
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7763614802208603887, guid: 933ee9d18139f284c8cfe3b1f03e0d82, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: <insert plant name>
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
+      <BuyPrice>k__BackingField: 0
+  - <Name>k__BackingField: SmallDarkGreen
+    <ID>k__BackingField: 5
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 680772458909961203, guid: 4ea3ef9ed41ed0d4cb0e779c4db36100, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: <insert plant name>
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
+      <BuyPrice>k__BackingField: 0
+  - <Name>k__BackingField: TallPlant
+    <ID>k__BackingField: 6
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8573834159641364139, guid: 9b0cef993a1306540af242bc3d56d19d, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: <insert plant name>
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
+      <BuyPrice>k__BackingField: 0
+  - <Name>k__BackingField: SmallLightGreen
+    <ID>k__BackingField: 7
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7860672490414122650, guid: dcdc94ffed178bc4388bfc81455fa779, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: <insert plant name>
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
+      <BuyPrice>k__BackingField: 0
+  - <Name>k__BackingField: SmallBush
+    <ID>k__BackingField: 8
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2939886681771152556, guid: 62c7aa66e18585542b18b258636386ca, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: <insert plant name>
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
+      <BuyPrice>k__BackingField: 0
+  - <Name>k__BackingField: FlowerOrange
+    <ID>k__BackingField: 9
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5076770562379704746, guid: a94a1fd0ef15f2448b75eb46856cea82, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: <insert plant name>
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
+      <BuyPrice>k__BackingField: 0
