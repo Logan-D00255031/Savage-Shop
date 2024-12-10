@@ -144,6 +144,33 @@ public class PrefabInventoryManager : MonoBehaviour
         return items;
     }
 
+    public void AllowObjectPlacement()
+    {
+        foreach(Transform item in InventoryContainer)
+        {
+            InventoryItemController itemController = item.GetComponent<InventoryItemController>();
+            item.GetComponent<Button>().onClick.AddListener(itemController.PlaceObject);
+        }
+        Debug.Log("PlaceObject Listener Added");
+    }
+
+    public bool ContainsItemWithID(int ID)
+    {
+        // No items in inventory, so it's not there
+        if (storedItemData.Count == 0)
+        {
+            return false;
+        }
+
+        foreach (InventoryData data in storedItemData)
+        {
+            if (data.PrefabDatabaseID == ID)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 [Serializable]

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ItemHolder : MonoBehaviour
@@ -53,11 +54,10 @@ public class ItemHolder : MonoBehaviour
 
     public void OnMouseDown()
     {
-        // TODO - Add Mouse Over UI Check
-
-        // Menu should not open if in object build mode
-        bool noBuildState = !PlacementSystem.instance.isBuildState;
-        if (canOpenMenu && noBuildState)
+        // Menu should not open if in object build mode or mouse is over a UI object
+        bool noBuildState = !PlacementSystem.instance.ActiveBuildState();
+        bool notOverUI = !PlacementSystem.instance.IsPointerOverUI();
+        if (canOpenMenu && noBuildState && notOverUI)
         {
             SlotMenuManager.instance.ShowMenu();
             SlotMenuManager.instance.ListItemSlots(this);

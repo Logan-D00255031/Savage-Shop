@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryToggle : MonoBehaviour, IButtonToggle
 {
@@ -13,6 +14,9 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
     private List<InventoryToggle> inventoryToggles = new();
 
     public KeyCode keyBind;
+
+    [SerializeField]    // Used to choose if it should place an item from the inventory when it's clicked
+    private bool canPlaceFromMenu = false;
 
     [ReadOnly, SerializeField]
     private bool active = false;
@@ -39,6 +43,12 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
         {
             ToggleState();
         }
+
+        // Close inventory if slot menu is opened
+        if (SlotMenuManager.instance.slotMenu.activeSelf)
+        {
+            Deactivate();
+        }
     }
 
     public void ToggleState()
@@ -46,6 +56,10 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
         if (!inventoryContainer.activeSelf)
         {
             Activate();
+            if (canPlaceFromMenu)
+            {
+                EnableObjectPlacement();
+            }
             // Deactivate any other active inventories to prevent overlapping
             foreach (InventoryToggle toggle in inventoryToggles)
             {
@@ -65,6 +79,18 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
     {
         inventoryContainer.SetActive(true);
         inventoryManager.ListItems();
+        
+        // Slot menu should be closed if inventory is opened
+        if (SlotMenuManager.instance.slotMenu.activeSelf)
+        {
+            SlotMenuManager.instance.CloseMenu();
+        }
+
+        // Exit build mode if currently active
+        if (PlacementSystem.instance.ActiveBuildState())
+        {
+            PlacementSystem.instance.ExitBuildMode();
+        }
         //active = true;
         Debug.Log("Activated Inventory");
     }
@@ -75,5 +101,18 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
         inventoryManager.CleanInventory();
         //active = false;
         Debug.Log("Deactivated Inventory");
+    }
+
+    public void EnableObjectPlacement()
+    {
+        inventoryManager.AllowObjectPlacement();
+
+        List<Button> buttons = inventoryManager.GetInventoryItemButtons();
+        foreach (Button button in buttons)
+        {
+            // Close menu to prevent repeat actions
+            button.onClick.AddListener(Deactivate);
+        }
+        Debug.Log("Deactivate Listener Added");
     }
 }

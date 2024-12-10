@@ -27,6 +27,18 @@ public class SlotMenuManager : MonoBehaviour
         instance = this;
     }
 
+    private void Update()
+    {
+        // Slot menu should not be open when build mode is active
+        if (PlacementSystem.instance.ActiveBuildState())
+        {
+            if (slotMenu.activeSelf)
+            {
+                CloseMenu();
+            }
+        }
+    }
+
     public void ListItemSlots(ItemHolder itemHolder)
     {
         currentItemHolder = itemHolder;
@@ -123,6 +135,12 @@ public class SlotMenuManager : MonoBehaviour
 
         slotMenu.transform.localPosition = localPoint;
 
+        // Exit build state if active
+        if (PlacementSystem.instance.ActiveBuildState())
+        {
+            PlacementSystem.instance.ExitBuildMode();
+        }
+        
         slotMenu.SetActive(true);
     }
 
@@ -134,6 +152,12 @@ public class SlotMenuManager : MonoBehaviour
 
     public void OpenMenu()
     {
+        // Exit build state if active
+        if (PlacementSystem.instance.ActiveBuildState())
+        {
+            PlacementSystem.instance.ExitBuildMode();
+        }
+
         slotMenu.SetActive(true);
     }
 

@@ -15,6 +15,7 @@ public class PlacementState : IBuildState
     PrefabDatabaseSO prefabDatabase;
     GridData gridData;
     ObjectPlacer objectPlacer;
+    PrefabInventoryManager prefabInventory;
     private float objectRotation = 0f;
     private Vector2Int objectSize;
     private Vector3Int objectGridPosition = Vector3Int.zero;
@@ -24,7 +25,8 @@ public class PlacementState : IBuildState
                           PreviewSystem previewSystem,
                           PrefabDatabaseSO prefabDatabase,
                           GridData gridData,
-                          ObjectPlacer objectPlacer)
+                          ObjectPlacer objectPlacer,
+                          PrefabInventoryManager prefabInventory)
     {
         ID = iD;
         this.grid = grid;
@@ -32,6 +34,7 @@ public class PlacementState : IBuildState
         this.prefabDatabase = prefabDatabase;
         this.gridData = gridData;
         this.objectPlacer = objectPlacer;
+        this.prefabInventory = prefabInventory;
 
         selectedObjectIndex = prefabDatabase.objectsData.FindIndex(data => data.ID == ID);
         if (selectedObjectIndex > -1)
@@ -60,7 +63,9 @@ public class PlacementState : IBuildState
 
         Vector3 worldPosition = grid.CellToWorld(objectGridPosition);
 
-        if (!CheckValidPlacement(objectGridPosition, selectedObjectIndex, objectRotation))    // If the position to place is not valid
+        // Determine if the position to place is not valid or there is none of the item in the inventory
+        if (!CheckValidPlacement(objectGridPosition, selectedObjectIndex, objectRotation) ||
+            !prefabInventory.ContainsItemWithID(ID))
         {
             // Invalid sound can be added here
             return;
@@ -76,6 +81,9 @@ public class PlacementState : IBuildState
             prefabDatabase.objectsData[selectedObjectIndex].ID,
             index, objectRotation);
         previewSystem.UpdatePosition(worldPosition, false);  // Update placed position to be invalid
+
+        // Remove object from inventory
+        prefabInventory.RemoveItem(ID);
     }
 
     //private bool CheckValidPlacement(Vector3Int gridPosition, int selectedObjectIndex)
@@ -108,7 +116,9 @@ public class PlacementState : IBuildState
 
         CalculateObjectGridPosition(mouseGridPosition); // Get new Object grid position
 
-        bool validPlacement = CheckValidPlacement(objectGridPosition, selectedObjectIndex, objectRotation);
+        bool validPlacement = 
+            CheckValidPlacement(objectGridPosition, selectedObjectIndex, objectRotation) && 
+            prefabInventory.ContainsItemWithID(ID);
         previewSystem.UpdatePosition(grid.CellToWorld(objectGridPosition), validPlacement, objectRotation);
     }
 

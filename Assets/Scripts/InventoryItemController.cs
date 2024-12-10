@@ -42,4 +42,9 @@ public class InventoryItemController : MonoBehaviour
         itemSlot.PlaceItem(prefab, inventoryData.PrefabDatabaseID);
         RemoveItem();
     }
+
+    public void PlaceObject()
+    {
+        PlacementSystem.instance.StartPlacement(inventoryData.PrefabDatabaseID);
+    }
 }

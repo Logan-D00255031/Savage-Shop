@@ -55,7 +55,7 @@ public class PlacementSystem : MonoBehaviour
     [ReadOnly, SerializeField]
     private Vector3Int lastGridPosition = Vector3Int.zero;
 
-    public bool isBuildState = false;
+    public bool isPlaceState = false, isRemoveState = false;
 
     public event Action OnClick, OnExit;
 
@@ -72,14 +72,15 @@ public class PlacementSystem : MonoBehaviour
     {
         EndPlacement();
         gridView.SetActive(true);
-        isBuildState = true;
+        isPlaceState = true;
         // Initialize PlacementState
         buildState = new PlacementState(ID,
                                         grid,
                                         previewSystem,
                                         prefabDatabase,
                                         groundData,
-                                        objectPlacer);
+                                        objectPlacer,
+                                        prefabInventory);
 
         OnClick += PlaceObject;
         OnExit += EndPlacement;
@@ -89,7 +90,7 @@ public class PlacementSystem : MonoBehaviour
     {
         EndPlacement();
         gridView.SetActive(true);
-        isBuildState = true;
+        isRemoveState = true;
         // Initialize RemovalState
         buildState = new RemovalState(grid,
                                       previewSystem,
@@ -110,7 +111,8 @@ public class PlacementSystem : MonoBehaviour
         gridView.SetActive(false);
 
         buildState.EndState();
-        isBuildState = false;
+        isPlaceState = false;
+        isRemoveState = false;
 
         OnClick -= PlaceObject;
         OnExit -= EndPlacement;
@@ -134,7 +136,7 @@ public class PlacementSystem : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            OnExit?.Invoke();
+            ExitBuildMode();
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -172,10 +174,10 @@ public class PlacementSystem : MonoBehaviour
         {
             StartPlacement(9);
         }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            StartRemoval();
-        }
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    StartRemoval();
+        //}
 
 
         if (buildState == null) // If not currently in a Build State
@@ -189,6 +191,16 @@ public class PlacementSystem : MonoBehaviour
             lastGridPosition = gridPosition;
         }
 
+    }
+
+    public void ExitBuildMode()
+    {
+        OnExit?.Invoke();
+    }
+
+    public bool ActiveBuildState()
+    {
+        return isPlaceState || isRemoveState;
     }
 
     public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
@@ -212,10 +224,10 @@ public class PlacementSystem : MonoBehaviour
 
     public void PlaceObject()
     {
-        //if (IsPointerOverUI())  // If Event is Active
-        //{
-        //    return;
-        //}
+        if (IsPointerOverUI())  // If Event is Active
+        {
+            return;
+        }
         Vector3 worldPosition = SnapToGrid(GetMouseInWorld());
         Vector3Int gridPosition = grid.WorldToCell(worldPosition);
 
