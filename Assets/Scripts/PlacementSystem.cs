@@ -55,6 +55,8 @@ public class PlacementSystem : MonoBehaviour
     [ReadOnly, SerializeField]
     private Vector3Int lastGridPosition = Vector3Int.zero;
 
+    public bool isBuildState = false;
+
     public event Action OnClick, OnExit;
 
     #region Methods
@@ -70,6 +72,7 @@ public class PlacementSystem : MonoBehaviour
     {
         EndPlacement();
         gridView.SetActive(true);
+        isBuildState = true;
         // Initialize PlacementState
         buildState = new PlacementState(ID,
                                         grid,
@@ -86,6 +89,7 @@ public class PlacementSystem : MonoBehaviour
     {
         EndPlacement();
         gridView.SetActive(true);
+        isBuildState = true;
         // Initialize RemovalState
         buildState = new RemovalState(grid,
                                       previewSystem,
@@ -106,6 +110,7 @@ public class PlacementSystem : MonoBehaviour
         gridView.SetActive(false);
 
         buildState.EndState();
+        isBuildState = false;
 
         OnClick -= PlaceObject;
         OnExit -= EndPlacement;

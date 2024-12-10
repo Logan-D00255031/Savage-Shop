@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 64983364}
   - component: {fileID: 64983363}
   m_Layer: 5
-  m_Name: Inventory Button2
+  m_Name: Item Inventory Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1986,6 +1986,7 @@ MonoBehaviour:
   previewSystem: {fileID: 670277062}
   prefabInventory: {fileID: 331805914}
   lastGridPosition: {x: 0, y: 0, z: 0}
+  isBuildState: 0
 --- !u!156049354 &282482598
 Grid:
   m_ObjectHideFlags: 0
@@ -2297,7 +2298,7 @@ GameObject:
   - component: {fileID: 331805915}
   - component: {fileID: 331805914}
   m_Layer: 0
-  m_Name: InventoryManager
+  m_Name: Object InventoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2860,7 +2861,7 @@ GameObject:
   - component: {fileID: 540189326}
   - component: {fileID: 540189325}
   m_Layer: 0
-  m_Name: EvenManager
+  m_Name: EventManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2894,7 +2895,43 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
+        m_CallState: 0
+      - m_Target: {fileID: 963194226}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
+      - m_Target: {fileID: 224799528}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 0
+      - m_Target: {fileID: 2081745358}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 0
 --- !u!4 &540189326
 Transform:
   m_ObjectHideFlags: 0
@@ -4059,7 +4096,7 @@ GameObject:
   - component: {fileID: 713036091}
   - component: {fileID: 713036090}
   m_Layer: 5
-  m_Name: Inventory
+  m_Name: Object Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4072,18 +4109,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713036088}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.27781588, y: 0.36497167, z: -0.1150751, w: 0.8811196}
+  m_LocalPosition: {x: 0, y: 0, z: -8.8843355}
+  m_LocalScale: {x: 0.029363777, y: 0.029363781, z: 0.029363785}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 70480460}
   - {fileID: 597444804}
-  m_Father: {fileID: 1862637657}
+  m_Father: {fileID: 1642489287}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -175, y: 0}
+  m_AnchoredPosition: {x: 8.72551, y: -0.2982221}
   m_SizeDelta: {x: 250, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713036090
@@ -6234,7 +6271,7 @@ GameObject:
   - component: {fileID: 1246888970}
   - component: {fileID: 1246888969}
   m_Layer: 5
-  m_Name: Inventory2
+  m_Name: Item Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6247,18 +6284,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246888967}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.000016159482}
-  m_LocalScale: {x: 1.0000612, y: 1.000061, z: 1.000061}
+  m_LocalRotation: {x: 0.27781588, y: 0.36497167, z: -0.1150751, w: 0.8811196}
+  m_LocalPosition: {x: 0, y: 0, z: -8.8843355}
+  m_LocalScale: {x: 0.029365577, y: 0.029365573, z: 0.029365577}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 905499030}
   - {fileID: 1909081011}
-  m_Father: {fileID: 1862637657}
+  m_Father: {fileID: 1642489287}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -174.99991, y: 0}
+  m_AnchoredPosition: {x: 8.72551, y: -0.2982221}
   m_SizeDelta: {x: 250, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246888969
@@ -6424,6 +6461,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1296795918}
+        m_TargetAssemblyTypeName: SlotMenuManager, Assembly-CSharp
+        m_MethodName: CleanMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
 --- !u!114 &1247758583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6660,6 +6709,7 @@ MonoBehaviour:
   slotMenuContainer: {fileID: 323500996}
   slotMenuItem: {fileID: 6472459740831644529, guid: 9c7e429936755a24da56621f211f3a48, type: 3}
   itemInventoryToggle: {fileID: 64983363}
+  inventoryManager: {fileID: 1849540248}
   currentItemHolder: {fileID: 0}
 --- !u!4 &1296795919
 Transform:
@@ -6669,12 +6719,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296795917}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.617517, y: 9.062474, z: -8.139099}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.6601276, y: 5.274293, z: 3.1827517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2138600240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1441389569
 GameObject:
@@ -7259,7 +7309,7 @@ GameObject:
   - component: {fileID: 1545101528}
   - component: {fileID: 1545101531}
   m_Layer: 5
-  m_Name: Inventory Button
+  m_Name: Object Inventory Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7732,6 +7782,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1630093553}
   m_CullTransparentMesh: 1
+--- !u!1 &1642489286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1642489287}
+  m_Layer: 0
+  m_Name: Inventories
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1642489287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642489286}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.27781588, y: -0.36497167, z: 0.1150751, w: 0.8811196}
+  m_LocalPosition: {x: -23.561209, y: 10.513548, z: -2.6926827}
+  m_LocalScale: {x: 34.055557, y: 34.055557, z: 34.055557}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 713036089}
+  - {fileID: 1246888968}
+  m_Father: {fileID: 1862637657}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1663033470
 GameObject:
   m_ObjectHideFlags: 0
@@ -13337,7 +13420,7 @@ GameObject:
   - component: {fileID: 1849540249}
   - component: {fileID: 1849540248}
   m_Layer: 0
-  m_Name: InventoryManager2
+  m_Name: Item InventoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13474,8 +13557,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 713036089}
-  - {fileID: 1246888968}
+  - {fileID: 1642489287}
   - {fileID: 1813382128}
   - {fileID: 653643782}
   - {fileID: 1016955223}
@@ -20009,7 +20091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2138600240}
   m_Layer: 0
-  m_Name: Inventories
+  m_Name: Menu Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20030,6 +20112,7 @@ Transform:
   m_Children:
   - {fileID: 331805915}
   - {fileID: 1849540249}
+  - {fileID: 1296795919}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
@@ -20049,5 +20132,4 @@ SceneRoots:
   - {fileID: 664262356}
   - {fileID: 380022697}
   - {fileID: 2138600240}
-  - {fileID: 1296795919}
   - {fileID: 540189326}
