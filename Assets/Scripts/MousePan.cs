@@ -7,6 +7,8 @@ public class MousePan : MonoBehaviour
 {
     [Required]
     public Transform player;
+    [Required]
+    public Transform playerCamera;
 
     [Range(0.0f, 1.0f)]
     public float sensitivity = 1.0f;
@@ -44,6 +46,6 @@ public class MousePan : MonoBehaviour
         verticalRotation = Mathf.Clamp(verticalRotation, maxRotation * -1, maxRotation); // Prevent the vertical rotation from being less/greater than the max rotation
 
         player.Rotate(Vector3.up * mouseX); // Rotates the player on the Y axis by mouseX
-        transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f); // Rotates the camera on the Z axis based on verticalRotation
+        playerCamera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f); // Rotates the camera on the Z axis based on verticalRotation
     }
 }
