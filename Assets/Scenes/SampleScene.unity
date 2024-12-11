@@ -1852,7 +1852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1675687131}
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 233342580}
   sensitivity: 1
   maxRotation: 90
   mouseX: 0
@@ -3298,8 +3298,8 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 224799528}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -8349,7 +8349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1663033473}
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 233342580}
   sensitivity: 1
   maxRotation: 90
   mouseX: 0
@@ -21133,12 +21133,9 @@ SceneRoots:
   - {fileID: 380022697}
   - {fileID: 2138600240}
   - {fileID: 540189326}
-<<<<<<< Updated upstream
-  - {fileID: 1173513789}
-=======
-  - {fileID: 250651959}
   - {fileID: 1347123700}
   - {fileID: 1891610279}
+  - {fileID: 250651959}
   - {fileID: 309876060}
   - {fileID: 177051148}
->>>>>>> Stashed changes
+  - {fileID: 1173513789}
