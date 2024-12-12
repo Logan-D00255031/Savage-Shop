@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5408074198754158754}
   - component: {fileID: 2591598097391967522}
   - component: {fileID: 4231716191862885369}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,8 @@ GameObject:
   - component: {fileID: 2945716104024375513}
   - component: {fileID: 414705311289747297}
   - component: {fileID: 5385967544475735240}
-  m_Layer: 0
+  - component: {fileID: 1462431071432391927}
+  m_Layer: 8
   m_Name: Object Test Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,9 +462,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchorPoints:
   - {fileID: 7445729045494890765}
-  slotMenu: {fileID: 0}
-  slotMenuContainer: {fileID: 0}
-  slotMenuItem: {fileID: 0}
+--- !u!114 &1462431071432391927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4184128714173119126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &7863251730075312032
 GameObject:
   m_ObjectHideFlags: 0
