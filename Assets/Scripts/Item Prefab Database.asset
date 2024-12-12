@@ -31,3 +31,12 @@ MonoBehaviour:
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: eb88c90301e163d4987efec17651136c, type: 3}
       <BuyPrice>k__BackingField: 12
+  - <Name>k__BackingField: Bluebell
+    <ID>k__BackingField: 3
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7963066314245953847, guid: 31cc3ef7dbee754449b7728eb605cd18, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: Bluebell
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: 7eea543e944d17f4cb28b8623650e723, type: 3}
+      <BuyPrice>k__BackingField: 5

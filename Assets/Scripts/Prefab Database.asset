@@ -94,3 +94,12 @@ MonoBehaviour:
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
       <BuyPrice>k__BackingField: 0
+  - <Name>k__BackingField: LargeRack
+    <ID>k__BackingField: 10
+    <Size>k__BackingField: {x: 4, y: 2}
+    <Prefab>k__BackingField: {fileID: 6818954906492102965, guid: 259a2b8358317124b836814f677ad4ad, type: 3}
+    <ItemData>k__BackingField:
+      <Name>k__BackingField: Large Rack
+      <Description>k__BackingField: 
+      <Icon>k__BackingField: {fileID: 21300000, guid: dfa7573a6acf9e143a09725f05116e1a, type: 3}
+      <BuyPrice>k__BackingField: 20

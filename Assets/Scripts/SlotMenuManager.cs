@@ -175,7 +175,8 @@ public class SlotMenuManager : MonoBehaviour
 
     public void RemoveFromSlot(Transform itemSlot)
     {
-        currentItemHolder.RemoveItemIn(itemSlot);
+        // Return item to inventory
+        currentItemHolder.RemoveItemIn(itemSlot, true);
 
         ItemSlotController slotController = slotData[itemSlot];
         SetDefaultData(slotData[itemSlot].gameObject);

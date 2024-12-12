@@ -1394,6 +1394,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &190031581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 190031582}
+  m_Layer: 0
+  m_Name: NPC Destinations
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &190031582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190031581}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.962414, y: 0.11025764, z: 0.02445174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1494014510}
+  - {fileID: 273254921}
+  - {fileID: 1247393592}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &199683350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1459,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 199683353}
+  exit: {fileID: 1494014510}
+  shopEntrance: {fileID: 1247393592}
   destination: {fileID: 1773313980}
+  itemDatabase: {fileID: 11400000, guid: f3399be2ba3393c49bbbe5874b08679b, type: 2}
+  itemIndex: 0
+  itemName: 
 --- !u!4 &199683352
 Transform:
   m_ObjectHideFlags: 0
@@ -2091,6 +2130,37 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 2}
   m_Constraint: 0
   m_ConstraintCount: 1
+--- !u!1 &273254920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 273254921}
+  m_Layer: 0
+  m_Name: NPC Enter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &273254921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273254920}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.037586, y: 0.8897424, z: 8.975548}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 190031582}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &282482596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,6 +2660,8 @@ MonoBehaviour:
     <AmountStored>k__BackingField: 5
   - <PrefabDatabaseID>k__BackingField: 9
     <AmountStored>k__BackingField: 1
+  - <PrefabDatabaseID>k__BackingField: 10
+    <AmountStored>k__BackingField: 2
   InventoryContainer: {fileID: 427748762}
   InventoryItem: {fileID: 6343905168332055631, guid: bfbee250d93f81d4b964e68d44b6ac4d, type: 3}
   InventoryItems: []
@@ -9360,6 +9432,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246888967}
   m_CullTransparentMesh: 1
+--- !u!1 &1247393591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1247393592}
+  m_Layer: 0
+  m_Name: Shop Entrance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1247393592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247393591}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.037586212, y: 0.8897424, z: -0.02445174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 190031582}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1247758580
 GameObject:
   m_ObjectHideFlags: 0
@@ -11260,6 +11363,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441389569}
   m_CullTransparentMesh: 1
+--- !u!1 &1494014509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1494014510}
+  m_Layer: 0
+  m_Name: NPC Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1494014510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494014509}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.037586, y: 0.8897424, z: -10.024452}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 190031582}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1519626766
 Mesh:
   m_ObjectHideFlags: 0
@@ -18331,9 +18465,11 @@ MonoBehaviour:
   PrefabDatabase: {fileID: 11400000, guid: f3399be2ba3393c49bbbe5874b08679b, type: 2}
   storedItemData:
   - <PrefabDatabaseID>k__BackingField: 1
-    <AmountStored>k__BackingField: 1
-  - <PrefabDatabaseID>k__BackingField: 2
     <AmountStored>k__BackingField: 2
+  - <PrefabDatabaseID>k__BackingField: 2
+    <AmountStored>k__BackingField: 3
+  - <PrefabDatabaseID>k__BackingField: 3
+    <AmountStored>k__BackingField: 5
   InventoryContainer: {fileID: 252795112}
   InventoryItem: {fileID: 6343905168332055631, guid: bfbee250d93f81d4b964e68d44b6ac4d, type: 3}
   InventoryItems: []
@@ -25860,3 +25996,4 @@ SceneRoots:
   - {fileID: 367204876}
   - {fileID: 199683352}
   - {fileID: 1654550210}
+  - {fileID: 190031582}

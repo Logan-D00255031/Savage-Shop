@@ -28,12 +28,15 @@ public class ItemHolder : MonoBehaviour
         storedItemIDs.Add(item, prefabDatabaseID);
     }
 
-    public void RemoveItemIn(Transform anchorPoint)
+    public void RemoveItemIn(Transform anchorPoint, bool returnToInv)
     {
         GameObject item = storedItems[anchorPoint];
-        // Add item back into inventory
+        // Add item back into inventory if bool is true
         int ID = storedItemIDs[item];
-        SlotMenuManager.instance.inventoryManager.AddItem(ID);
+        if (returnToInv)
+        {
+            SlotMenuManager.instance.inventoryManager.AddItem(ID);
+        }
         storedItemIDs.Remove(item);
         // Remove item from slot
         Destroy(item);
