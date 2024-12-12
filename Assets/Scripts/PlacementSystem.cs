@@ -55,6 +55,7 @@ public class PlacementSystem : MonoBehaviour
     [ReadOnly, SerializeField]
     private Vector3Int lastGridPosition = Vector3Int.zero;
 
+    [ReadOnly]
     public bool isPlaceState = false, isRemoveState = false;
 
     public event Action OnClick, OnExit;
