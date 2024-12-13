@@ -62,4 +62,19 @@ public class SettingsManager : MonoBehaviour
             uiVolumeText.text = Mathf.RoundToInt(value * 100).ToString();
         }
     }
+
+
+    public GameObject creditsPanel; // Assign in Unity
+
+    public void OpenCredits()
+    {
+        creditsPanel.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        creditsPanel.SetActive(false);
+    }
+
+
 }
