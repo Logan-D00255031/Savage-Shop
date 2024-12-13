@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] GameEvent nightMode;
+    [SerializeField] int secondsUntilNight = 100;
     float elapsedTime = 0f;
     float intervalTimer = 0f;
     int hours = 12; // Start at 12
@@ -59,7 +60,7 @@ public class Timer : MonoBehaviour
 
     private IEnumerator switchToNight()
     {
-        yield return new WaitForSeconds(10); //change it to longer cuz testinnnng
+        yield return new WaitForSeconds(secondsUntilNight); //change it to longer cuz testinnnng
         nightMode?.Raise();   //raises the event
     }
 
