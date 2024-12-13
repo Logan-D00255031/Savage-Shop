@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 
 //https://docs.unity3d.com/ScriptReference/AudioSource.html
@@ -19,6 +21,7 @@ public class audioPlay : MonoBehaviour
         m_MyAudioSource = GetComponent<AudioSource>();
         //Ensure the toggle is set to true for the music to play at start-up
         m_Play = true;
+        StartCoroutine(SubtitleText());
     }
 
     void Update()
@@ -54,7 +57,19 @@ public class audioPlay : MonoBehaviour
             //Change to true to show that there was just a change in the toggle state
             m_ToggleChange = true;
 
-            Subtitles.instance.SetSubtitle("TESTING");
         }
+    }
+
+    IEnumerator SubtitleText()
+    {
+        Subtitles.instance.SetSubtitle("Robber: alright girly give me the money and maybe I won’t hurt you");
+        yield return new WaitForSeconds(8f);
+        Subtitles.instance.SetSubtitle("Sage: Get out of my store NOW");
+        yield return new WaitForSeconds(4);
+        Subtitles.instance.SetSubtitle("Robber: OR WHAT IF YOU WANNA DIE KEEP TALKING");
+        yield return new WaitForSeconds(7);
+        Subtitles.instance.SetSubtitle("Sage: THIS IS YOUR FINAL WARNING OR I WILL BE FORCED TO SHOOT");
+        yield return new WaitForSeconds(7);
+        Subtitles.instance.SetSubtitle("Robber: you little wh-");
     }
 }
