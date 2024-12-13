@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 404029244204984242}
   - component: {fileID: 1059778936295182103}
   - component: {fileID: 7886489742914012490}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
