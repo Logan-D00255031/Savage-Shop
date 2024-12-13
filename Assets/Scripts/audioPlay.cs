@@ -63,7 +63,7 @@ public class audioPlay : MonoBehaviour
     IEnumerator SubtitleText()
     {
         Subtitles.instance.SetSubtitle("Robber: alright girly give me the money and maybe I won’t hurt you");
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(8);
         Subtitles.instance.SetSubtitle("Sage: Get out of my store NOW");
         yield return new WaitForSeconds(4);
         Subtitles.instance.SetSubtitle("Robber: OR WHAT IF YOU WANNA DIE KEEP TALKING");
