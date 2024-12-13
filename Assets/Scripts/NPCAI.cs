@@ -28,63 +28,54 @@ public class NPCAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        itemIndex = Random.Range(0, itemDatabase.objectsData.Count);
-        itemName = itemDatabase.objectsData[itemIndex].Prefab.name;
-        SearchForItem();
+        //itemIndex = Random.Range(0, itemDatabase.objectsData.Count);
+        //itemName = itemDatabase.objectsData[itemIndex].Prefab.name;
 
         minPrice = Random.Range(0, 10);
         maxPrice = minPrice + Random.Range(5, 20);
     }
 
-    private bool SearchForItem()
-    {
-        GameObject itemObj = GameObject.Find(itemName + "(Clone)");
-        if (itemObj != null)
-        {
-            destination = itemObj.transform;
-            return true;
-        }
-        return false;
-    }
-
-    // Update is called once per frame
-    void Update()
+    public void Activate()
     {
 
-
-        if (Input.GetKeyDown(KeyCode.L))
+        if (destination != null)
         {
-            if (SearchForItem())
-            {
-                StartCoroutine(MoveBuyAndLeave());
-            }
-            else
-            {
-                StartCoroutine(MoveAndLeave());
-            }
+            Debug.Log("Found Item");
+            StartCoroutine(MoveBuyAndLeave());
         }
-
+        else
+        {
+            Debug.Log("No Item Found");
+            StartCoroutine(MoveAndLeave());
+        }
     }
 
     private void AttemptToBuy()
     {
         float itemPrice = itemDatabase.objectsData[itemIndex].ItemData.BuyPrice;
 
-        if (itemPrice >= minPrice && maxPrice >= itemPrice)
+        if (destination != null)
         {
-            // Add itemPrice to wallet
+            if (itemPrice >= minPrice && maxPrice >= itemPrice)
+            {
+                // Add itemPrice to wallet
 
 
-            Transform slot = destination.parent;
-            ItemHolder holder = slot.GetComponentInParent<ItemHolder>();
+                Transform slot = destination.parent;
+                ItemHolder holder = slot.GetComponentInParent<ItemHolder>();
 
-            // Take item
-            holder.RemoveItemIn(slot, false);
-            Debug.Log($"Item Bought: {itemName}");
+                // Take item
+                holder.RemoveItemIn(slot, false);
+                Debug.Log($"Item Bought: {itemName}");
+            }
+            else
+            {
+                Debug.Log($"Item not within price range ({minPrice}, {maxPrice}): {itemPrice}");
+            }
         }
         else
         {
-            Debug.Log($"Item not within price range ({minPrice}, {maxPrice}): {itemPrice}");
+            Debug.Log("Item no longer exists");
         }
 
         // Leave the store
