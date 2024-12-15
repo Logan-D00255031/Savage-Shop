@@ -8,7 +8,7 @@ public class SettingsManager : MonoBehaviour
     public GameObject volumePanel; // The main settings panel (also acting as the Volume panel)
     public GameObject controlsPanel; // Assign in Unity
     public GameObject graphicsPanel; // Assign in Unity
-    public GameObject creditsPanel; // Assign in Unity
+    //public GameObject creditsPanel; // Assign in Unity
 
     // Master Volume
     public TMP_Text masterVolumeText;
@@ -34,20 +34,20 @@ public class SettingsManager : MonoBehaviour
         volumePanel.SetActive(false);
         controlsPanel.SetActive(false);
         graphicsPanel.SetActive(false);
-        creditsPanel.SetActive(false);
+        //creditsPanel.SetActive(false);
     }
 
-    // Open and Close Credits Panel
-    public void OpenCredits()
-    {
-        creditsPanel.SetActive(true);
-        HideAllPanelsExcept(creditsPanel);
-    }
+    //// Open and Close Credits Panel
+    //public void OpenCredits()
+    //{
+    //    creditsPanel.SetActive(true);
+    //    HideAllPanelsExcept(creditsPanel);
+    //}
 
-    public void CloseCredits()
-    {
-        creditsPanel.SetActive(false);
-    }
+    //public void CloseCredits()
+    //{
+    //    creditsPanel.SetActive(false);
+    //}
 
     // Switch Panels
     public void ShowVolumePanel()
@@ -71,7 +71,7 @@ public class SettingsManager : MonoBehaviour
         if (volumePanel != activePanel) volumePanel.SetActive(false);
         if (controlsPanel != activePanel) controlsPanel.SetActive(false);
         if (graphicsPanel != activePanel) graphicsPanel.SetActive(false);
-        if (creditsPanel != activePanel) creditsPanel.SetActive(false);
+        //if (creditsPanel != activePanel) creditsPanel.SetActive(false);
 
         if (activePanel != null)
         {
@@ -107,6 +107,7 @@ public class SettingsManager : MonoBehaviour
         }
     }
 }
+
 
 
 
