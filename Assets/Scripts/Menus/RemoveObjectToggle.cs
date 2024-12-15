@@ -10,6 +10,8 @@ public class RemoveObjectToggle : MonoBehaviour, IButtonToggle
     public Transform inventoryButtonsContainer;
     private List<InventoryToggle> inventoryToggles = new();
 
+    public ShopToggle mainShopToggle;
+
     public KeyCode keyBind;
 
     public void ToggleState()
@@ -54,6 +56,11 @@ public class RemoveObjectToggle : MonoBehaviour, IButtonToggle
             {
                 toggle.Deactivate();
             }
+        }
+
+        if (mainShopToggle.isActive())
+        {
+            mainShopToggle.Deactivate();
         }
     }
 

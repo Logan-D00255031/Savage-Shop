@@ -45,7 +45,7 @@ public class PrefabInventoryManager : MonoBehaviour
             }
             // Otherwise add new inventory data to list
             storedItemData.Add(new InventoryData(prefabID));
-            return storedItemData.Count;
+            return storedItemData.Count - 1;
         }
     }
 

@@ -13,6 +13,8 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
     public GameObject inventoryButtonsContainer;
     private List<InventoryToggle> inventoryToggles = new();
 
+    public ShopToggle mainShopToggle;
+
     public KeyCode keyBind;
 
     [SerializeField]    // Used to choose if it should place an item from the inventory when it's clicked
@@ -45,7 +47,7 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
         }
 
         // Close inventory if slot menu is opened
-        if (SlotMenuManager.instance.slotMenu.activeSelf)
+        if (SlotMenuManager.instance.slotMenu.activeSelf && inventoryContainer.activeSelf)
         {
             Deactivate();
         }
@@ -67,6 +69,11 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
                 {
                     toggle.Deactivate();
                 }
+            }
+            // Shop menu should be closed is currently open
+            if (mainShopToggle.isActive())
+            {
+                mainShopToggle.Deactivate();
             }
         }
         else

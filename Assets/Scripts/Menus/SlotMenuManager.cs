@@ -147,6 +147,7 @@ public class SlotMenuManager : MonoBehaviour
     // These methods are used to hide/show the menu without resetting its data
     public void CloseMenu()
     {
+        Debug.Log("Closing Slot Menu.");
         slotMenu.SetActive(false);
     }
 
