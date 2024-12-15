@@ -2491,7 +2491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 190031582}
   m_Layer: 0
-  m_Name: NPC Destinations
+  m_Name: AI Destinations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2513,6 +2513,7 @@ Transform:
   - {fileID: 1494014510}
   - {fileID: 273254921}
   - {fileID: 1247393592}
+  - {fileID: 1641339359}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &222374344
@@ -7131,6 +7132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 499834420}
   - component: {fileID: 499834421}
+  - component: {fileID: 499834422}
   m_Layer: 0
   m_Name: SFX
   m_TagString: Untagged
@@ -7165,12 +7167,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c61e0eab48e15f40ab1aeed1ed7bf29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeObject: {fileID: 0}
-  placeItem: {fileID: 0}
-  removeObject: {fileID: 0}
-  removeItem: {fileID: 0}
-  selectType: {fileID: 0}
-  audioSource: {fileID: 0}
+  placeObject: {fileID: 8300000, guid: 88adeae038b10394da094dfaba4090ff, type: 3}
+  placeItem: {fileID: 8300000, guid: 45f8cbedcc97dc740930b51f66469932, type: 3}
+  removeObject: {fileID: 8300000, guid: 88adeae038b10394da094dfaba4090ff, type: 3}
+  removeItem: {fileID: 8300000, guid: 45f8cbedcc97dc740930b51f66469932, type: 3}
+  selectType: {fileID: 8300000, guid: 2edb2e7a311a24b4f98e6059c55779c7, type: 3}
+  invalid: {fileID: 8300000, guid: 4ea2194d3b80a374da6c9ac11bc86e84, type: 3}
+  menuClick: {fileID: 8300000, guid: 2edb2e7a311a24b4f98e6059c55779c7, type: 3}
+  buyItem: {fileID: 8300000, guid: 3db849102b288734dbfbc6f0a88a4fe1, type: 3}
+  gunShot: {fileID: 8300000, guid: 4866bfb7d34ad834d9580b25c00f148d, type: 3}
+  audioSource: {fileID: 499834422}
+--- !u!82 &499834422
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499834419}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &501840313
 GameObject:
   m_ObjectHideFlags: 0
@@ -29826,11 +29928,11 @@ Transform:
   m_GameObject: {fileID: 1641339358}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: 1, z: 5}
+  m_LocalPosition: {x: 22.962414, y: 0.8897424, z: 4.9755483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 190031582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1642202483
 PrefabInstance:
@@ -40905,4 +41007,3 @@ SceneRoots:
   - {fileID: 190031582}
   - {fileID: 222374345}
   - {fileID: 487889805}
-  - {fileID: 1641339359}

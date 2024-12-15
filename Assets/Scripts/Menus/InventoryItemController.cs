@@ -46,5 +46,6 @@ public class InventoryItemController : MonoBehaviour
     public void PlaceObject()
     {
         PlacementSystem.instance.StartPlacement(inventoryData.PrefabDatabaseID);
+        SFXManager.instance.PlaySFX(SFXManager.SFX.MenuClick);
     }
 }

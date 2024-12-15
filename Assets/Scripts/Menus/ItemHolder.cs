@@ -62,6 +62,8 @@ public class ItemHolder : MonoBehaviour
         bool notOverUI = !PlacementSystem.instance.IsPointerOverUI();
         if (canOpenMenu && noBuildState && notOverUI)
         {
+            SFXManager.instance.PlaySFX(SFXManager.SFX.MenuClick);
+
             SlotMenuManager.instance.ShowMenu();
             SlotMenuManager.instance.ListItemSlots(this);
         }

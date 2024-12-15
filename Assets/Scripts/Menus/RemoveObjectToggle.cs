@@ -45,6 +45,7 @@ public class RemoveObjectToggle : MonoBehaviour, IButtonToggle
     public void Activate()
     {
         placementSystem.StartRemoval();
+        SFXManager.instance.PlaySFX(SFXManager.SFX.MenuClick);
 
         // Inventories should not be open when remove mode is active
         foreach (InventoryToggle toggle in inventoryToggles)

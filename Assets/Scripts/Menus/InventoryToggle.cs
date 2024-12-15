@@ -77,6 +77,8 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
 
     public void Activate()
     {
+        SFXManager.instance.PlaySFX(SFXManager.SFX.MenuClick);
+
         inventoryContainer.SetActive(true);
         inventoryManager.ListItems();
         
