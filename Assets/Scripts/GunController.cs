@@ -12,16 +12,24 @@ public class GunController : MonoBehaviour
     [Required]
     public ParticleSystem muzzleFlash;
 
-    public bool isPlayer = true;
+    public bool isPlayer = false;
 
     public float damage = 10f;
     public float range = 100f;
     [Range(1f, 100f)]
-    public float rateOfFire = 50f;
-    public float ammo = 12f;
+    public float rateOfFire = 5f;
+    public int magSize = 12;
+    public float reloadTime = 2f;
 
     [ReadOnly, SerializeField]
+    private int ammo;
+    [ReadOnly, SerializeField]
     private float fireCooldown = 0f;
+
+    private void Start()
+    {
+        ammo = magSize;
+    }
 
     // Update is called once per frame
     void Update()
@@ -29,19 +37,40 @@ public class GunController : MonoBehaviour
         // Only allow to activate if set to player
         if (isPlayer)
         {
-            if (Input.GetButton("Fire1") && Time.time >= fireCooldown)   // When Fire1 button is activated and cooldown is over (Mouse 1)
+            // Cannot fire if there's no ammo
+            if (ammo > 0)
             {
-                fireCooldown = Time.time + 1f / rateOfFire; // Start cooldown
-                //Debug.Log("Firing...");
-                FireFromPlayer();
+                if (Input.GetButton("Fire1") && Time.time >= fireCooldown)   // When Fire1 button is activated and cooldown is over (Mouse 1)
+                {
+                    fireCooldown = Time.time + (1f / rateOfFire); // Start cooldown
+                    //Debug.Log("Firing...");
+                    //Debug.Log($"{Time.time} - {fireCooldown}");
+                    FireFromPlayer();
+                }
             }
         }
         
     }
+
+    private IEnumerator Reload(float reloadTime)
+    {
+        yield return new WaitForSeconds(reloadTime);
+        ReloadMag();
+        Debug.Log("Reloaded!");
+    }
+
+    public void ReloadMag()
+    {
+        ammo = magSize;
+    }
+
     void FireFromPlayer()
     {
         muzzleFlash.Play(); // Activate muzzle flash
         SFXManager.instance.PlaySFX(SFXManager.SFX.GunShot);
+
+        // Bullet expended
+        ammo--;
 
         RaycastHit target;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out target, range))    // Check if gun hit something
@@ -53,6 +82,13 @@ public class GunController : MonoBehaviour
             {
                 targetComponent.Damaged(damage);    // Deal damage to target
             }
+        }
+
+        // Reload when out of ammo
+        if (ammo <= 0)
+        {
+            StartCoroutine(Reload(reloadTime));
+            Debug.Log("Reloading...");
         }
     }
 

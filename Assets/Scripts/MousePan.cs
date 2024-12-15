@@ -33,6 +33,11 @@ public class MousePan : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LockCursor();
+    }
+
+    public static void LockCursor()
+    {
         Cursor.lockState = CursorLockMode.Locked; // Locks and hides cursor to the window
     }
 

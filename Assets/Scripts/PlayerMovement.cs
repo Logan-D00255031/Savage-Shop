@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         x = Input.GetAxis("Horizontal");    // store horizontal input
         z = Input.GetAxis("Vertical");      // store vertical input
 
-        Vector3 move = transform.right * x + transform.forward * z; // store x and z vector movement
+        Vector3 move = controller.transform.right * x + controller.transform.forward * z; // store x and z vector movement
 
         controller.Move(move * speed * Time.deltaTime); // Move the player by move vector
     }

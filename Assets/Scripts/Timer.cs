@@ -8,9 +8,15 @@ using GD;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] TextMeshProUGUI timerTextIsometric;
+    [SerializeField] TextMeshProUGUI timerTextFirstPerson;
     [SerializeField] GameEvent nightMode;
-    [SerializeField] int secondsUntilNight = 100;
+    [SerializeField] GameEvent dayMode;
+    [SerializeField] GameEvent shopOpen;
+
+    // Amount of real seconds needed for 15 minutes of in game time to pass 
+    [SerializeField, Range(0.1f, 60f)] float fifteenMinToRealSeconds = 7f;
+    //[SerializeField] int secondsUntilNight = 100;
     float elapsedTime = 0f;
     float intervalTimer = 0f;
     int hours = 12; // Start at 12
@@ -18,7 +24,7 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(switchToNight());
+        //StartCoroutine(switchToNight());
     }
 
     void Update()
@@ -26,8 +32,8 @@ public class Timer : MonoBehaviour
         elapsedTime += Time.deltaTime;
         intervalTimer += Time.deltaTime;
 
-        // Check if 7 seconds have passed
-        if (intervalTimer >= 5f)
+        // Check if desired seconds have passed
+        if (intervalTimer >= fifteenMinToRealSeconds)
         {
             minutes += 15;
             intervalTimer = 0f; // Reset the interval timer
@@ -44,9 +50,25 @@ public class Timer : MonoBehaviour
             {
                 hours = 0; // Reset to midnight
             }
+
+            if (hours == 18 && minutes == 0)
+            {
+                StartCoroutine(switchToNight());
+            }
+
+            if (hours == 8 && minutes == 0)
+            {
+                StartCoroutine(switchToDay());
+            }
+
+            if (hours == 12 && minutes == 0)
+            {
+                StartCoroutine(openShop());
+            }
         }
 
-        timerText.text = string.Format("{0:00}:{1:00}", hours, minutes);
+        timerTextIsometric.text = string.Format("{0:00}:{1:00}", hours, minutes);
+        timerTextFirstPerson.text = string.Format("{0:00}:{1:00}", hours, minutes);
     }
     public void ResetTimer()
     {
@@ -54,14 +76,27 @@ public class Timer : MonoBehaviour
         intervalTimer = 0f;
         hours = 12;
         minutes = 0;
-        timerText.text = "12:00";
+        timerTextIsometric.text = "12:00";
+        timerTextFirstPerson.text = "12:00";
 
     }
 
     private IEnumerator switchToNight()
     {
-        yield return new WaitForSeconds(secondsUntilNight); //change it to longer cuz testinnnng
+        yield return new WaitForSeconds(1f);
         nightMode?.Raise();   //raises the event
+    }
+
+    private IEnumerator switchToDay()
+    {
+        yield return new WaitForSeconds(1f);
+        dayMode?.Raise();   //raises the event
+    }
+
+    private IEnumerator openShop()
+    {
+        yield return new WaitForSeconds(1f);
+        shopOpen?.Raise();   //raises the event
     }
 
 }

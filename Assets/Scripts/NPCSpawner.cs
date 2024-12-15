@@ -22,6 +22,11 @@ public class NPCSpawner : MonoBehaviour
         PrepareNextSpawn();
     }
 
+    public void BeginSpawning()
+    {
+        PrepareNextSpawn();
+    }
+
     private void PrepareNextSpawn()
     {
         waitTime = UnityEngine.Random.Range(5, 10);

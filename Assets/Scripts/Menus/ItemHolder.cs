@@ -57,15 +57,19 @@ public class ItemHolder : MonoBehaviour
 
     public void OnMouseDown()
     {
-        // Menu should not open if in object build mode or mouse is over a UI object
-        bool noBuildState = !PlacementSystem.instance.ActiveBuildState();
-        bool notOverUI = !PlacementSystem.instance.IsPointerOverUI();
-        if (canOpenMenu && noBuildState && notOverUI)
+        // Don't open menu if the Isometric camera is inactive
+        if (IsometricCamera.IsActive())
         {
-            SFXManager.instance.PlaySFX(SFXManager.SFX.MenuClick);
+            // Menu should not open if in object build mode or mouse is over a UI object
+            bool noBuildState = !PlacementSystem.instance.ActiveBuildState();
+            bool notOverUI = !PlacementSystem.instance.IsPointerOverUI();
+            if (canOpenMenu && noBuildState && notOverUI)
+            {
+                SFXManager.instance.PlaySFX(SFXManager.SFX.MenuClick);
 
-            SlotMenuManager.instance.ShowMenu();
-            SlotMenuManager.instance.ListItemSlots(this);
+                SlotMenuManager.instance.ShowMenu();
+                SlotMenuManager.instance.ListItemSlots(this);
+            }
         }
     }
 
