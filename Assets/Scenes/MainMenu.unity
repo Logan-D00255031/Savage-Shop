@@ -2700,6 +2700,7 @@ RectTransform:
   - {fileID: 1673182219}
   - {fileID: 280012023}
   - {fileID: 1131508234}
+  - {fileID: 602078073}
   m_Father: {fileID: 799751183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4124,11 +4125,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 961902719}
+  m_Father: {fileID: 421866714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 878.801, y: 513.30005}
+  m_AnchoredPosition: {x: 904.80005, y: 484.90002}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &602078074
@@ -4459,32 +4460,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingHubManager, Assembly-CSharp
-        m_MethodName: ShowControlsPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingHubManager, Assembly-CSharp
-        m_MethodName: ShowGraphicsPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingHubManager, Assembly-CSharp
+      - m_Target: {fileID: 536060836}
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: ShowVolumePanel
         m_Mode: 1
         m_Arguments:
@@ -5893,33 +5870,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingHubManager, Assembly-CSharp
+      - m_Target: {fileID: 536060836}
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: ShowControlsPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingHubManager, Assembly-CSharp
-        m_MethodName: ShowGraphicsPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingHubManager, Assembly-CSharp
-        m_MethodName: ShowVolumePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6337,7 +6290,6 @@ RectTransform:
   - {fileID: 1555557471}
   - {fileID: 920677607}
   - {fileID: 830650528}
-  - {fileID: 602078073}
   m_Father: {fileID: 421866714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -11834,8 +11786,8 @@ RectTransform:
   m_Children:
   - {fileID: 1158138354}
   - {fileID: 259114976}
-  - {fileID: 799751183}
   - {fileID: 434427839}
+  - {fileID: 799751183}
   - {fileID: 536060834}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
