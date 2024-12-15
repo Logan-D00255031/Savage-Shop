@@ -45,7 +45,7 @@ public class RemovalState : IBuildState
 
         if (selectedData == null)
         {
-            // Invalid sound can go here
+            SFXManager.instance.PlaySFX(SFXManager.SFX.Invalid);
         }
         else
         {
@@ -54,6 +54,9 @@ public class RemovalState : IBuildState
             {
                 return;
             }
+
+            SFXManager.instance.PlaySFX(SFXManager.SFX.RemoveObject);
+
             // Add Object prefab ID to inventory
             int prefabDatabaseID = selectedData.GetRepresentationID(gridPosition);
             prefabInventory.AddItem(prefabDatabaseID);

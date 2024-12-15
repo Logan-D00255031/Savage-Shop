@@ -58,6 +58,8 @@ public class NPCAI : MonoBehaviour
         {
             if (itemPrice >= minPrice && maxPrice >= itemPrice)
             {
+                SFXManager.instance.PlaySFX(SFXManager.SFX.BuyItem);
+
                 // Add itemPrice to wallet
 
 
@@ -70,6 +72,7 @@ public class NPCAI : MonoBehaviour
             }
             else
             {
+                SFXManager.instance.PlaySFX(SFXManager.SFX.Invalid);
                 Debug.Log($"Item not within price range ({minPrice}, {maxPrice}): {itemPrice}");
             }
         }

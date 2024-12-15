@@ -10,5 +10,10 @@ public class NotepadManager : MonoBehaviour
     {
         // Toggle the visibility of the Notepad Panel
         notepadPanel.SetActive(!notepadPanel.activeSelf);
+
+        if (notepadPanel.activeSelf)
+        {
+            SFXManager.instance.PlaySFX(SFXManager.SFX.MenuClick);
+        }
     }
 }

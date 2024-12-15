@@ -41,6 +41,7 @@ public class GunController : MonoBehaviour
     void FireFromPlayer()
     {
         muzzleFlash.Play(); // Activate muzzle flash
+        SFXManager.instance.PlaySFX(SFXManager.SFX.GunShot);
 
         RaycastHit target;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out target, range))    // Check if gun hit something
@@ -64,6 +65,7 @@ public class GunController : MonoBehaviour
         fireCooldown = Time.time + 1f / rateOfFire;
 
         muzzleFlash.Play(); // Activate muzzle flash
+        SFXManager.instance.PlaySFX(SFXManager.SFX.GunShot);
 
         RaycastHit target;
         if (Physics.Raycast(objectView.transform.position, objectView.transform.forward, out target, range))    // Check if gun hit something

@@ -67,11 +67,11 @@ public class PlacementState : IBuildState
         if (!CheckValidPlacement(objectGridPosition, selectedObjectIndex, objectRotation) ||
             !prefabInventory.ContainsItemWithID(ID))
         {
-            // Invalid sound can be added here
+            SFXManager.instance.PlaySFX(SFXManager.SFX.Invalid);
             return;
         }
 
-        // Valid sound can be added here
+        SFXManager.instance.PlaySFX(SFXManager.SFX.PlaceObject);
 
         int index = objectPlacer.PlaceObject(prefabDatabase.objectsData[selectedObjectIndex].Prefab, worldPosition, objectRotation);
 
