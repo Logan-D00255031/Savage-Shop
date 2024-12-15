@@ -9,17 +9,23 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
-    [Required]
-    public FieldOfView fieldOfView;
-    [Required]
+    [Required, BoxGroup("Fields of View")]
+    public FieldOfView fieldOfView1;
+    [Required, BoxGroup("Fields of View")]
+    public FieldOfView fieldOfView2;
+    [Required, BoxGroup("Other Components")]
     public GunController gunController;
+    [BoxGroup("Other Components")]
     public HealthManager healthManager;
 
-    [Required]
+    [Required, BoxGroup("Navigation")]
     public NavMeshAgent agent;
+    [BoxGroup("Navigation")]
     public Transform objective;
+    [BoxGroup("Navigation")]
+    public Transform exit;
 
-    
+
 
 
     // Start is called before the first frame update
@@ -45,13 +51,22 @@ public class EnemyAI : MonoBehaviour
 
     IEnumerator MoveToObjective()
     {
+        agent.speed = 2;
         agent.SetDestination(objective.position);
 
         // Wait until the path is finished computing and then has reached destination
         while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
         {
+            if (healthManager.GetHealth() <= 10)
+            {
+                StartCoroutine(Flee());
+                // Flee sound effect here
+
+                Debug.Log("Fleeing...");
+                yield break;
+            }
             // Engage the player if spotted or damaged
-            if (fieldOfView.canSeePlayer || healthManager.damaged)
+            if ((fieldOfView1.canSeePlayer || fieldOfView2.canSeePlayer) || healthManager.damaged)
             {
                 Debug.Log("Spotted player! Beginning to target.");
                 StartCoroutine(TargetPlayer());
@@ -67,16 +82,42 @@ public class EnemyAI : MonoBehaviour
     IEnumerator TargetPlayer()
     {
         Transform playerTransform = player.transform;
-        agent.SetDestination(playerTransform.position);
+        agent.speed = 3;
+        // Only change destination if it has chenged
+        if (agent.destination != playerTransform.position)
+        {
+            agent.SetDestination(playerTransform.position);
+        }
 
         // Wait until the path is finished computing and then has reached destination
         while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
         {
+            if (healthManager.GetHealth() <= 10)
+            {
+                StartCoroutine(Flee());
+                // Flee sound effect here
+
+                Debug.Log("Fleeing...");
+                yield break;
+            }
             // Shoot at player when in line of sight
-            if (fieldOfView.canSeePlayer)
+            if (fieldOfView1.canSeePlayer || fieldOfView2.canSeePlayer)
             {
                 agent.SetDestination(playerTransform.position);
                 gunController.FireFromObject();
+                // Retarget player
+                if (agent.destination != playerTransform.position)
+                {
+                    agent.SetDestination(playerTransform.position);
+                }
+            }
+            // Retarget player if hit
+            else if (healthManager.damaged)
+            {
+                if (agent.destination != playerTransform.position)
+                {
+                    agent.SetDestination(playerTransform.position);
+                }
             }
             yield return null;
         }
@@ -84,5 +125,28 @@ public class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(1);
         Debug.Log("Enemy has lost the player. Returning to objective.");
         StartCoroutine(MoveToObjective());
+    }
+
+    IEnumerator Flee()
+    {
+        agent.speed = 5;
+        agent.SetDestination(exit.position);
+
+        // Wait until the path is finished computing and then has reached destination
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        {
+            // Kill enemy if health reaches 0
+            if (healthManager.GetHealth() <= 0)
+            {
+                // Death sound effect here
+
+                Debug.Log("Enemy has been killed!");
+                gameObject.SetActive(false);
+                yield break;
+            }
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 }

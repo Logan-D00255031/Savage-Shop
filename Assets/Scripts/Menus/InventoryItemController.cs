@@ -49,6 +49,8 @@ public class InventoryItemController : MonoBehaviour
         int prefabIndex = prefabDatabase.objectsData.FindIndex(data => data.ID == inventoryData.PrefabDatabaseID);
         GameObject prefab = prefabDatabase.objectsData[prefabIndex].Prefab;
 
+        SFXManager.instance.PlaySFX(SFXManager.SFX.PlaceItem);
+
         itemSlot.PlaceItem(prefab, inventoryData.PrefabDatabaseID);
         RemoveItem(false);
     }

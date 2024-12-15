@@ -6,16 +6,29 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour
 {
     [SerializeField]
-    [Range(1f, 200f)]
+    [Range(0f, 200f)]
     private float health = 50f;
+
+    [SerializeField] 
+    bool destroyOnDeath = true;
+
+    [SerializeField]
+    SFXManager.SFX deathSound;
 
     [ReadOnly]
     public bool damaged = false;
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        if (health <= 0)
+        if ((health - damage) < 0)
+        {
+            health = 0;
+        }
+        else
+        {
+            health -= damage;
+        }
+        if (health <= 0 && destroyOnDeath)
         {
             Die();
         }
@@ -24,6 +37,7 @@ public class HealthManager : MonoBehaviour
 
     private void Die()
     {
+        SFXManager.instance.PlaySFX(deathSound);
         Destroy(gameObject);
     }
 
@@ -32,5 +46,20 @@ public class HealthManager : MonoBehaviour
         damaged = true;
         yield return new WaitForSeconds(seconds);
         damaged = false;
+    }
+
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    public void SetHealth(float health)
+    {
+        this.health = health;
+    }
+
+    public bool IsDead()
+    {
+        return health <= 0;
     }
 }

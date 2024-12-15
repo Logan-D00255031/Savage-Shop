@@ -10,8 +10,9 @@ public class FieldOfView : MonoBehaviour
 {
     [Range(0, 50)]
     public float radius;
-    [Range(1, 360)]
-    public float angle;
+    // Values larger than 147 degrees seem to break it, so don't set any higher
+    [Range(1, 147)]
+    public float angle = 1f;
 
     [Required]
     public GameObject playerRef;

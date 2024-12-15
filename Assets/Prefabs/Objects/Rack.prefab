@@ -104,6 +104,8 @@ GameObject:
   - component: {fileID: 404029244204984242}
   - component: {fileID: 1059778936295182103}
   - component: {fileID: 7886489742914012490}
+  - component: {fileID: 8680700913132695903}
+  - component: {fileID: 6994550419892849518}
   m_Layer: 8
   m_Name: Rack
   m_TagString: Untagged
@@ -169,6 +171,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.15, y: 3, z: 1.65}
   m_Center: {x: 2, y: 1.5, z: 1}
+--- !u!114 &8680700913132695903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6818954906492102965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f019e5a9f079ef4294d630d0c80d150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 6994550419892849518}
+--- !u!114 &6994550419892849518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6818954906492102965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4827777dfa2fba54a9b97a5f03af8932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+  destroyOnDeath: 1
+  deathSound: 3
+  damaged: 0
 --- !u!1 &7452305621121390490
 GameObject:
   m_ObjectHideFlags: 0

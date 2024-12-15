@@ -55,6 +55,8 @@ public class ItemSlotController : MonoBehaviour
     {
         slotMenuManager.RemoveFromSlot(itemSlot);
 
+        SFXManager.instance.PlaySFX(SFXManager.SFX.RemoveItem);
+
         // Disable remove button in menu UI
         DisableDeleteButton();
     }
