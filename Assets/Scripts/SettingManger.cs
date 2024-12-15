@@ -5,10 +5,10 @@ using TMPro;
 
 public class SettingsManager : MonoBehaviour
 {
-    public GameObject settingsPanel; // The settings panel
-    public GameObject volumePanel; // Assign in Unity
+    public GameObject volumePanel; // The main settings panel (also acting as the Volume panel)
     public GameObject controlsPanel; // Assign in Unity
     public GameObject graphicsPanel; // Assign in Unity
+    public GameObject creditsPanel; // Assign in Unity
 
     // Master Volume
     public TMP_Text masterVolumeText;
@@ -22,24 +22,26 @@ public class SettingsManager : MonoBehaviour
     public TMP_Text uiVolumeText;
     public UnityEngine.UI.Slider uiVolumeSlider;
 
-    public GameObject creditsPanel; // Assign in Unity
-
-    // Open and Close Settings Panel
+    // Open and Close Settings (Volume Panel acts as main settings panel)
     public void OpenSettings()
     {
-        settingsPanel.SetActive(true);
-        ShowVolumePanel(); // Default panel to open
+        volumePanel.SetActive(true);
+        ShowVolumePanel(); // Default view on opening
     }
 
     public void CloseSettings()
     {
-        settingsPanel.SetActive(false);
+        volumePanel.SetActive(false);
+        controlsPanel.SetActive(false);
+        graphicsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
     }
 
     // Open and Close Credits Panel
     public void OpenCredits()
     {
         creditsPanel.SetActive(true);
+        HideAllPanelsExcept(creditsPanel);
     }
 
     public void CloseCredits()
@@ -50,27 +52,31 @@ public class SettingsManager : MonoBehaviour
     // Switch Panels
     public void ShowVolumePanel()
     {
-        HideAllPanels();
-        volumePanel.SetActive(true);
+        HideAllPanelsExcept(volumePanel);
     }
 
     public void ShowControlsPanel()
     {
-        HideAllPanels();
-        controlsPanel.SetActive(true);
+        HideAllPanelsExcept(controlsPanel);
     }
 
     public void ShowGraphicsPanel()
     {
-        HideAllPanels();
-        graphicsPanel.SetActive(true);
+        HideAllPanelsExcept(graphicsPanel);
     }
 
-    private void HideAllPanels()
+    // Hide all panels except the one passed as a parameter
+    private void HideAllPanelsExcept(GameObject activePanel)
     {
-        if (volumePanel != null) volumePanel.SetActive(false);
-        if (controlsPanel != null) controlsPanel.SetActive(false);
-        if (graphicsPanel != null) graphicsPanel.SetActive(false);
+        if (volumePanel != activePanel) volumePanel.SetActive(false);
+        if (controlsPanel != activePanel) controlsPanel.SetActive(false);
+        if (graphicsPanel != activePanel) graphicsPanel.SetActive(false);
+        if (creditsPanel != activePanel) creditsPanel.SetActive(false);
+
+        if (activePanel != null)
+        {
+            activePanel.SetActive(true);
+        }
     }
 
     // Adjust Master Volume
@@ -101,6 +107,8 @@ public class SettingsManager : MonoBehaviour
         }
     }
 }
+
+
 
 
 

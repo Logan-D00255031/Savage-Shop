@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7120583508055018601}
   - component: {fileID: 2004026998560959466}
   - component: {fileID: 6274393096715588937}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Post Processing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,3 +62,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271e60bac2b0415bb4b5d82deb18b713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yureiLayer: 18
