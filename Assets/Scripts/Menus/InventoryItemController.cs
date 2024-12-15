@@ -12,8 +12,18 @@ public class InventoryItemController : MonoBehaviour
     // Used when adding an item to a slot
     public ItemSlotController itemSlot;
 
-    public void RemoveItem()
+    public void RemoveItem(bool sell)
     {
+        if (sell)
+        {
+            SFXManager.instance.PlaySFX(SFXManager.SFX.BuyItem);
+
+            // Return 90% of the buy price of the item back to wallet
+            int prefabIndex = inventoryManager.PrefabDatabase.objectsData.FindIndex(data => data.ID == inventoryData.PrefabDatabaseID);
+            float buyPrice = inventoryManager.PrefabDatabase.objectsData[prefabIndex].ItemData.BuyPrice;
+            WalletManager.instance.AddToWallet(buyPrice * 0.9f);
+        }
+
         inventoryManager.RemoveItem(inventoryData.PrefabDatabaseID);
         //Debug.Log($"Amount: {inventoryData.AmountStored}");
         if (inventoryData.AmountStored <= 0)
@@ -40,7 +50,7 @@ public class InventoryItemController : MonoBehaviour
         GameObject prefab = prefabDatabase.objectsData[prefabIndex].Prefab;
 
         itemSlot.PlaceItem(prefab, inventoryData.PrefabDatabaseID);
-        RemoveItem();
+        RemoveItem(false);
     }
 
     public void PlaceObject()

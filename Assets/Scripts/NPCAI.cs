@@ -61,7 +61,7 @@ public class NPCAI : MonoBehaviour
                 SFXManager.instance.PlaySFX(SFXManager.SFX.BuyItem);
 
                 // Add itemPrice to wallet
-
+                WalletManager.instance.AddToWallet(itemPrice);
 
                 Transform slot = destination.parent;
                 ItemHolder holder = slot.GetComponentInParent<ItemHolder>();

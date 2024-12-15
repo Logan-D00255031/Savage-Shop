@@ -199,14 +199,14 @@ MonoBehaviour:
       - m_Target: {fileID: 2661221506174598279}
         m_TargetAssemblyTypeName: InventoryItemController, Assembly-CSharp
         m_MethodName: RemoveItem
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &6343905168332055631
 GameObject:
@@ -346,6 +346,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d19b2f99db11c479b8ded09c40d244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryManager: {fileID: 0}
+  inventoryData:
+    <PrefabDatabaseID>k__BackingField: 0
+    <AmountStored>k__BackingField: 0
+  itemSlot: {fileID: 0}
 --- !u!1 &7881480377712109319
 GameObject:
   m_ObjectHideFlags: 0

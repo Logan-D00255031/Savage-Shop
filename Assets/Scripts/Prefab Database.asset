@@ -21,7 +21,7 @@ MonoBehaviour:
       <Name>k__BackingField: Basic Cube
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: dfa7573a6acf9e143a09725f05116e1a, type: 3}
-      <BuyPrice>k__BackingField: 0
+      <BuyPrice>k__BackingField: 1
   - <Name>k__BackingField: Rectangle
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 2, y: 4}
@@ -30,7 +30,7 @@ MonoBehaviour:
       <Name>k__BackingField: Basic Rectangle
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: b4047ecfa9407874c88af0996fe5951a, type: 3}
-      <BuyPrice>k__BackingField: 0
+      <BuyPrice>k__BackingField: 1
   - <Name>k__BackingField: Pot3
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
@@ -39,7 +39,7 @@ MonoBehaviour:
       <Name>k__BackingField: Pot
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
-      <BuyPrice>k__BackingField: 1
+      <BuyPrice>k__BackingField: 0.5
   - <Name>k__BackingField: Pot1
     <ID>k__BackingField: 4
     <Size>k__BackingField: {x: 1, y: 1}
@@ -48,7 +48,7 @@ MonoBehaviour:
       <Name>k__BackingField: <insert plant name>
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
-      <BuyPrice>k__BackingField: 0
+      <BuyPrice>k__BackingField: 1.5
   - <Name>k__BackingField: SmallDarkGreen
     <ID>k__BackingField: 5
     <Size>k__BackingField: {x: 1, y: 1}
@@ -57,7 +57,7 @@ MonoBehaviour:
       <Name>k__BackingField: <insert plant name>
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
-      <BuyPrice>k__BackingField: 0
+      <BuyPrice>k__BackingField: 2
   - <Name>k__BackingField: TallPlant
     <ID>k__BackingField: 6
     <Size>k__BackingField: {x: 1, y: 1}
@@ -75,7 +75,7 @@ MonoBehaviour:
       <Name>k__BackingField: <insert plant name>
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
-      <BuyPrice>k__BackingField: 0
+      <BuyPrice>k__BackingField: 5
   - <Name>k__BackingField: SmallBush
     <ID>k__BackingField: 8
     <Size>k__BackingField: {x: 1, y: 1}
@@ -84,7 +84,7 @@ MonoBehaviour:
       <Name>k__BackingField: <insert plant name>
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
-      <BuyPrice>k__BackingField: 0
+      <BuyPrice>k__BackingField: 10
   - <Name>k__BackingField: FlowerOrange
     <ID>k__BackingField: 9
     <Size>k__BackingField: {x: 1, y: 1}
@@ -93,7 +93,7 @@ MonoBehaviour:
       <Name>k__BackingField: <insert plant name>
       <Description>k__BackingField: 
       <Icon>k__BackingField: {fileID: 21300000, guid: e4b13e9f881266e4192c45dc4ab02630, type: 3}
-      <BuyPrice>k__BackingField: 0
+      <BuyPrice>k__BackingField: 15
   - <Name>k__BackingField: LargeRack
     <ID>k__BackingField: 10
     <Size>k__BackingField: {x: 4, y: 2}

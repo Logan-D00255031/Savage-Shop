@@ -13,7 +13,13 @@ public class ShopItemController : MonoBehaviour
 
     public void BuyItem()
     {
+        if ((WalletManager.instance.balance - itemPrice) <= 0)
+        {
+            SFXManager.instance.PlaySFX(SFXManager.SFX.Invalid);
+            return;
+        }
         // Deduct price from wallet
+        WalletManager.instance.RemoveFromWallet(itemPrice);
 
         SFXManager.instance.PlaySFX(SFXManager.SFX.BuyItem);
 
