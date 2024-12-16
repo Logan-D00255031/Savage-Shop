@@ -7697,6 +7697,10 @@ MonoBehaviour:
   menuClick: {fileID: 8300000, guid: 2edb2e7a311a24b4f98e6059c55779c7, type: 3}
   buyItem: {fileID: 8300000, guid: 3db849102b288734dbfbc6f0a88a4fe1, type: 3}
   gunShot: {fileID: 8300000, guid: 4866bfb7d34ad834d9580b25c00f148d, type: 3}
+  potBreaks:
+  - {fileID: 8300000, guid: 6594f18684bcb33439a21704265684c9, type: 3}
+  - {fileID: 8300000, guid: 0b33b4afb097b3f4dbe1039ec6b92052, type: 3}
+  - {fileID: 8300000, guid: 278f94df956430749896652d4a04940e, type: 3}
   audioSource: {fileID: 499834422}
 --- !u!82 &499834422
 AudioSource:

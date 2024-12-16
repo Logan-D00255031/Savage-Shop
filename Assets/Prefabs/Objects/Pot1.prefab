@@ -46,11 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4827777dfa2fba54a9b97a5f03af8932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  maxHealth: 30
   destroyOnDeath: 1
   isObject: 1
   centrePoint: {fileID: 7081964545077917570}
-  deathSound: 3
+  isItem: 0
+  deathSound: 9
+  health: 30
   damaged: 0
 --- !u!1 &7972197518727088871
 GameObject:

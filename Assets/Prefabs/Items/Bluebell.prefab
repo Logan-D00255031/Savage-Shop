@@ -204,6 +204,6 @@ MonoBehaviour:
   isObject: 0
   centrePoint: {fileID: 0}
   isItem: 1
-  deathSound: 3
+  deathSound: 9
   health: 0
   damaged: 0

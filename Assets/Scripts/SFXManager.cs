@@ -27,13 +27,16 @@ public class SFXManager : MonoBehaviour
     public AudioClip buyItem;
     [BoxGroup("Audio Clips")]
     public AudioClip gunShot;
+    [BoxGroup("Audio Clips")]
+    public List<AudioClip> potBreaks;
+
 
     [BoxGroup("Audio Source")]
     public AudioSource audioSource;
 
     private float pitch;
 
-    public enum SFX {PlaceObject, PlaceItem, RemoveObject, RemoveItem, SelectType, Invalid, MenuClick, BuyItem, GunShot}
+    public enum SFX {PlaceObject, PlaceItem, RemoveObject, RemoveItem, SelectType, Invalid, MenuClick, BuyItem, GunShot, potBreak}
 
     public void PlaySFX(SFX buildSFX)
     {
@@ -93,6 +96,13 @@ public class SFXManager : MonoBehaviour
             case SFX.GunShot:
                 {
                     selectedClip = gunShot;
+                }
+                break;
+            case SFX.potBreak:
+                {
+                    // Select random break sound from collection
+                    int clipIndex = UnityEngine.Random.Range(0, potBreaks.Count - 1);
+                    selectedClip = potBreaks[clipIndex];
                 }
                 break;
         }
