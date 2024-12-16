@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Required for scene management
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenu; // Assign your pause menu GameObject in the Inspector
-    public GameObject settingsPanel; // Assign your settings panel GameObject in the Inspector
+    public GameObject settingsPanel; // Assign your settings panel here (optional)
+
     private bool isPaused = false;
 
     void Start()
@@ -65,8 +66,15 @@ public class PauseManager : MonoBehaviour
     {
         if (settingsPanel != null)
         {
-            settingsPanel.SetActive(true); // Show the settings panel
+            settingsPanel.SetActive(true); // Show settings panel
         }
+
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(false); // Hide pause menu
+        }
+
+        Debug.Log("Opened Settings Panel");
     }
 
     public void CloseSettings()
@@ -89,6 +97,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f; // Ensure time scale is reset to normal
         SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with your main menu scene name
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
@@ -96,5 +105,10 @@ public class PauseManager : MonoBehaviour
             TogglePause();
         }
     }
+
 }
+
+
+
+
 
