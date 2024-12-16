@@ -19,7 +19,15 @@ public class WalletManager : MonoBehaviour
 
     private void UpdateDisplay()
     {
-        walletText.text = balance.ToString();
+        // Do not display decimal point if it's a whole number
+        if (Mathf.Approximately(balance % 1, 0))
+        {
+            walletText.text = balance.ToString();
+        }
+        else
+        {
+            walletText.text = balance.ToString("F2");
+        }
     }
 
     public void AddToWallet(float amount)

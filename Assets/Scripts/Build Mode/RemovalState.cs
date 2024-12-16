@@ -32,6 +32,7 @@ public class RemovalState : IBuildState
 
     public void EndState()
     {
+        previewSystem.EndRemovalPreview();
         previewSystem.EndPreview();
     }
 

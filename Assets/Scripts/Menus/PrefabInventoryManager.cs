@@ -38,7 +38,7 @@ public class PrefabInventoryManager : MonoBehaviour
         {
             // Add index to list
             storedItemData.Add(new InventoryData(prefabID));
-            return storedItemData.Count;
+            return storedItemData.Count - 1;
         }
         else
         {

@@ -112,6 +112,8 @@ public class PlacementSystem : MonoBehaviour
         gridView.SetActive(false);
 
         buildState.EndState();
+        // Disable build state to prevent any accidental updates
+        buildState = null;
         isPlaceState = false;
         isRemoveState = false;
 

@@ -31,22 +31,15 @@ public class ShopToggle : MonoBehaviour, IButtonToggle
     {
         active = shopContainer.activeSelf;
 
-        // Grab all inventory toggles
-        InventoryToggle[] toggles = inventoryButtonsContainer.GetComponentsInChildren<InventoryToggle>();
-        foreach (InventoryToggle toggle in toggles)
+        // Grab all inventory toggles for main toggle
+        if (isMainToggle)
         {
+            InventoryToggle[] toggles = inventoryButtonsContainer.GetComponentsInChildren<InventoryToggle>();
+            foreach (InventoryToggle toggle in toggles)
+            {
                 inventoryToggles.Add(toggle);
+            }
         }
-
-        // Grab all shop toggles except this one to the list
-        //ShopToggle[] shopToggles = inventoryButtonsContainer.GetComponentsInChildren<ShopToggle>();
-        //foreach (InventoryToggle toggle in toggles)
-        //{
-        //    if (toggle != this)
-        //    {
-        //        shopToggles.Add(toggle);
-        //    }
-        //}
     }
 
     public void Update()

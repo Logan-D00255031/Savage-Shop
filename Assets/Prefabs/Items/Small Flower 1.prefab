@@ -10,19 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4629767842229819245, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
       propertyPath: m_Name
-      value: PotPlant_10 Variant
+      value: Small Flower 1
       objectReference: {fileID: 0}
     - target: {fileID: 7131487874297909560, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7131487874297909560, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7131487874297909560, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7131487874297909560, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64,8 +64,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7941568853552262489, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4629767842229819245, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2793779461221648370}
+    - targetCorrespondingSourceObject: {fileID: 3740337831136788380, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1747096141501894670}
   m_SourcePrefab: {fileID: 100100000, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
+--- !u!1 &3883488087388255831 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4629767842229819245, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
+  m_PrefabInstance: {fileID: 8477136268266725690}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2793779461221648370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3883488087388255831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4827777dfa2fba54a9b97a5f03af8932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
+  destroyOnDeath: 1
+  isObject: 0
+  centrePoint: {fileID: 0}
+  isItem: 1
+  deathSound: 3
+  health: 0
+  damaged: 0
+--- !u!1 &5065581963755298470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3740337831136788380, guid: 113c760ec54052f4399a00ad86ebb9ea, type: 3}
+  m_PrefabInstance: {fileID: 8477136268266725690}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1747096141501894670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5065581963755298470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f019e5a9f079ef4294d630d0c80d150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 2793779461221648370}
