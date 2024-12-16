@@ -29615,7 +29615,7 @@ MonoBehaviour:
   destroyOnDeath: 1
   isObject: 0
   centrePoint: {fileID: 0}
-  isItem: 1
+  isItem: 0
   deathSound: 5
   health: 100
   damaged: 0
