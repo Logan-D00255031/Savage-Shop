@@ -1,3 +1,4 @@
+using GD;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,10 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    [SerializeField]
+    private GameEvent dayEvent;
+    [SerializeField]
+    private Timer timer;
     [SerializeField]
     private GameObject player;
 
@@ -47,6 +52,7 @@ public class EnemyAI : MonoBehaviour
     public void Activate()
     {
         StartCoroutine(MoveToObjective());
+        transform.position = exit.position;
     }
 
     IEnumerator MoveToObjective()
@@ -141,12 +147,21 @@ public class EnemyAI : MonoBehaviour
                 // Death sound effect here
 
                 Debug.Log("Enemy has been killed!");
-                gameObject.SetActive(false);
+                agent.speed = 0;
+                StartCoroutine(CallDayModeAfterSeconds(5f));
                 yield break;
             }
             yield return null;
         }
 
-        Destroy(gameObject);
+        StartCoroutine(CallDayModeAfterSeconds(5f));
+    }
+
+    IEnumerator CallDayModeAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        dayEvent?.Raise();
+        timer.SetTime(8, 0);
+        gameObject.SetActive(false);
     }
 }

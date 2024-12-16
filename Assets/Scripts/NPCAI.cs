@@ -15,28 +15,33 @@ public class NPCAI : MonoBehaviour
 
     public PrefabDatabaseSO itemDatabase;
 
-    [ReadOnly, SerializeField]
-    private int itemIndex;
-    [ReadOnly, SerializeField]
-    private string itemName;
+    [SerializeField]
+    private ItemSellPriceDataBase itemSellPriceData;
+
+    [ReadOnly]
+    public int itemIndex;
+    [ReadOnly]
+    public string itemName;
 
     [ReadOnly, SerializeField]
-    private int minPrice;
+    private float minPrice;
     [ReadOnly, SerializeField]
-    private int maxPrice;
+    private float maxPrice;
 
     // Start is called before the first frame update
     void Start()
     {
         //itemIndex = Random.Range(0, itemDatabase.objectsData.Count);
         //itemName = itemDatabase.objectsData[itemIndex].Prefab.name;
-
-        minPrice = Random.Range(0, 10);
-        maxPrice = minPrice + Random.Range(5, 20);
     }
 
     public void Activate()
     {
+        float itemPrice = itemDatabase.objectsData[itemIndex].ItemData.BuyPrice;
+
+        minPrice = Random.Range(0, (itemPrice * 0.5f));
+        maxPrice = minPrice + Random.Range((minPrice + 5), (minPrice + 10) + (itemPrice * 2));
+
 
         if (destination != null)
         {
@@ -52,7 +57,22 @@ public class NPCAI : MonoBehaviour
 
     private void AttemptToBuy()
     {
-        float itemPrice = itemDatabase.objectsData[itemIndex].ItemData.BuyPrice;
+        int itemID = itemDatabase.objectsData[itemIndex].ID;
+        float itemPrice = 0;
+        bool sellPriceNotSet = true;
+        foreach (ItemSellPriceData priceData in itemSellPriceData.itemSellPrices)
+        {
+            if (priceData.ID == itemID)
+            {
+                itemPrice = priceData.SellPrice;
+                sellPriceNotSet = false;
+            }
+        }
+        if (sellPriceNotSet)
+        {
+            itemPrice = itemDatabase.objectsData[itemIndex].ItemData.BuyPrice;
+        }
+
 
         if (destination != null)
         {

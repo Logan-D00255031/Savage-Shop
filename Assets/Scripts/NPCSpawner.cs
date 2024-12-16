@@ -55,6 +55,8 @@ public class NPCSpawner : MonoBehaviour
         AI.shopEntrance = shopEntrance;
         AI.itemDatabase = itemDatabase;
         AI.destination = SearchForItem(itemName);
+        AI.itemIndex = itemIndex;
+        AI.itemName = itemName;
         AI.Activate();
     }
 

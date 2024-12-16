@@ -99,4 +99,10 @@ public class Timer : MonoBehaviour
         shopOpen?.Raise();   //raises the event
     }
 
+    public void SetTime(int hours, int minutes)
+    {
+        this.hours = hours;
+        this.minutes = minutes;
+    }
+
 }

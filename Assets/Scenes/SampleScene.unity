@@ -5118,6 +5118,8 @@ MonoBehaviour:
     <AmountStored>k__BackingField: 2
   InventoryContainer: {fileID: 427748762}
   InventoryItem: {fileID: 6343905168332055631, guid: bfbee250d93f81d4b964e68d44b6ac4d, type: 3}
+  canSetPriceFromMenu: 0
+  sellPriceDataBase: {fileID: 0}
   InventoryItems: []
 --- !u!4 &331805915
 Transform:
@@ -8192,6 +8194,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1132811583}
+        m_TargetAssemblyTypeName: GunController, Assembly-CSharp
+        m_MethodName: ReloadMag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 487889803}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -8203,6 +8217,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1773313979}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1165679723}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -15009,7 +15035,7 @@ MonoBehaviour:
   nightMode: {fileID: 11400000, guid: 053bfbc3efe7e8446a7738bd26f668db, type: 2}
   dayMode: {fileID: 11400000, guid: 80bb38ef432734847afba7127be72ec6, type: 2}
   shopOpen: {fileID: 11400000, guid: 5ff18573836a7fc48948ad8a05b91b56, type: 2}
-  fifteenMinToRealSeconds: 2
+  fifteenMinToRealSeconds: 5
 --- !u!4 &989009866
 Transform:
   m_ObjectHideFlags: 0
@@ -19107,7 +19133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2009f832836094e8cb126cf9536ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balance: 0
+  balance: 10
   walletText: {fileID: 1626154224}
 --- !u!4 &1244285513
 Transform:
@@ -31159,6 +31185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   destroyOnDeath: 1
+  deathSound: 0
   damaged: 0
 --- !u!114 &1663033475
 MonoBehaviour:
@@ -36866,7 +36893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1773313980
 Transform:
   m_ObjectHideFlags: 0
@@ -36899,6 +36926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   destroyOnDeath: 0
+  deathSound: 0
   damaged: 0
 --- !u!114 &1773313982
 MonoBehaviour:
@@ -36956,6 +36984,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d11c7a0676f1c4c924f9438d0c4cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dayEvent: {fileID: 11400000, guid: 80bb38ef432734847afba7127be72ec6, type: 2}
+  timer: {fileID: 989009865}
   player: {fileID: 1663033470}
   fieldOfView1: {fileID: 1773313982}
   fieldOfView2: {fileID: 1773313985}
@@ -37994,7 +38024,9 @@ MonoBehaviour:
   - <PrefabDatabaseID>k__BackingField: 3
     <AmountStored>k__BackingField: 5
   InventoryContainer: {fileID: 252795112}
-  InventoryItem: {fileID: 6343905168332055631, guid: bfbee250d93f81d4b964e68d44b6ac4d, type: 3}
+  InventoryItem: {fileID: 7424058345338325868, guid: 2b1ab451a9dc50c4d819f82ed45d99e2, type: 3}
+  canSetPriceFromMenu: 1
+  sellPriceDataBase: {fileID: 11400000, guid: e90b35ab36661f8439e401ba7811f1a7, type: 2}
   InventoryItems: []
 --- !u!4 &1849540249
 Transform:

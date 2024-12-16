@@ -13,7 +13,7 @@ public class ShopItemController : MonoBehaviour
 
     public void BuyItem()
     {
-        if ((WalletManager.instance.balance - itemPrice) <= 0)
+        if ((WalletManager.instance.balance - itemPrice) < 0)
         {
             SFXManager.instance.PlaySFX(SFXManager.SFX.Invalid);
             return;

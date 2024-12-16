@@ -1,9 +1,11 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class InventoryToggle : MonoBehaviour, IButtonToggle
 {
@@ -116,8 +118,8 @@ public class InventoryToggle : MonoBehaviour, IButtonToggle
     {
         inventoryManager.AllowObjectPlacement();
 
-        List<Button> buttons = inventoryManager.GetInventoryItemButtons();
-        foreach (Button button in buttons)
+        List<UnityEngine.UI.Button> buttons = inventoryManager.GetInventoryItemButtons();
+        foreach (UnityEngine.UI.Button button in buttons)
         {
             // Close menu to prevent repeat actions
             button.onClick.AddListener(Deactivate);

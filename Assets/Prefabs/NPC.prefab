@@ -51,6 +51,7 @@ MonoBehaviour:
   shopEntrance: {fileID: 0}
   destination: {fileID: 0}
   itemDatabase: {fileID: 11400000, guid: f3399be2ba3393c49bbbe5874b08679b, type: 2}
+  itemSellPriceData: {fileID: 11400000, guid: e90b35ab36661f8439e401ba7811f1a7, type: 2}
   itemIndex: 0
   itemName: 
   minPrice: 0

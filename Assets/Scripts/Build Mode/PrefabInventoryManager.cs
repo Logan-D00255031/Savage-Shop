@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
+using Image = UnityEngine.UI.Image;
 
 public class PrefabInventoryManager : MonoBehaviour
 {
@@ -13,6 +16,12 @@ public class PrefabInventoryManager : MonoBehaviour
 
     public Transform InventoryContainer;
     public GameObject InventoryItem;
+
+    [SerializeField]
+    private bool canSetPriceFromMenu = false;
+
+    [EnableIf("canSetPriceFromMenu")]
+    public ItemSellPriceDataBase sellPriceDataBase;
 
     [ReadOnly, SerializeField]
     private InventoryItemController[] InventoryItems;
@@ -95,6 +104,35 @@ public class PrefabInventoryManager : MonoBehaviour
             itemName.text = PrefabDatabase.objectsData[prefabIndex].ItemData.Name;
             itemIcon.sprite = PrefabDatabase.objectsData[prefabIndex].ItemData.Icon;
             itemAmount.text = itemData.AmountStored.ToString();
+
+            if (canSetPriceFromMenu)
+            {
+                var textField = obj.transform.Find("PriceSetter").GetComponent<TMP_InputField>();
+
+                if (textField != null)
+                {
+                    float sellPrice = 0;
+                    bool priceSet = false;
+                    foreach (ItemSellPriceData sellPriceData in sellPriceDataBase.itemSellPrices)
+                    {
+                        if (sellPriceData.ID == itemData.PrefabDatabaseID)
+                        {
+                            sellPrice = sellPriceData.SellPrice;
+                            priceSet = true;
+                        }
+                    }
+                    if (!priceSet)
+                    {
+                        sellPrice = PrefabDatabase.objectsData[prefabIndex].ItemData.BuyPrice;
+                        sellPriceDataBase.itemSellPrices.Add(new ItemSellPriceData(itemData.PrefabDatabaseID, sellPrice));
+                    }
+
+                    textField.text = sellPrice.ToString();
+
+                    PriceSetter priceSetter = obj.transform.Find("PriceSetter").GetComponent<PriceSetter>();
+                    priceSetter.itemId = itemData.PrefabDatabaseID;
+                }
+            }
         }
 
         SetInventoryItems();
@@ -128,7 +166,7 @@ public class PrefabInventoryManager : MonoBehaviour
         List<Button> buttons = new();
         foreach (Transform item in InventoryContainer)
         {
-            buttons.Add(item.GetComponent<Button>());
+            buttons.Add(item.GetComponent<UnityEngine.UI.Button>());
         }
 
         return buttons;
