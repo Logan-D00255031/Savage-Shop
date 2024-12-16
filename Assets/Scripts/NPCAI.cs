@@ -85,6 +85,11 @@ public class NPCAI : MonoBehaviour
 
                 Transform slot = destination.parent;
                 ItemHolder holder = slot.GetComponentInParent<ItemHolder>();
+                // Holder component should be on one of the object's children if it's null
+                if (holder == null)
+                {
+                    holder = slot.parent.GetComponentInChildren<ItemHolder>();
+                }
 
                 // Take item
                 holder.RemoveItemIn(slot, false);

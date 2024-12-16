@@ -10,9 +10,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private GameEvent dayEvent;
     [SerializeField]
-    private Timer timer;
+    public Timer timer;
     [SerializeField]
-    private GameObject player;
+    public GameObject player;
 
     [Required, BoxGroup("Fields of View")]
     public FieldOfView fieldOfView1;
@@ -43,16 +43,16 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         // For testing purposes
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Activate();
-        }
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    Activate();
+        //}
     }
 
     public void Activate()
     {
         StartCoroutine(MoveToObjective());
-        transform.position = exit.position;
+        //transform.position = exit.position;
     }
 
     IEnumerator MoveToObjective()

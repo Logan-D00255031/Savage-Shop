@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3693454912513570128}
-  - component: {fileID: 9039993258928351394}
+  - component: {fileID: 2641763021564642631}
   m_Layer: 0
   m_Name: SmallDarkGreen
   m_TagString: Untagged
@@ -31,24 +31,58 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3608438577688864818}
+  - {fileID: 2456891537441475204}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &9039993258928351394
-NavMeshObstacle:
+--- !u!114 &2641763021564642631
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680772458909961203}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.5, y: 0.5, z: 0.5}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4827777dfa2fba54a9b97a5f03af8932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+  destroyOnDeath: 1
+  isObject: 1
+  centrePoint: {fileID: 2456891537441475204}
+  deathSound: 3
+  damaged: 0
+--- !u!1 &8499705847786163880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2456891537441475204}
+  m_Layer: 0
+  m_Name: Centre Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2456891537441475204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8499705847786163880}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3693454912513570128}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8204830929058323019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59,15 +93,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4886077421144322681, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4886077421144322681, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4886077421144322681, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4886077421144322681, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -109,6 +143,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6292232851850336597, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8473907666719829749, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
       propertyPath: m_Name
       value: PotPlant_8
@@ -116,8 +154,78 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8473907666719829749, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3279107719672225010}
+    - targetCorrespondingSourceObject: {fileID: 8473907666719829749, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1228487406372141030}
+    - targetCorrespondingSourceObject: {fileID: 6874055228294200687, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8236921638469152385}
   m_SourcePrefab: {fileID: 100100000, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
+--- !u!1 &307428270195061950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8473907666719829749, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
+  m_PrefabInstance: {fileID: 8204830929058323019}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &3279107719672225010
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307428270195061950}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1976854568690696244, guid: 7c5fead82797a104c802305e31a1663e, type: 3}
+--- !u!114 &1228487406372141030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307428270195061950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f019e5a9f079ef4294d630d0c80d150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 2641763021564642631}
+--- !u!1 &3366694215131899684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6874055228294200687, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}
+  m_PrefabInstance: {fileID: 8204830929058323019}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &8236921638469152385
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3366694215131899684}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.096, y: 0.068, z: 0.096}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.07, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!4 &3608438577688864818 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4886077421144322681, guid: 3760bacfb9c7b744ba4b8c1aa57cfbdc, type: 3}

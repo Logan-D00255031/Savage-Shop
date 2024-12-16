@@ -14,6 +14,9 @@ public class GunController : MonoBehaviour
 
     public bool isPlayer = false;
 
+    [SerializeField, EnableIf("isPlayer")]
+    private LayerMask nonPlayerMasks;
+
     public float damage = 10f;
     public float range = 100f;
     [Range(1f, 100f)]
@@ -73,7 +76,7 @@ public class GunController : MonoBehaviour
         ammo--;
 
         RaycastHit target;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out target, range))    // Check if gun hit something
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out target, range, nonPlayerMasks))    // Check if gun hit something
         {
             Debug.Log("Hit " + target.transform.name);
 

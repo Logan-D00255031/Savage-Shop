@@ -139,42 +139,42 @@ public class PlacementSystem : MonoBehaviour
         {
             ExitBuildMode();
         }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            StartPlacement(1);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            StartPlacement(2);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartPlacement(3);
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            StartPlacement(4);
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            StartPlacement(5);
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartPlacement(6);
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            StartPlacement(7);
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            StartPlacement(8);
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            StartPlacement(9);
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    StartPlacement(1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    StartPlacement(2);
+        //}
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    StartPlacement(3);
+        //}
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    StartPlacement(4);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Y))
+        //{
+        //    StartPlacement(5);
+        //}
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    StartPlacement(6);
+        //}
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    StartPlacement(7);
+        //}
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    StartPlacement(8);
+        //}
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    StartPlacement(9);
+        //}
         //if (Input.GetKeyDown(KeyCode.X))
         //{
         //    StartRemoval();
@@ -232,8 +232,16 @@ public class PlacementSystem : MonoBehaviour
         Vector3 worldPosition = SnapToGrid(GetMouseInWorld());
         Vector3Int gridPosition = grid.WorldToCell(worldPosition);
 
-        buildState.OnAction(gridPosition);  // Begin Placement Action
+        buildState.OnAction(gridPosition, true);  // Begin Placement Action
         
+    }
+
+    public void DestroyObject(Vector3 position)
+    {
+        StartRemoval();
+        Vector3Int gridPosition = grid.WorldToCell(position);
+        buildState.OnAction(gridPosition, false);
+        ExitBuildMode();
     }
 
     // DEPRECATED METHOD

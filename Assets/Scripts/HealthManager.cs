@@ -12,6 +12,12 @@ public class HealthManager : MonoBehaviour
     [SerializeField] 
     bool destroyOnDeath = true;
 
+    [SerializeField, EnableIf("destroyOnDeath")]
+    bool isObject = true;
+
+    [SerializeField, EnableIf("isObject")]
+    Transform centrePoint;
+
     [SerializeField]
     SFXManager.SFX deathSound;
 
@@ -38,7 +44,14 @@ public class HealthManager : MonoBehaviour
     private void Die()
     {
         SFXManager.instance.PlaySFX(deathSound);
-        Destroy(gameObject);
+        if (isObject)
+        {
+            PlacementSystem.instance.DestroyObject(centrePoint.position);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator ShowDamagedForSeconds(float seconds)

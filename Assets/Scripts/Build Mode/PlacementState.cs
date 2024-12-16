@@ -57,7 +57,7 @@ public class PlacementState : IBuildState
         previewSystem.EndPreview();
     }
 
-    public void OnAction(Vector3Int mouseGridPosition)
+    public void OnAction(Vector3Int mouseGridPosition, bool returnItem)
     {
         CalculateObjectGridPosition(mouseGridPosition); // Get new Object grid position
 

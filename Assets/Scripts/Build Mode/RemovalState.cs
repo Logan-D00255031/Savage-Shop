@@ -35,7 +35,7 @@ public class RemovalState : IBuildState
         previewSystem.EndPreview();
     }
 
-    public void OnAction(Vector3Int gridPosition)
+    public void OnAction(Vector3Int gridPosition, bool returnItem)
     {
         GridData selectedData = null;
         if (!gridData.ObjectCanBePlacedAt(gridPosition, Vector2Int.one)) // If an object cannot be placed at selected cell
@@ -55,11 +55,13 @@ public class RemovalState : IBuildState
                 return;
             }
 
-            SFXManager.instance.PlaySFX(SFXManager.SFX.RemoveObject);
-
-            // Add Object prefab ID to inventory
-            int prefabDatabaseID = selectedData.GetRepresentationID(gridPosition);
-            prefabInventory.AddItem(prefabDatabaseID);
+            if (returnItem)
+            {
+                SFXManager.instance.PlaySFX(SFXManager.SFX.RemoveObject);
+                // Add Object prefab ID to inventory
+                int prefabDatabaseID = selectedData.GetRepresentationID(gridPosition);
+                prefabInventory.AddItem(prefabDatabaseID);
+            }
 
             selectedData.RemoveObjectAt(gridPosition);
             objectPlacer.RemoveObjectAt(gameObjectIndex);
