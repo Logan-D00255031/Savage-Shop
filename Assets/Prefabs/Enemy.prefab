@@ -5362,10 +5362,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4827777dfa2fba54a9b97a5f03af8932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  maxHealth: 80
   destroyOnDeath: 0
   isObject: 0
+  centrePoint: {fileID: 0}
+  isItem: 0
   deathSound: 6
+  health: 50
   damaged: 0
 --- !u!195 &5010295022417052628
 NavMeshAgent:
@@ -5455,6 +5458,7 @@ MonoBehaviour:
   agent: {fileID: 5010295022417052628}
   objective: {fileID: 0}
   exit: {fileID: 0}
+  fleeAtHealthTreshhold: 20
 --- !u!1 &7903262690597443649
 GameObject:
   m_ObjectHideFlags: 0
@@ -5599,6 +5603,9 @@ MonoBehaviour:
   objectView: {fileID: 812691259225279726}
   muzzleFlash: {fileID: 6589555790366459569}
   isPlayer: 0
+  nonPlayerMasks:
+    serializedVersion: 2
+    m_Bits: 0
   damage: 10
   range: 100
   rateOfFire: 1.5

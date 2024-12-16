@@ -62,14 +62,19 @@ public class audioPlay : MonoBehaviour
 
     IEnumerator SubtitleText()
     {
-        Subtitles.instance.SetSubtitle("Robber: alright girly give me the money and maybe I won’t hurt you");
+        Subtitles.instance.SetSubtitle("Robber: Alright girly, give me the money and maybe I won’t hurt you");
         yield return new WaitForSeconds(8);
         Subtitles.instance.SetSubtitle("Sage: Get out of my store NOW");
         yield return new WaitForSeconds(4);
-        Subtitles.instance.SetSubtitle("Robber: OR WHAT IF YOU WANNA DIE KEEP TALKING");
+        Subtitles.instance.SetSubtitle("Robber: OR WHAT? IF YOU WANNA DIE, KEEP TALKING!");
         yield return new WaitForSeconds(7);
-        Subtitles.instance.SetSubtitle("Sage: THIS IS YOUR FINAL WARNING OR I WILL BE FORCED TO SHOOT");
+        Subtitles.instance.SetSubtitle("Sage: THIS IS YOUR FINAL WARNING! LEAVE NOW OR I WILL BE FORCED TO SHOOT");
         yield return new WaitForSeconds(7);
-        Subtitles.instance.SetSubtitle("Robber: you little wh-");
+        Subtitles.instance.SetSubtitle("Robber: You little wh-");
+    }
+
+    public void PlaySubtitles()
+    {
+        StartCoroutine(SubtitleText());
     }
 }

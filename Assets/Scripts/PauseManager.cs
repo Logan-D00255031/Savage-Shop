@@ -100,10 +100,18 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePause();
+            if (PlacementSystem.instance.ActiveBuildState())
+            {
+                PlacementSystem.instance.ExitBuildMode();
+            }
+            else
+            {
+                TogglePause();
+            }
         }
+        
     }
 
 }

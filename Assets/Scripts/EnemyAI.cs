@@ -30,6 +30,8 @@ public class EnemyAI : MonoBehaviour
     [BoxGroup("Navigation")]
     public Transform exit;
 
+    public float fleeAtHealthTreshhold = 10;
+
 
 
 
@@ -98,7 +100,7 @@ public class EnemyAI : MonoBehaviour
         // Wait until the path is finished computing and then has reached destination
         while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
         {
-            if (healthManager.GetHealth() <= 10)
+            if (healthManager.GetHealth() <= fleeAtHealthTreshhold)
             {
                 StartCoroutine(Flee());
                 // Flee sound effect here

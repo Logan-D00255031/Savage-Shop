@@ -22,22 +22,27 @@ public class EnemySpawner : MonoBehaviour
     [BoxGroup("Navigation")]
     public Transform exit;
 
-    public void SpawnNPC()
+    public void SpawnEnemy()
     {
-        GameObject spawnedEmemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+        GameObject spawnedEmemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
         EnemyAI AI = spawnedEmemy.GetComponent<EnemyAI>();
         AI.timer = timer;
         AI.player = player;
         AI.objective = objective;
         AI.exit = exit;
+        ActivateEnemy(AI);
+    }
+
+    private static void ActivateEnemy(EnemyAI AI)
+    {
         AI.Activate();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            SpawnNPC();
-        }
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    SpawnEnemy();
+        //}
     }
 }

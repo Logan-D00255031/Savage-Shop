@@ -137,10 +137,10 @@ public class PlacementSystem : MonoBehaviour
         {
             OnClick?.Invoke();
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ExitBuildMode();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    ExitBuildMode();
+        //}
         //if (Input.GetKeyDown(KeyCode.Q))
         //{
         //    StartPlacement(1);

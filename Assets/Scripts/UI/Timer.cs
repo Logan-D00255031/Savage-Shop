@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
     //[SerializeField] int secondsUntilNight = 100;
     float elapsedTime = 0f;
     float intervalTimer = 0f;
-    int hours = 12; // Start at 12
+    int hours = 10; // Start at 12
     int minutes = 0;
 
     private void Start()
@@ -76,8 +76,8 @@ public class Timer : MonoBehaviour
         intervalTimer = 0f;
         hours = 12;
         minutes = 0;
-        timerTextIsometric.text = "12:00";
-        timerTextFirstPerson.text = "12:00";
+        timerTextIsometric.text = "10:00";
+        timerTextFirstPerson.text = "10:00";
 
     }
 
