@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 397954486682937211, guid: 7d0db71d02915b24d8ce3076fb156383, type: 3}
       propertyPath: m_Name
-      value: PotPlant_2 Variant
+      value: Tall Flower 1
       objectReference: {fileID: 0}
     - target: {fileID: 2417423427513111386, guid: 7d0db71d02915b24d8ce3076fb156383, type: 3}
       propertyPath: m_LocalScale.x
@@ -64,8 +64,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2475463297591768159, guid: 7d0db71d02915b24d8ce3076fb156383, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 397954486682937211, guid: 7d0db71d02915b24d8ce3076fb156383, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1640461134986483987}
+    - targetCorrespondingSourceObject: {fileID: 9188710463568635546, guid: 7d0db71d02915b24d8ce3076fb156383, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1193819402121326044}
   m_SourcePrefab: {fileID: 100100000, guid: 7d0db71d02915b24d8ce3076fb156383, type: 3}
+--- !u!1 &2320402195199845446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 397954486682937211, guid: 7d0db71d02915b24d8ce3076fb156383, type: 3}
+  m_PrefabInstance: {fileID: 2717474873406260029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1640461134986483987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2320402195199845446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4827777dfa2fba54a9b97a5f03af8932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
+  destroyOnDeath: 1
+  isObject: 0
+  centrePoint: {fileID: 0}
+  isItem: 1
+  deathSound: 3
+  health: 0
+  damaged: 0
+--- !u!1 &6499454593771136423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9188710463568635546, guid: 7d0db71d02915b24d8ce3076fb156383, type: 3}
+  m_PrefabInstance: {fileID: 2717474873406260029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1193819402121326044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6499454593771136423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f019e5a9f079ef4294d630d0c80d150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 1640461134986483987}

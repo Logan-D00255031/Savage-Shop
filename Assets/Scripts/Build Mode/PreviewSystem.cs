@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 using UnityEngine.UIElements;
+using System.Collections;
 
 // Learned from Tutorial: https://www.youtube.com/watch?v=l0emsAHIBjU&list=PLcRSafycjWFepsLiAHxxi8D_5GGvu6arf
 
@@ -82,21 +83,22 @@ public class PreviewSystem : MonoBehaviour
 
     public void EndPreview()
     {
-        EndRemovalPreview();
         cellIndicator.SetActive(false); // Hide Indicator
         if (previewObject != null)  // If there is an active preview object
         {
             Destroy(previewObject); // Remove Prefab preview from scene
             previewObject = null;
+            Debug.Log("Preview Ended");
         }
     }
 
     public void EndRemovalPreview()
     {
-        if (removePreviewObject != null)  // If there is an active preview object
+        if (removePreviewObject != null)  // If there is an active remove preview object
         {
-            RestorePreviewObjectMaterials(removePreviewObject);   // Restores the original materials the object had before being replaced
+            RestorePreviewObjectMaterials(removePreviewObject);  // Restores the original materials the object had before being replaced
             removePreviewObject = null;
+            Debug.Log("Removal Preview Ended");
         }
     }
 
