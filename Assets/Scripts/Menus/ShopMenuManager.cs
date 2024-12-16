@@ -30,7 +30,7 @@ public class ShopMenuManager : MonoBehaviour
             // Display Information
             itemName.text = prefabData.ItemData.Name;
             itemIcon.sprite = prefabData.ItemData.Icon;
-            price.text = prefabData.ItemData.BuyPrice.ToString();
+            price.text = string.Format("€{0:F2}" , prefabData.ItemData.BuyPrice);
 
             // Show amount of that item in the inventory
             string amountInInventory = "0";

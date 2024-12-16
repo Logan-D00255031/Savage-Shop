@@ -7,7 +7,7 @@ public class HealthManager : MonoBehaviour
 {
     [SerializeField]
     [Range(0f, 200f)]
-    private float health = 50f;
+    private float maxHealth = 50f;
 
     [SerializeField] 
     bool destroyOnDeath = true;
@@ -21,8 +21,17 @@ public class HealthManager : MonoBehaviour
     [SerializeField]
     SFXManager.SFX deathSound;
 
+    [ReadOnly, SerializeField]
+    private float health;
+
     [ReadOnly]
     public bool damaged = false;
+
+
+    private void Start()
+    {
+        health = maxHealth;
+    }
 
     public void TakeDamage(float damage)
     {
@@ -69,6 +78,16 @@ public class HealthManager : MonoBehaviour
     public void SetHealth(float health)
     {
         this.health = health;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public void SetMaxHealth(float maxHealth)
+    {
+        this.maxHealth = maxHealth;
     }
 
     public bool IsDead()

@@ -127,7 +127,7 @@ public class PrefabInventoryManager : MonoBehaviour
                         sellPriceDataBase.itemSellPrices.Add(new ItemSellPriceData(itemData.PrefabDatabaseID, sellPrice));
                     }
 
-                    textField.text = sellPrice.ToString();
+                    textField.text = sellPrice.ToString("F2");
 
                     PriceSetter priceSetter = obj.transform.Find("PriceSetter").GetComponent<PriceSetter>();
                     priceSetter.itemId = itemData.PrefabDatabaseID;

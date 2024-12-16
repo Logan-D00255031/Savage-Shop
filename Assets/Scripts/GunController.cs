@@ -118,4 +118,9 @@ public class GunController : MonoBehaviour
             }
         }
     }
+
+    public int GetAmmo()
+    {
+        return ammo;
+    }
 }
