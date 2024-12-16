@@ -44,6 +44,7 @@ public class PauseManager : MonoBehaviour
         if (pauseMenu != null)
         {
             pauseMenu.SetActive(true); // Show the pause menu
+            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 
@@ -53,6 +54,11 @@ public class PauseManager : MonoBehaviour
         if (pauseMenu != null)
         {
             pauseMenu.SetActive(false); // Hide the pause menu
+            // Lock cursor again if in 1st person
+            if (!IsometricCamera.IsActive())
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
 
         // Ensure settings panel is hidden when resuming the game
