@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8463396417160822553}
-  - component: {fileID: 5005908350764161565}
   - component: {fileID: 2326613128372251014}
   m_Layer: 0
   m_Name: SmallBush
@@ -35,22 +34,6 @@ Transform:
   - {fileID: 6942471369891544949}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &5005908350764161565
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2939886681771152556}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.5, y: 0.5, z: 0.5}
-  m_TimeToStationary: 0.5
 --- !u!114 &2326613128372251014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,11 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4827777dfa2fba54a9b97a5f03af8932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  maxHealth: 30
   destroyOnDeath: 1
   isObject: 1
   centrePoint: {fileID: 6942471369891544949}
-  deathSound: 3
+  isItem: 0
+  deathSound: 9
+  health: 50
   damaged: 0
 --- !u!1 &6747608856798392513
 GameObject:
