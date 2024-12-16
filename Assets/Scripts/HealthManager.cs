@@ -18,6 +18,9 @@ public class HealthManager : MonoBehaviour
     [SerializeField, EnableIf("isObject")]
     Transform centrePoint;
 
+    [SerializeField, EnableIf("destroyOnDeath")]
+    bool isItem = false;
+
     [SerializeField]
     SFXManager.SFX deathSound;
 
@@ -53,9 +56,25 @@ public class HealthManager : MonoBehaviour
     private void Die()
     {
         SFXManager.instance.PlaySFX(deathSound);
-        if (isObject)
+        if (isObject && !isItem)
         {
             PlacementSystem.instance.DestroyObject(centrePoint.position);
+            return;
+        }
+        else if (isItem)
+        {
+            Transform itemSlot = transform.parent;
+            Transform prefabGameObject = itemSlot.parent;
+
+            ItemHolder itemHolder = prefabGameObject.GetComponent<ItemHolder>();
+            // Holder component should be on one of the object's children if it's null
+            if (itemHolder == null)
+            {
+                itemHolder = prefabGameObject.GetComponentInChildren<ItemHolder>();
+            }
+
+            itemHolder.RemoveItemIn(itemSlot, false);
+            return;
         }
         else
         {
